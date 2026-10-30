@@ -1,0 +1,60 @@
+/* EROSION.EXE crawler demo. Same world as the main site: near-black, off-white, one orange line. */
+:root {
+  --bg: #090909;
+  --fg: #e9e5dc;
+  --dim: #7c7872;
+  --wall: #3a3a38;
+  --gutter: 28px;
+  --mono: "DejaVu Sans Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font: 14px/1.5 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  letter-spacing: .04em;
+  padding: 24px var(--gutter) 40px;
+}
+.mono {
+  font-family: var(--mono);
+  font-size: 10.5px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  padding-bottom: 16px;
+}
+.top .t { font-size: 18px; letter-spacing: .14em; }
+
+.panels {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  border-bottom: 1px solid var(--wall);
+  border-right: 1px solid var(--wall);
+}
+.panel {
+  border-top: 1px solid var(--wall);
+  border-left: 1px solid var(--wall);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 0 16px;
+  min-width: 0;
+}
+canvas {
+  width: 100%;
+  height: 480px;
+  display: block;
+  touch-action: none; /* dragging on a phone should disturb the creature, not scroll the page */
+}
+.nm {
+  font-family: var(--mono);
+  font-size: 14px;
+  letter-spacing: .06em;
+}

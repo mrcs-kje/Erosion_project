@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Archive | Erosion.exe | Marcus Kje</title>
+  <meta name="description" content="Erosion.exe archive: an article about erosion, the slow wearing away of stone, text, memory and files. Parts of it may be missing.">
+  <link rel="preload" href="../../fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../erosion.css">
+  <link rel="stylesheet" href="../crawlers/crawlers.css">
+  <link rel="stylesheet" href="archive.css">
+</head>
+<body class="erosion ero-archive">
+  <a class="skip-link" href="#article">Skip to the article</a>
+
+  <header class="ero-header">
+    <a href="../../index.html">TERMINATE PROCESS → HOME</a>
+    <a class="ero-dim ero-dead" href="../random/index.html" data-random>RANDOM / OFFLINE</a>
+    <a class="ero-dim ero-dead" href="../index/index.html">INDEX / 404</a>
+    <button class="ero-intercept" type="button" aria-label="Intercept process">EROSION.EXE / RUNNING</button>
+  </header>
+
+  <div class="arc-title">
+    <p class="arc-name">ARCHIVE / THINGS WEARING AWAY</p>
+    <p class="arc-meta" id="count" aria-live="polite">03 PRESENT / 0 WORDS MISSING</p>
+  </div>
+
+  <main id="world" class="arc-world">
+    <svg id="figure" aria-hidden="true"></svg>
+
+    <!-- Left: the encyclopedia's own navigation -->
+    <aside class="arc-side" aria-label="Archive navigation">
+      <div class="arc-side-in">
+        <a class="ero-sub-fig arc-fig" href="../index.html" aria-label="Back to the Erosion.exe front page">
+          <svg viewBox="100 125 180 300" aria-hidden="true">
+            <g fill="none" stroke="#e8441b" stroke-width="1.4">
+              <polygon points="170,140 195,172 190,203 162,215 143,188 148,158"/>
+              <polyline points="170,140 162,215 154,262 157,316 161,408"/>
+              <polyline points="154,262 195,290 231,268 265,277 157,316"/>
+              <polyline points="154,262 127,347 114,383"/>
+              <polyline points="146,368 161,408"/>
+            </g>
+            <g fill="#e8441b">
+              <circle cx="170" cy="140" r="2.4"/><circle cx="190" cy="203" r="2.4"/><circle cx="143" cy="188" r="2.4"/>
+              <circle cx="154" cy="262" r="2.4"/><circle cx="231" cy="268" r="2.4"/><circle cx="157" cy="316" r="2.4"/>
+              <circle cx="114" cy="383" r="2.4"/><circle cx="146" cy="368" r="2.4"/>
+            </g>
+          </svg>
+        </a>
+        <nav class="arc-nav" aria-label="Archive">
+          <p class="arc-label">NAVIGATION</p>
+          <ul>
+            <li><a href="../index.html">Main page</a></li>
+            <li><a href="#nest">Samples</a></li>
+            <li><a href="#contents">Contents</a></li>
+            <li><a href="#log">Recent changes</a></li>
+            <li><a class="ero-dead" href="../random/index.html" data-random>Random article</a></li>
+          </ul>
+          <p class="arc-label">TOOLS</p>
+          <ul class="arc-tools">
+            <li><span class="ero-dead">What links here</span></li>
+            <li><span class="ero-dead">Permanent link</span></li>
+            <li><span class="ero-dead">Cite this page</span></li>
+          </ul>
+        </nav>
+        <section class="arc-log" aria-labelledby="log">
+          <p class="arc-label" id="log">LOG</p>
+          <ol id="log-list" aria-live="polite"></ol>
+        </section>
+      </div>
+    </aside>
+
+    <!-- Samples: where the three dormant ones sleep -->
+    <section class="arc-nest" id="nest" aria-label="Samples">
+      <p class="arc-label arc-nest-title">SAMPLES / 03</p>
+      <div class="arc-cells">
+        <div class="ero-cell" data-home="crawler"><p><span class="ero-name">01</span> / <span class="ero-state">DORMANT</span></p></div>
+        <div class="ero-cell" data-home="snake"><p><span class="ero-name">02</span> / <span class="ero-state">DORMANT</span></p></div>
+        <div class="ero-cell" data-home="strider"><p><span class="ero-name">03</span> / <span class="ero-state">DORMANT</span></p></div>
+      </div>
+      <p class="arc-label arc-nest-foot">NOTHING IS ADDED, ONLY MOVED.</p>
+    </section>
+
+    <!-- Right: the selected one and the tools (small, to be hidden later) -->
+    <aside class="arc-rail" aria-label="Selected sample and tools">
+      <div class="arc-rail-in">
+        <p class="arc-label">SELECTED / <span id="sel-name">01</span></p>
+        <p class="arc-mood" id="sel-mood">DORMANT</p>
+        <p class="arc-soon" id="sel-soon" hidden></p>
+        <p class="arc-form" id="sel-form">STAGE 1 OF 5</p>
+
+        <p class="arc-label" id="sel-food-label">WORDS 0 OF 20</p>
+        <div class="arc-squares" id="sel-food" aria-hidden="true"></div>
+
+        <p class="arc-label">NEAR YOU <span id="sel-fond-text">0%</span></p>
+        <div class="arc-bar" aria-hidden="true"><span id="sel-fond"></span></div>
+
+        <p class="arc-label">SAMPLES</p>
+        <div class="arc-buttons" role="group" aria-label="Wake or send back">
+          <button type="button" data-wake="crawler" aria-pressed="false"><span class="ero-name">01</span> <span class="ero-state">DORMANT</span></button>
+          <button type="button" data-wake="snake" aria-pressed="false"><span class="ero-name">02</span> <span class="ero-state">DORMANT</span></button>
+          <button type="button" data-wake="strider" aria-pressed="false"><span class="ero-name">03</span> <span class="ero-state">DORMANT</span></button>
+        </div>
+        <div class="arc-buttons arc-pair">
+          <button type="button" id="release">RELEASE</button>
+          <button type="button" id="purge">PURGE</button>
+        </div>
+
+        <p class="arc-label">TOOLS / ON THE SELECTED ONE</p>
+        <div class="arc-buttons arc-lab">
+          <button type="button" id="lab-evolve">NEXT STAGE</button>
+          <button type="button" id="lab-split">SPLIT</button>
+          <button type="button" id="lab-kill">END</button>
+          <button type="button" id="lab-mutant">+ NEW</button>
+        </div>
+        <p class="arc-label"><label for="summon-kind">SUMMON</label></p>
+        <div class="arc-buttons arc-summon">
+          <select id="summon-kind"></select>
+          <button type="button" id="summon-go">CALL</button>
+        </div>
+        <p class="arc-small" id="sel-pieces">0 PIECES LEFT</p>
+      </div>
+    </aside>
+
+    <!-- The article: reading material, and food -->
+    <article id="article" class="arc-article">
+      <h1>Erosion</h1>
+      <p class="arc-from">From EROSION.EXE, the free archive of things wearing away</p>
+      <p class="arc-hatnote">This article is about wearing away. For the program, see <a href="../index.html">Erosion.exe</a>.</p>
+
+      <div class="arc-notice" role="note">
+        <p class="arc-label">THIS ARTICLE IS WEARING THIN</p>
+        <p>Parts of this page may be missing by the time you reach them. Nothing is deleted. It is only moved, or covered, or forgotten for a while.</p>
+      </div>
+
+      <table class="arc-infobox">
+        <caption>Erosion</caption>
+        <tbody>
+          <tr><td colspan="2" class="arc-infobox-img">
+            <svg viewBox="-70 -46 140 92" aria-hidden="true">
+              <g fill="none" stroke="#e8441b" stroke-width="1.2" stroke-linecap="round">
+                <polyline points="-62,-30 -40,-30 -38,-31 -10,-31 -6,-29 30,-29 34,-30 62,-30"/>
+                <polyline points="-62,-16 -48,-16"/><polyline points="-42,-16 -4,-17 6,-15 22,-15"/><polyline points="30,-16 62,-16"/>
+                <polyline points="-62,-2 -56,-2"/><polyline points="-46,-2 -30,-1"/><polyline points="-14,-2 2,-2"/><polyline points="24,-1 40,-2"/>
+                <polyline points="-60,12 -58,12"/><polyline points="-34,12 -26,12"/><polyline points="8,13 12,13"/><polyline points="44,12 48,12"/>
+              </g>
+              <g fill="#e8441b">
+                <circle cx="-50" cy="26" r="1.2"/><circle cx="-18" cy="30" r="1.2"/><circle cx="16" cy="27" r="1.2"/>
+                <circle cx="52" cy="31" r="1.2"/><circle cx="-2" cy="40" r="1"/>
+              </g>
+            </svg>
+            <p>Four lines of the same sentence, each one copied from the one above.</p>
+          </td></tr>
+          <tr><th scope="row">Type</th><td>Process</td></tr>
+          <tr><th scope="row">Acts on</th><td>Stone, text, memory, files</td></tr>
+          <tr><th scope="row">Agents</th><td>Water, wind, ice, use, time, others</td></tr>
+          <tr><th scope="row">Speed</th><td>Slow, then all at once</td></tr>
+          <tr><th scope="row">Leaves</th><td>Scars, sand, gaps</td></tr>
+          <tr><th scope="row">Opposite</th><td>Deposition</td></tr>
+          <tr><th scope="row">Reversible</th><td>Partly, from a copy</td></tr>
+          <tr><th scope="row">First recorded</th><td>Before records</td></tr>
+          <tr><th scope="row">Status</th><td class="arc-red">Ongoing</td></tr>
+        </tbody>
+      </table>
+
+      <p><b>Erosion</b> is the slow removal of material from a surface. Something wears off, is carried away and settles somewhere else. Rivers do it to mountains, feet do it to stairs, and reading does it to a page. In Erosion.exe the word is used for everything that wears away by being used, copied, opened or left alone: stone, text, memory and files.</p>
+      <p>Erosion is not the same as destruction. Nothing that erodes disappears. It is only moved to a place where nobody is looking for it. A valley is what is left after a mountain was carried to the sea one grain at a time, and the sea floor is where the mountain went.</p>
+
+      <nav class="arc-toc" id="contents" aria-label="Contents">
+        <p class="arc-toc-title">Contents</p>
+        <ol>
+          <li><a href="#stone">In stone</a></li>
+          <li><a href="#text">In text</a>
+            <ol>
+              <li><a href="#scars">Scars</a></li>
+              <li><a href="#moving">Moved words</a></li>
+            </ol>
+          </li>
+          <li><a href="#memory">In memory</a></li>
+          <li><a href="#files">In files</a>
+            <ol>
+              <li><a href="#copies">Copies of copies</a></li>
+              <li><a href="#links">Dead links</a></li>
+            </ol>
+          </li>
+          <li><a href="#agents">Agents</a></li>
+          <li><a href="#restoration">Restoration</a></li>
+          <li><a href="#disputed">Disputed</a></li>
+          <li><a href="#see-also">See also</a></li>
+          <li><a href="#notes">Notes</a></li>
+        </ol>
+      </nav>
+
+      <h2 id="stone">In stone</h2>
+      <p>Geologists separate two things. Weathering breaks rock apart where it stands. Erosion is what carries the pieces off: water, wind, ice and gravity. A canyon is erosion that has been going on for a few million years. A stone step in an old church, dipped in the middle, is erosion that took a few hundred years and a great many feet.</p>
+      <p>Touch is an agent too. The bronze foot of the statue of Saint Peter in Rome has been kissed and rubbed by pilgrims for centuries, and the toes have worn almost flat. Nobody meant to remove them. Everybody did a little.</p>
+
+      <h2 id="text">In text</h2>
+      <p>Text erodes when it is read, copied, translated, summarised or quoted out of order. Each step loses something small and adds something smaller. A sentence that is passed on long enough ends up meaning roughly what the people passing it wanted it to mean.</p>
+      <p>Before paper was cheap, writing was scraped off parchment so the parchment could be used again. A page written over like this is called a <b>palimpsest</b>. The old text is never fully gone. With the right light it shows through the new one, and some of the oldest copies of lost works have been found underneath prayer books.</p>
+      <h3 id="scars">Scars</h3>
+      <p>A word that has worn away often leaves a mark where it was: a gap, a smudge, a row of dots. The mark is the only proof that something was there. Scars are more common on pages that nobody reads, which is strange, because nobody is there to wear them down.<span class="arc-cn">[citation needed]</span></p>
+      <h3 id="moving">Moved words</h3>
+      <p>Not every lost word is gone. Some turn up somewhere else on the page, in a sentence that did not ask for them. Over a long session a paragraph can end up saying something its author never wrote. Nothing is added, only moved.</p>
+
+      <h2 id="memory">In memory</h2>
+      <p>A memory is not stored once and kept. It is rebuilt every time it is remembered, and each rebuild is a copy of the last one, not of the event. Memories that are recalled often stay bright but drift. Memories that are never recalled stay accurate and fade. There is no third option.</p>
+      <p>What is left after enough years is usually a feeling, a colour, a smell and one detail that may not have happened.<sup><a href="#note-1">[1]</a></sup></p>
+
+      <h2 id="files">In files</h2>
+      <p>Digital files are said not to wear out. This is mostly true and slightly false. Storage decays, a bit flips, a format stops being readable, a program that opened something is no longer made. The file is still there. It just cannot be reached any more, which from the outside looks the same.</p>
+      <h3 id="copies">Copies of copies</h3>
+      <p>Every time an image is saved as a compressed file, a little detail is thrown away to make it smaller. Saved again, it loses a little more. After a few hundred generations the picture is a field of blocks in roughly the right colours. Tape copied from tape does the same with hiss. In 1969 the composer Alvin Lucier recorded himself speaking in a room, played the recording back into the room and recorded it again, over and over, until his words were gone and only the sound of the room was left.</p>
+      <h3 id="links">Dead links</h3>
+      <p>A link is a promise that something is still on the other side. Over time the promises break. The page moves, the site closes, the address is sold. A dead link still looks like a door. It just opens onto a wall, or onto <a href="../random/index.html">something else</a>.<sup><a href="#note-2">[2]</a></sup></p>
+
+      <h2 id="agents">Agents</h2>
+      <p>The known agents are water, wind, ice, heat, gravity, use and time. Most erosion can be traced back to one of them.</p>
+      <p>Some cannot. Words go missing from pages that have not been opened. Small marks turn up next to the gaps, in short regular rows, as if something had walked there. The marks do not match any known agent, and they are not always in the same place when the page is opened again. Most sources treat this as a fault in the record. A few do not.<span class="arc-cn">[citation needed]</span></p>
+
+      <h2 id="restoration">Restoration</h2>
+      <p>Restoration does not undo erosion. It adds a new layer on top, made to look like the old one, and the new layer starts to wear too. A restored page is a copy standing where the original stood. It is usually good enough.</p>
+      <p>On this page a purge restores every word that has gone missing. It is not a cure. The words will go missing again.</p>
+
+      <h2 id="disputed">Disputed</h2>
+      <ol class="arc-disputed">
+        <li>A word that was here yesterday.</li>
+        <li>A hyphen on the index page. <s>It was a hyphen.</s> It was not a hyphen.</li>
+        <li>The sound a file makes when it is closed for the last time.</li>
+        <li>Something was worn away on 14.10, not sure what.<span class="arc-cn">[citation needed]</span></li>
+      </ol>
+      <table class="arc-attempts">
+        <caption>Attempts to photograph a gap</caption>
+        <thead><tr><th scope="col">attempt</th><th scope="col">result</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>too bright</td></tr>
+          <tr><td>2</td><td>different gap</td></tr>
+          <tr><td>3</td><td>(missing)</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="see-also">See also</h2>
+      <ul>
+        <li><a href="../index.html">Erosion.exe</a></li>
+        <li><a href="#text">Palimpsest</a></li>
+        <li><a href="#copies">Generation loss</a></li>
+        <li><a href="#scars">Scar (text)</a></li>
+        <li><a href="#memory">Forgetting</a></li>
+        <li><span class="ero-dead">Random / offline</span></li>
+      </ul>
+
+      <h2 id="notes">Notes</h2>
+      <ol class="arc-notes">
+        <li id="note-1">The detail is usually the one that gets told. Telling it is what keeps it, and telling it is what changes it.</li>
+        <li id="note-2">A link on this page was followed by a visitor and opened onto a page with one word missing. The word has not been identified.</li>
+        <li>This article has been read more often than it has been edited. Parts of it may already be gone.</li>
+      </ol>
+      <p class="arc-edited">Last edited during an unfinished session. <a href="../index.html">[ RETURN TO VOID ]</a></p>
+    </article>
+  </main>
+  <script src="../../js/main.js"></script>
+  <script src="../sub.js"></script>
+  <script src="../nav.js"></script>
+  <script src="../crawlers/words.js"></script>
+  <script src="../crawlers/creatures.js"></script>
+  <script src="archive.js"></script>
+</body>
+</html>

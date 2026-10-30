@@ -1,0 +1,35 @@
+/* Erosion.exe: walk to the door. From the mockup erosion_page_game.png. */
+html:has(body.ero-game) { background: #f2f1ee; }
+body.ero-game {
+  --accent: #c2330f;
+  --ero-text: #111;
+  background: #f2f1ee;
+  color: #111;
+}
+.ero-game .ero-dim { color: #444; }
+.ero-game .ero-here { color: var(--accent); }
+
+.game-world { position: relative; padding: 30px clamp(16px, 4.4vw, 84px) 60px; }
+.game-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; }
+.game-title, .game-label, .game-info, .game-bottom { font-size: 13px; letter-spacing: .16em; text-transform: uppercase; font-weight: 400; }
+.game-title { margin: 0 0 20px; }
+.game-count { margin: 0; font-size: clamp(90px, 13vw, 210px); font-weight: 200; line-height: 1; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.game-label { margin: 22px 0 0 6px; color: #444; }
+.game-info { text-align: right; color: #444; line-height: 1.9; }
+.game-info p { margin: 0; }
+.game-goal { margin-top: 18px !important; color: #111; }
+
+.game-stage { display: block; width: 100%; height: auto; margin: 4vh 0 6vh; overflow: visible; }
+.game-ground line { stroke: #111; stroke-width: 1.6; }
+.game-man circle, .game-man line, .game-man polyline { fill: none; stroke: #111; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.game-door rect { fill: none; stroke: #111; stroke-width: 2.6; }
+.game-door .game-knob { fill: var(--accent); }
+.game-door text { font-size: 28px; text-anchor: middle; fill: #111; }
+.game-door.is-open rect { fill: #111; }
+.game-ghosts rect { fill: none; stroke: #111; stroke-width: 1.4; }
+
+.game-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; color: #444; }
+.game-bottom p { margin: 0; }
+.game-keys { display: flex; align-items: center; gap: 14px; color: #111; }
+.game-keys button { font-size: 18px; width: 46px; height: 40px; border: 1px solid #111; }
+.game-keys button:hover { color: var(--accent); border-color: var(--accent); }

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EROSION.EXE</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <header class="bar">
+    <span>EROSION.EXE / DEMO 01</span>
+    <span id="status" aria-live="polite">DORMANT</span>
+  </header>
+
+  <main>
+    <div id="stage" class="stage">
+      <svg id="figure" role="group" aria-label="A dormant line figure. Activate any dot to wake it."></svg>
+    </div>
+
+    <p class="hint">Tap any dot to wake it. Drag to lead it. Let go and it wanders on its own.</p>
+
+    <div class="controls">
+      <button id="purge" type="button">PURGE</button>
+      <span class="meta" id="meta">12 DOTS / 13 LIMBS</span>
+    </div>
+  </main>
+
+  <script src="./js/figure.js"></script>
+</body>
+</html>

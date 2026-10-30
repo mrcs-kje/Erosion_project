@@ -1,0 +1,75 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+:root{--bg:#090909;--fg:#ece8e1;--dim:#7d7a75;--wall:#4a4a47;--o:#e8441b}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);width:1440px;height:900px;overflow:hidden;font-family:Helvetica,Arial,sans-serif}
+.m{font-family:'DejaVu Sans Mono',monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+header{display:flex;justify-content:space-between;padding:18px 36px;border-bottom:1px solid var(--wall)}
+header span:last-child{color:var(--o)}
+.stage{position:relative;height:calc(900px - 62px - 46px)}
+footer{position:absolute;bottom:0;left:0;right:0;height:46px;border-top:1px solid var(--wall);display:flex;justify-content:space-between;align-items:center;padding:0 36px}
+.cell{position:absolute;border:1px solid var(--wall)}
+/* essay */
+.essay{left:36px;top:30px;width:430px;height:700px;padding:26px 28px;border-right-color:transparent}
+.essay h1{font-weight:400;font-size:25px;letter-spacing:.14em;line-height:1.25;margin:0 0 22px}
+.essay p{font-size:15px;line-height:1.7;letter-spacing:.02em;margin:0 0 15px;color:#d9d5cc}
+.essay .cut{border-bottom:0;white-space:nowrap}
+.eaten{display:inline-block;position:relative;color:transparent;background:repeating-linear-gradient(90deg,#2a2a28 0 3px,transparent 3px 5px);height:.75em;vertical-align:baseline;width:3.6em}
+.todo{color:var(--o);font-family:'DejaVu Sans Mono',monospace;font-size:11px;letter-spacing:.1em}
+/* drawing: scaled far too big, cropped by its cell */
+.draw{left:490px;top:30px;width:420px;height:300px;overflow:hidden}
+.draw svg{position:absolute;left:-340px;top:-210px;width:1500px;height:1050px}
+/* photo, stretched */
+.photo{left:930px;top:30px;width:90px;height:520px;overflow:hidden}
+.photo svg{width:100%;height:100%}
+/* second image, the same drawing tiny */
+.tiny{left:1040px;top:30px;width:140px;height:140px;overflow:hidden;border-color:transparent}
+.tiny svg{width:100%;height:100%}
+/* video facade, squashed */
+.vid{left:490px;top:350px;width:430px;height:110px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;border-top-color:transparent}
+.vid .tri{width:0;height:0;border-left:22px solid var(--fg);border-top:13px solid transparent;border-bottom:13px solid transparent;transform:scaleX(5) scaleY(.7)}
+/* scrap */
+.note{left:1040px;top:200px;width:330px;height:200px;padding:20px 22px;transform:rotate(-2.2deg);border-color:var(--fg)}
+.note p{margin:0 0 8px;font-family:'DejaVu Sans Mono',monospace;font-size:12.5px;line-height:1.6;letter-spacing:.03em}
+/* huge cropped numeral */
+.num{left:490px;top:480px;width:700px;height:250px;overflow:hidden;border-bottom-color:transparent}
+.num div{position:absolute;left:-30px;top:-120px;font-size:520px;line-height:1;letter-spacing:-.04em;color:transparent;-webkit-text-stroke:1.2px var(--fg);white-space:nowrap}
+.num .m{position:absolute;right:16px;bottom:12px}
+/* leaking cell */
+.leak{left:1190px;top:30px;width:214px;height:150px;border-color:transparent;border-left-color:var(--wall)}
+.leak .m{position:absolute;left:14px;top:14px}
+.cap{position:absolute;font-family:'DejaVu Sans Mono',monospace;font-size:10px;letter-spacing:.1em;color:var(--dim);text-transform:uppercase}
+</style></head><body>
+<header><span class="m">RANDOM / OFFLINE</span><span class="m" style="color:var(--dim)">INDEX / 404</span><span class="m">EROSION.EXE / RUNNING (INTERCEPT)</span></header>
+<div class="stage">
+
+<div class="cell essay">
+<div class="m" style="margin-bottom:14px">ESSAY / 07 / UNFINISHED</div>
+<h1>NOTES ON<br>MEASURING<br>THE KITCHEN</h1>
+<p>I measured the kitchen with my feet. Eleven and a half. Then with the charger cable, which turned out to be longer than the room, and that felt like information.</p>
+<p>The <span class="eaten">window</span> is the only thing in here that has not changed size since I started. Everything else keeps adjusting itself when I look away.</p>
+<p>Third attempt: a piece of string, a pencil, and the idea that if I mark where the string ends I will finally know where the<span class="cut"></span></p>
+<p class="todo">[TODO: THE PART ABOUT THE FRIDGE]<br>[TODO: FIND OUT WHY THE STRING IS WET]</p>
+<svg width="120" height="60" viewBox="0 0 120 60" style="position:absolute;left:150px;top:386px"><g stroke="#e8441b" stroke-width="1.2" fill="#e8441b" stroke-linecap="round"><path d="M6 40 Q22 18 40 36 T74 30 T110 20" fill="none"/><circle cx="6" cy="40" r="2.2"/><circle cx="40" cy="36" r="2.2"/><circle cx="74" cy="30" r="2.2"/><circle cx="110" cy="20" r="2.6"/><path d="M110 20 l8 -6 M110 20 l7 7" fill="none"/></g></svg>
+</div>
+
+<div class="cell draw"><svg viewBox="0 0 300 210" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#ece8e1" stroke-width=".6">
+<rect x="70" y="40" width="160" height="120"/><line x1="70" y1="100" x2="230" y2="100"/><line x1="150" y1="40" x2="150" y2="100"/>
+<circle cx="190" cy="130" r="14"/><circle cx="190" cy="130" r="8"/><path d="M90 130 h30 M90 138 h24 M90 146 h34"/>
+<path d="M70 160 l-20 30 M230 160 l20 30"/><path d="M100 60 q10 -12 22 0" /><line x1="30" y1="190" x2="270" y2="190" stroke-dasharray="3 3"/></g>
+<g fill="#e8441b"><circle cx="120" cy="60" r="1.8"/><circle cx="196" cy="68" r="1.4"/></g></svg></div>
+<div class="cap" style="left:496px;top:12px">DRAWING / KITCHEN / SCALE 1:1 (APPROX)</div>
+
+<div class="cell photo"><svg viewBox="0 0 200 130" preserveAspectRatio="none"><defs><radialGradient id="g" cx=".35" cy=".4" r=".7"><stop offset="0" stop-color="#ece8e1"/><stop offset=".5" stop-color="#7d7a75"/><stop offset="1" stop-color="#090909"/></radialGradient></defs>
+<rect width="200" height="130" fill="url(#g)"/><rect x="60" y="30" width="70" height="50" fill="none" stroke="#090909" stroke-width="3"/><circle cx="95" cy="55" r="14" fill="#090909"/><circle cx="95" cy="55" r="5" fill="#e8441b"/></svg></div>
+<div class="cap" style="left:930px;top:556px;width:100px">PHOTO / STRETCHED</div>
+
+<div class="cell tiny"><svg viewBox="0 0 200 130"><rect width="200" height="130" fill="none" stroke="#7d7a75"/><circle cx="95" cy="55" r="14" fill="#7d7a75"/></svg></div>
+
+<div class="cell vid"><div class="tri"></div><div class="m">VIDEO / 0:41 / CLICK TO LOAD</div></div>
+
+<div class="cell note"><p>kitchen is 11.5 feet</p><p>kitchen is 3.8 cables</p><p>kitchen is also wherever</p><p>the string ends</p><p style="color:#7d7a75">(it does not end)</p></div>
+
+<div class="cell num"><div>11.5</div><span class="m">THE NUMBER, CROPPED</span></div>
+<div class="cell leak"><span class="m">CELL 9 / EMPTY</span></div>
+</div>
+<footer><span class="m">PIECE 07 / 1 OF ?</span><span class="m">WORN WALL, NO AUTHOR</span><span class="m">PURGE</span></footer>
+</body></html>

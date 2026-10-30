@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 | Marcus Kje</title>
+  <meta name="robots" content="noindex">
+  <!-- Everything is inline: a 404 page can be shown at any URL depth, so relative CSS/image paths would break. -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='40%20124%20300%20300'%3E%3Crect%20x='40'%20y='124'%20width='300'%20height='300'/%3E%3Cg%20fill='none'%20stroke='%23e8441b'%20stroke-width='7'%3E%3Cpolygon%20points='170,140%20195,172%20190,203%20162,215%20143,188%20148,158'/%3E%3Cpolyline%20points='170,140%20162,215%20154,262%20157,316%20161,408'/%3E%3Cpolyline%20points='154,262%20195,290%20231,268%20265,277%20157,316'/%3E%3Cpolyline%20points='154,262%20127,347%20114,383'/%3E%3C/g%3E%3C/svg%3E">
+  <style>
+    :root { --accent: #e8441b; }
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body { margin: 0; background: #060606; color: #e8e6df; font-family: 'Inter', system-ui, sans-serif; font-size: 14px;
+           display: grid; grid-template-rows: auto 1fr auto; overflow: hidden; }
+    a { color: inherit; text-decoration: none; }
+    a:hover, a:focus-visible { color: var(--accent); }
+    :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+    header, footer { display: flex; justify-content: space-between; gap: 20px; padding: 20px 22px; font-size: 13px; }
+    footer { font-size: 9px; color: #9a978f; border-top: 1px solid #262626; }
+    main { position: relative; display: grid; place-items: center; padding: 20px; }
+    .code { font-size: clamp(120px, 26vw, 360px); font-weight: 400; line-height: .9; margin: 0; letter-spacing: -.02em; position: relative; }
+    .code .cursor { display: inline-block; width: .5em; text-align: left; animation: blink 1s steps(1) infinite; color: var(--accent); }
+    @keyframes blink { 50% { opacity: 0; } }
+    .code::before, .code::after { content: '404'; position: absolute; inset: 0; pointer-events: none; }
+    .code::before { color: var(--accent); clip-path: inset(0 0 70% 0); animation: shift 3.2s steps(1) infinite; }
+    .code::after { color: #6f6cff; clip-path: inset(62% 0 8% 0); animation: shift 2.3s steps(1) infinite reverse; opacity: .6; }
+    @keyframes shift { 0%, 88%, 100% { transform: none; opacity: 0; } 90% { transform: translate(-6px, 0); opacity: 1; } 94% { transform: translate(5px, 2px); opacity: 1; } }
+    .log { font-size: 13px; line-height: 1.8; margin-top: 30px; }
+    .log .err { color: var(--accent); font-size: 11px; }
+    .figure { position: absolute; left: 6%; top: 8%; width: 110px; opacity: .9; }
+    /* arriving from Erosion.exe (INTERCEPT): glitch in */
+    @keyframes glitch-in {
+      0%   { opacity: 0; transform: scaleY(.02); filter: invert(1); }
+      25%  { opacity: 1; transform: translate(10px, 0) skewX(8deg); clip-path: inset(40% 0 35% 0); }
+      45%  { transform: translate(-7px, 2px); clip-path: inset(8% 0 60% 0); filter: contrast(2.5); }
+      65%  { transform: translate(4px, -2px); clip-path: inset(55% 0 4% 0); filter: invert(1); }
+      100% { transform: none; opacity: 1; clip-path: none; filter: none; }
+    }
+    body.glitch-in > * { animation: glitch-in .7s steps(8, end) both; }
+    @media (prefers-reduced-motion: reduce) { .code .cursor, .code::before, .code::after, body.glitch-in > * { animation: none; } }
+    @media (max-width: 600px) { .figure { width: 70px; } header { font-size: 11px; } }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html" id="home">TERMINATE PROCESS → HOME</a>
+    <span>EROSION.EXE / 404</span>
+  </header>
+
+  <main>
+    <svg class="figure" viewBox="100 125 180 300" aria-hidden="true">
+      <g fill="none" stroke="#e8441b" stroke-width="1.4">
+        <polygon points="170,140 195,172 190,203 162,215 143,188 148,158"/>
+        <polyline points="170,140 162,215 154,262 157,316 161,408"/>
+        <polyline points="154,262 195,290 231,268 265,277 157,316"/>
+        <polyline points="154,262 127,347 114,383"/>
+        <polyline points="146,368 161,408"/>
+      </g>
+    </svg>
+    <div>
+      <h1 class="code" aria-label="404, page not found">404<span class="cursor" aria-hidden="true">_</span></h1>
+      <div class="log">
+        <p>[ PAGE MISSING ]<br>The file you are looking for has eroded, moved or never existed.</p>
+        <p class="err">ERROR: OBJECT NOT FOUND / 00 OBJECTS AVAILABLE AT THIS ADDRESS</p>
+        <p><a href="index.html" id="home2">→ RETURN TO HOME</a></p>
+      </div>
+    </div>
+  </main>
+
+  <footer><span>MARCUS KJE</span><span>LAST MUTATION: ??.??.??</span></footer>
+
+  <script>
+    try {
+      if (sessionStorage.getItem('glitch-arrive')) {
+        sessionStorage.removeItem('glitch-arrive');
+        document.body.classList.add('glitch-in');
+        setTimeout(() => document.body.classList.remove('glitch-in'), 750);
+      }
+    } catch (_) { /* storage blocked: no effect */ }
+    // On GitHub Pages the site may live in a sub-folder (/repo-name/); point "home" there.
+    if (location.hostname.endsWith('github.io')) {
+      const base = '/' + (location.pathname.split('/')[1] || '') + '/';
+      document.querySelectorAll('#home, #home2').forEach((a) => { a.href = base; });
+    }
+  </script>
+</body>
+</html>

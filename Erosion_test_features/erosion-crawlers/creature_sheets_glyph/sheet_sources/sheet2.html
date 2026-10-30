@@ -1,0 +1,74 @@
+<!doctype html><html><head><meta charset="utf-8"><title>crawlers 2</title>
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--bg:#090909;--fg:#e9e5dc;--dim:#7c7872;--wall:#3a3a38}
+body{width:1280px;height:800px;background:var(--bg);color:var(--fg);font:14px/1.5 "Helvetica Neue",Helvetica,"Liberation Sans",Arial,sans-serif;letter-spacing:.04em;overflow:hidden;padding:28px 40px}
+.mono{font-family:"DejaVu Sans Mono","Liberation Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.top{display:flex;justify-content:space-between;align-items:baseline;height:40px}
+.top .t{font-size:18px;letter-spacing:.14em;color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:330px 330px;margin-top:10px}
+.cell{border-top:1px solid var(--wall);border-left:1px solid var(--wall);display:flex;flex-direction:column;align-items:center;padding:10px 0 14px}
+.cell:nth-child(5n){border-right:1px solid var(--wall)}
+.cell:nth-child(n+6){border-bottom:1px solid var(--wall)}
+.cell:nth-child(3){border-top-color:transparent}
+.cell:nth-child(7){border-left-color:transparent}
+.nm{font-family:"DejaVu Sans Mono",monospace;font-size:14px;letter-spacing:.06em;color:var(--fg);margin-top:auto}
+.ds{margin-top:2px;text-align:center}
+</style></head><body>
+<div class="top"><span class="t">CRAWLERS / 10 MORE FORMS</span><span class="mono">Reference sheet 2 / names are for reference only</span></div>
+<div class="grid" id="g"></div>
+<script>
+const O='#e8441b',G='#4d4b47',T='#bdb8ae';
+let sd=23;const rnd=()=>{sd=(sd*9301+49297)%233280;return sd/233280};
+const f=n=>n.toFixed(1);
+const dot=(x,y,r=2.7,o=1)=>`<circle cx="${f(x)}" cy="${f(y)}" r="${r}" fill="${O}" opacity="${o}"/>`;
+const ln=(a,b,w=1.5,o=1,c=O)=>`<line x1="${f(a[0])}" y1="${f(a[1])}" x2="${f(b[0])}" y2="${f(b[1])}" stroke="${c}" stroke-width="${w}" stroke-linecap="round" opacity="${o}"/>`;
+const pl=(p,w=1.4,o=1,c=O)=>`<polyline points="${p.map(q=>f(q[0])+','+f(q[1])).join(' ')}" fill="none" stroke="${c}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" opacity="${o}"/>`;
+const F=[];
+// 11 tangle
+F.push(()=>{let p=[];for(let i=0;i<=420;i++){const u=i/420*6.6;p.push([120+84*Math.sin(2.3*u+.4)*Math.cos(.9*u),128+64*Math.sin(3.1*u)*Math.cos(1.3*u+.6)])}
+ const e=p[p.length-1],h=[206,238];return pl(p,1.2)+ln(e,h,1.2)+dot(p[0][0],p[0][1],2.6)+dot(h[0],h[1],5.4)+pl([[h[0]+3,h[1]+3],[h[0]+14,h[1]+14]],1)+pl([[h[0]+4,h[1]-2],[h[0]+16,h[1]+2]],1)});
+// 12 colony
+F.push(()=>{let s='';const cx=120,cy=135;for(let i=0;i<14;i++){const a=i/14*6.283+rnd()*.3,r=44+rnd()*56,x=cx+Math.cos(a)*r,y=cy+Math.sin(a)*r*.9;s+=ln([cx,cy],[x,y],.8,.22);
+  const ta=a+(rnd()-.5)*.8;for(let k=1;k<=4;k++)s+=dot(x+Math.cos(ta)*k*6.5,y+Math.sin(ta)*k*6.5*.9,2.5-k*.4,1-k*.12);s+=dot(x,y,3.4)}
+ return s+`<circle cx="${cx}" cy="${cy}" r="11" fill="none" stroke="${O}" stroke-width="1.6"/>`+dot(cx,cy,4.4)});
+// 13 compass
+F.push(()=>{const L=[96,228],R=[168,228],H=[132,82];let s=ln([6,228],[234,228],1,1,G);
+ s+=`<path d="M24 228 A36 36 0 0 1 96 228" fill="none" stroke="${G}" stroke-dasharray="3 4"/><path d="M96 228 A36 36 0 0 1 168 228" fill="none" stroke="${G}" stroke-dasharray="3 4"/>`;
+ s+=ln(H,L,1.8)+ln(H,R,1.8)+ln([132,74],[132,48],1.6)+`<circle cx="132" cy="82" r="6" fill="#090909" stroke="${O}" stroke-width="1.6"/>`+dot(132,44,3.8);
+ return s+dot(24,228,2.4,.5)+dot(96,228,3.4)+dot(168,228,4.4)+ln([96,228],[90,238],1,.6)+ln([168,228],[172,240],1,.6)});
+// 14 brackets
+F.push(()=>{const y=140;let s=`<line x1="18" y1="${y+8}" x2="98" y2="${y+8}" stroke="${G}" stroke-dasharray="2 5"/>`;
+ s+=`<text x="134" y="${y+5}" fill="${O}" font-size="13" font-family="DejaVu Sans Mono,monospace" text-anchor="middle">stair</text><text x="170" y="${y+5}" fill="${T}" font-size="13" font-family="DejaVu Sans Mono,monospace">case had</text>`;
+ s+=pl([[112,112],[106,112],[106,168],[112,168]],2)+pl([[156,112],[162,112],[162,168],[156,168]],2)+ln([106,168],[98,186],1.4)+ln([106,168],[112,190],1.4)+ln([162,168],[154,190],1.4)+ln([162,168],[170,186],1.4)+ln([106,174],[162,174],.8,.3);
+ s+=dot(106,112,2.6)+dot(162,112,2.6)+`<text x="124" y="214" fill="${O}" font-size="11" font-family="DejaVu Sans Mono,monospace" opacity=".6">t</text><text x="140" y="232" fill="${O}" font-size="10" font-family="DejaVu Sans Mono,monospace" opacity=".4">a</text>`+dot(132,198,1.6,.5)+dot(148,210,1.4,.4)+dot(118,226,1.2,.3);return s});
+// 15 kite
+F.push(()=>{const T0=[146,36],R=[176,78],B=[146,126],Lf=[116,78];let s=`<polygon points="${T0} ${R} ${B} ${Lf}" fill="none" stroke="${O}" stroke-width="1.6" stroke-linejoin="round"/>`+ln(T0,B,1)+ln(Lf,R,1)+dot(146,78,3.6);
+ s+=`<path d="M146 126 C130 146,164 160,146 180 S128 210,140 228" fill="none" stroke="${O}" stroke-width="1.2"/>`+[[140,144],[152,162],[144,184],[138,206]].map(p=>ln([p[0]-6,p[1]-3],[p[0]+6,p[1]+3],1.2)).join('');
+ s+=`<path d="M146 100 Q70 150 60 242" fill="none" stroke="${O}" stroke-width="1"/>`+dot(60,242,4.2)+ln([34,250],[100,250],1,1,G)+ln([20,56],[56,56],1,1,G)+ln([8,74],[56,74],1,1,G)+ln([24,92],[54,92],1,1,G);return s});
+// 16 rootnet
+F.push(()=>{let s='';function br(x,y,a,l,d,w){if(l<5)return;const n=Math.max(2,Math.floor(l/4));let px=x,py=y;for(let i=0;i<n;i++){a+=(rnd()-.5)*.35;const nx=px+Math.cos(a)*l/n,ny=py+Math.sin(a)*l/n;s+=ln([px,py],[nx,ny],w);px=nx;py=ny}
+  if(d>0){br(px,py,a-.5-rnd()*.3,l*.7,d-1,w*.8);br(px,py,a+.5+rnd()*.3,l*.7,d-1,w*.8);if(rnd()<.35)br(px,py,a+(rnd()-.5)*.3,l*.6,d-1,w*.8)}else s+=dot(px,py,1.9)}
+ for(let i=0;i<7;i++)br(120,125,i/7*6.283+rnd()*.4,34,3,1.5);return s+`<circle cx="120" cy="125" r="9" fill="#090909" stroke="${O}" stroke-width="1.6"/>`+dot(120,125,3.4)});
+// 17 nautilus
+F.push(()=>{const cx=112,cy=138;const P=[];for(let i=0;i<=30;i++){const t=i*.43,r=3+i*2.75;P.push([cx+Math.cos(t)*r,cy+Math.sin(t)*r])}
+ let s='';for(let i=0;i<=15;i+=2)s+=ln(P[i],P[i+15],.8,.25);s+=pl(P,1.5);P.forEach((p,i)=>s+=dot(p[0],p[1],1.4+i*.11));
+ const t=30*.43,h=P[30],tx=-Math.sin(t),ty=Math.cos(t);for(const k of[-.6,0,.6]){const a=Math.atan2(ty,tx)+k;s+=pl([h,[h[0]+Math.cos(a)*10+tx*4,h[1]+Math.sin(a)*10+ty*4],[h[0]+Math.cos(a+.4)*22,h[1]+Math.sin(a+.4)*22]],1.1)}return s});
+// 18 orrery
+F.push(()=>{const cx=120,cy=135;const R=[[28,0,.7],[52,35,2.4],[76,-30,4.1],[100,80,5.4]];let s='';
+ R.forEach(([rx,deg,th],i)=>{const ry=rx*.48,ph=deg*Math.PI/180;s+=`<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${ry}" fill="none" stroke="${O}" stroke-width="1" opacity=".55" transform="rotate(${deg} ${cx} ${cy})"/>`;
+  const x=cx+rx*Math.cos(th)*Math.cos(ph)-ry*Math.sin(th)*Math.sin(ph),y=cy+rx*Math.cos(th)*Math.sin(ph)+ry*Math.sin(th)*Math.cos(ph);s+=ln([cx,cy],[x,y],.8,.25)+dot(x,y,3+i*.5)});
+ return s+dot(cx,cy,4.6)});
+// 19 stitch
+F.push(()=>{let s=pl([[108,30],[108,92]],1.4,1,G)+pl([[132,30],[132,100]],1.4,1,G)+pl([[108,190],[108,250]],1.4,1,G)+pl([[132,182],[132,250]],1.4,1,G);
+ for(let y=98;y<=184;y+=11){s+=ln([103,y],[137,y+4],1.5)+dot(103,y,1.8)+dot(137,y+4,1.8)}
+ s+=ln([120,34],[120,74],1.6)+`<ellipse cx="120" cy="78" rx="2.6" ry="5.5" fill="none" stroke="${O}" stroke-width="1.2"/>`+dot(120,30,2.2);
+ s+=`<path d="M120 84 C150 110,176 150,152 192 S118 232,180 252" fill="none" stroke="${O}" stroke-width="1.1"/><circle cx="180" cy="252" r="4" fill="none" stroke="${O}" stroke-width="1.2"/>`;return s});
+// 20 fissure
+F.push(()=>{let s=`<rect x="30" y="30" width="180" height="210" fill="none" stroke="${G}" stroke-width="1.4"/>`;
+ function crack(x,y,a,n,d,w){for(let k=0;k<n;k++){a+=(rnd()-.5)*.75;const nx=x+Math.cos(a)*11,ny=y+Math.sin(a)*11;if(nx<33||nx>207||ny<33||ny>237)break;s+=ln([x,y],[nx,ny],w);x=nx;y=ny;if(d>0&&rnd()<.2)crack(x,y,a+(rnd()<.5?-1:1)*(.7+rnd()*.5),Math.floor(n*.6),d-1,w*.7)}s+=dot(x,y,d==3?3.8:1.8)}
+ crack(120,240,-Math.PI/2,16,3,1.8);crack(60,240,-1.2,7,1,1.1);
+ for(let i=0;i<7;i++)s+=`<rect x="${f(40+rnd()*160)}" y="${f(60+rnd()*170)}" width="3" height="3" fill="none" stroke="${G}"/>`;return s});
+const N=['tangle / one knotted line','colony / many small, one queen','compass / two legs, footprints','brackets / eat the text','kite / tethered to the ground','rootnet / roots, spore tips','nautilus / spiral, feelers','orrery / rings, orbiting dots','stitch / sews up a wall gap','fissure / a crack that grows'];
+document.getElementById('g').innerHTML=F.map((fn,i)=>`<div class="cell"><svg width="240" height="270" viewBox="0 0 240 270" style="overflow:visible">${fn()}</svg><span class="nm">crawl_${i+11}</span><span class="mono ds">${N[i]}</span></div>`).join('');
+</script></body></html>

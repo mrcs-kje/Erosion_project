@@ -1,0 +1,170 @@
+/* Erosion.exe crawlers: how the creatures and the words they touch look.
+   Shared by every Erosion page that has creatures on it (copied from
+   Erosion_test_features/erosion-crawlers/crawler_test_13).
+   The page needs one <svg id="figure"> inside a positioned #world. */
+:root {
+  --ero-line: #e8441b;                 /* the creatures' line colour */
+  --ero-hurt: #1cb9db;                 /* taking damage: the orange inverted */
+  --ero-text: #c9c4bb;                 /* dropped words */
+  --ero-scar: rgba(232, 68, 27, 0.45); /* where a word was swallowed */
+  --ero-mono: "DejaVu Sans Mono", "SF Mono", Menlo, Consolas, monospace;
+}
+
+#figure {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  overflow: visible;
+  pointer-events: none; /* clicks go through to the text... */
+}
+#figure .hit {
+  fill: transparent;
+  pointer-events: visible; /* ...except on the creatures themselves */
+  cursor: url('../../img/cursor/hand.svg') 5 1, pointer; /* the site's hand (path from this file) */
+  touch-action: none;
+}
+#figure .limb, #figure .ero-tongue {
+  stroke: var(--ero-line);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+#figure .dot { fill: var(--ero-line); }
+#figure .ero-thick { stroke-width: 2; }
+#figure .ero-silk { stroke: var(--ero-line); stroke-width: 0.8; opacity: 0.55; }
+#figure .ero-claw { stroke-width: 1.6; }
+#figure .ero-tendril {
+  stroke: var(--ero-line);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+#figure .ero-heavy { stroke-width: 4.2; }                 /* the warlord's thick legs */
+#figure .ero-ghost { stroke-width: 0.8; opacity: 0.35; }  /* faint skeleton under glyphs */
+#figure .ero-glyph,
+#figure .ero-letter {
+  fill: var(--ero-line);
+  font-family: var(--ero-mono);
+  text-anchor: middle;
+  dominant-baseline: central;
+}
+#figure .ero-big { font-weight: 700; }
+
+/* Taking damage: the creature flickers turquoise. */
+#figure .ero-hurt .limb,
+#figure .ero-hurt .ero-tendril,
+#figure .ero-hurt .ero-silk { stroke: var(--ero-hurt); }
+#figure .ero-hurt .dot,
+#figure .ero-hurt .ero-glyph { fill: var(--ero-hurt); }
+/* Severed pieces flicker too as they fall away. */
+#figure .ero-piece.ero-hurt { stroke: var(--ero-hurt); }
+#figure .dot.ero-piece.ero-hurt { fill: var(--ero-hurt); }
+
+/* Zapped by a double-click: only the parts near the hit turn turquoise. */
+#figure .ero-zap { stroke: var(--ero-hurt); }
+#figure .dot.ero-zap, #figure text.ero-zap { fill: var(--ero-hurt); stroke: none; }
+
+/* Gibberish a fond creature says to you. */
+#figure .ero-speech {
+  fill: var(--ero-line);
+  font-family: var(--ero-mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+/* Feeding: the word you pulled out of the text, and the page while you hold it. */
+#figure .ero-held { fill: var(--ero-line); font-family: var(--font, sans-serif); font-size: 16px; font-weight: 700; }
+.ero-feeding, .ero-feeding * { user-select: none; -webkit-user-select: none; cursor: grabbing; }
+.ero-w { -webkit-touch-callout: none; }
+
+/* Words being carried, dropped somewhere else, or brought to you. */
+#figure .ero-carried,
+#figure .ero-dropped,
+#figure .ero-gift {
+  font-family: var(--font, sans-serif);
+  font-size: 16px;
+  letter-spacing: 0.01em;
+}
+#figure .ero-carried { fill: var(--ero-line); }
+#figure .ero-dropped { fill: var(--ero-text); animation: ero-land 1.2s ease; }
+#figure .ero-gift { fill: var(--ero-line); font-weight: 700; animation: ero-land 1.2s ease; }
+@keyframes ero-land {
+  from { fill: var(--ero-hurt); }
+}
+
+/* ---- Words the creatures touch (classes only; the text never changes) ---- */
+.ero-w { transition: color 0.25s ease, opacity 1.2s ease; }
+.ero-w.ero-gripped { color: var(--ero-line); }
+.ero-w.ero-worn { opacity: 0.45; }
+.ero-w.ero-swallowed {
+  color: transparent; /* also when the site turns animations off */
+  animation: ero-gulp 0.7s ease forwards;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--ero-scar);
+}
+@keyframes ero-gulp {
+  from { color: var(--ero-line); }
+  to { color: transparent; }
+}
+/* A creature is hatching out of this word: it shakes and flickers red. */
+.ero-w.ero-cracking { color: var(--ero-line); display: inline-block; animation: ero-crack 0.16s steps(2) infinite; }
+@keyframes ero-crack {
+  0% { transform: translate(0, 0); }
+  50% { transform: translate(1px, -1px) skewX(-8deg); }
+  100% { transform: translate(-1px, 1px); }
+}
+/* Something just crawled into this link. */
+.ero-w.ero-portal { animation: ero-door 0.9s steps(6); }
+@keyframes ero-door {
+  0%, 40%, 80% { color: var(--ero-line); }
+  20%, 60%, 100% { color: var(--ero-hurt); }
+}
+
+/* A drawing or drawn door that something just went through, or came out of. */
+#world a.ero-portal { animation: ero-door-ring 0.9s steps(6); }
+@keyframes ero-door-ring {
+  0%, 40%, 80% { outline: 2px solid var(--ero-line); outline-offset: 2px; }
+  20%, 60%, 100% { outline: 2px solid var(--ero-hurt); outline-offset: 2px; }
+}
+
+/* An egg: a word something is about to hatch out of. It looks like any
+   other word, but every few seconds it gives a small twitch (each egg on
+   its own beat, set in page.js), and it turns red under the cursor.
+   Click it and it cracks open. */
+.ero-w.ero-egg {
+  display: inline-block;
+  cursor: url('../../img/cursor/hand.svg') 5 1, pointer;
+  animation: ero-twitch var(--ero-egg-ms, 4s) linear var(--ero-egg-delay, 0s) infinite;
+}
+.ero-w.ero-egg:hover, .ero-w.ero-egg:focus-visible { color: var(--ero-line); }
+@keyframes ero-twitch {
+  0%, 90%, 100% { transform: none; }
+  92% { transform: translate(0.9px, -0.6px) rotate(-1deg); }
+  94% { transform: translate(-0.9px, 0.4px) rotate(0.8deg); }
+  96% { transform: translate(0.6px, 0) rotate(-0.4deg); }
+  98% { transform: translate(-0.3px, 0.2px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ero-w.ero-egg { text-decoration: underline dotted var(--ero-line); text-underline-offset: 3px; }
+  .ero-w { transition: none; }
+  .ero-w.ero-swallowed { animation-duration: 0.01s; }
+  .ero-w.ero-cracking, .ero-w.ero-portal, #world a.ero-portal, .ero-w.ero-egg, #figure .ero-dropped, #figure .ero-gift { animation: none; }
+}
+
+/* Snake eggs (demo 14): a small rocking egg with a curled-up snake inside. */
+#figure .ero-snake-egg { stroke-width: 1.4; }
+#figure .ero-egg-curl { stroke-width: 1; opacity: 0.75; }
+
+/* Building (demo 15): strands spun between words, and the threads that mend a dead link. */
+#figure .ero-strand { stroke-width: 0.9; opacity: 0.7; }
+#figure .ero-spinning { opacity: 0.9; }
+#figure .ero-mend { stroke-width: 0.7; opacity: 0.55; }
+#figure .ero-knot { opacity: 0.8; }
+a.ero-mended { opacity: 1; text-decoration: underline dotted 1px; text-underline-offset: 4px; }

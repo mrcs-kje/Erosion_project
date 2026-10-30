@@ -1,0 +1,68 @@
+/* Erosion.exe, room 3: a grey room with an essay anyone may continue.
+   From the mockup erosion_room.png. */
+html:has(body.ero-room) { background: #bcbab4; }
+body.ero-room {
+  --accent: #c2330f;   /* the darker red reads on the grey wall */
+  --ero-text: #171717;
+  background: #bcbab4;
+  color: #171717;
+}
+.ero-room .ero-dim { color: #3d3b37; }
+.ero-room .ero-here { color: var(--accent); }
+
+.room-world {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 520px);
+  grid-template-areas: "top top" "essay side" "bottom bottom";
+  gap: 30px 70px;
+  padding: 30px clamp(16px, 5vw, 96px) 50px;
+}
+.room-top { grid-area: top; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+.room-top p { margin: 0; }
+.room-label, .room-meta, .room-sign, .room-open, .room-bottom, .room-note {
+  font-size: 12px; letter-spacing: .16em; text-transform: uppercase;
+}
+.room-sign { border: 1px dashed #171717; padding: 10px 18px; }
+.room-dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: var(--accent); margin-right: 8px; vertical-align: 0; }
+
+.room-essay { grid-area: essay; max-width: 920px; }
+.room-meta { color: #55534e; margin: 26px 0 8px; }
+.room-essay h1 { font-size: clamp(36px, 4.2vw, 58px); font-weight: 500; letter-spacing: -.01em; margin: 0 0 10px; }
+.room-text { font-size: clamp(18px, 1.55vw, 23px); line-height: 1.75; }
+.room-text p { margin: 0 0 26px; }
+.room-text a { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; }
+.room-text a:hover { color: var(--accent); }
+.room-blank { display: inline-block; width: 7em; border-bottom: 1px solid #171717; vertical-align: baseline; }
+.room-added p { margin: 0 0 14px; }
+.room-added p::before { content: '+ '; color: #55534e; }
+
+.room-form { display: flex; gap: 20px; align-items: end; margin: 40px 0 0; max-width: 920px; }
+.room-form input {
+  flex: 1; min-width: 0; font: inherit; font-size: 20px; color: #171717; background: none;
+  border: 0; border-bottom: 1px solid #171717; padding: 8px 0;
+}
+.room-form input::placeholder { color: #55534e; }
+.room-form input:focus-visible { outline: none; border-bottom-color: var(--accent); }
+.room-form button { font-size: 12px; letter-spacing: .16em; border: 1px solid #171717; padding: 10px 18px; }
+.room-form button:hover { color: var(--accent); border-color: var(--accent); }
+.room-note { color: var(--accent); margin: 90px 0 0; }
+
+.room-side { grid-area: side; display: flex; flex-direction: column; gap: 40px; padding-top: 70px; }
+.room-box { display: block; border: 1px solid #171717; padding: 22px 24px; }
+.room-box .room-label { display: block; margin: 0; color: #3d3b37; line-height: 2.2; }
+.room-cell { position: relative; height: 220px; }
+.room-door { width: min(100%, 380px); margin-left: 14%; }
+.room-door svg { display: block; width: 100%; height: auto; margin-top: 10px; transition: color .15s steps(2, end); }
+.room-door:hover, .room-door:focus-visible { color: var(--accent); }
+
+.room-bottom { grid-area: bottom; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px; color: #3d3b37; padding-top: 60px; }
+.room-bottom p { margin: 0; }
+
+@media (max-width: 900px) {
+  .room-world { grid-template-columns: minmax(0, 1fr); grid-template-areas: "top" "essay" "side" "bottom"; }
+  .room-side { padding-top: 0; }
+  .room-door { margin-left: 0; }
+  .room-note { margin-top: 40px; }
+  .room-form { flex-direction: column; align-items: stretch; }
+}

@@ -1,0 +1,102 @@
+/* Erosion.exe, its own black "system" look (no shared header/footer by choice). */
+
+/* no soft cross-fade into or out of the Erosion universe: it has its own glitch */
+@view-transition { navigation: none; }
+
+body.erosion { --accent: #e8441b; background: #060606; color: #e8e6df; font-size: 15px; }
+.erosion a:hover { color: var(--accent); }
+
+.ero-header { display: grid; grid-template-columns: 1fr auto auto auto; gap: 70px; padding: 20px 22px; font-size: 13px; white-space: nowrap; }
+.ero-dim { color: #cfccc4; }
+.ero-dead { text-decoration: line-through; text-decoration-thickness: 1px; opacity: .7; }
+
+/* the struck-through links (RANDOM / OFFLINE, INDEX / 404): on hover the line glitches away */
+a.ero-dead { transition: opacity .2s steps(2, end); }
+a.ero-dead:hover, a.ero-dead:focus-visible {
+  opacity: 1; color: var(--accent);
+  animation: ero-unstrike .5s steps(1, end) forwards;
+}
+@keyframes ero-unstrike {
+  0%   { text-decoration-color: currentColor; }
+  15%  { text-decoration-color: transparent; transform: translateX(-2px); text-shadow: 2px 0 #e8441b, -2px 0 #3a6bff; }
+  30%  { text-decoration-color: currentColor; transform: translateX(2px); text-shadow: -2px 0 #e8441b, 2px 0 #3a6bff; }
+  50%  { text-decoration-color: transparent; transform: translateX(-1px); text-shadow: 1px 0 #e8441b, -1px 0 #3a6bff; }
+  65%  { text-decoration-color: currentColor; transform: none; text-shadow: none; }
+  80%  { text-decoration-color: transparent; transform: translateX(1px); }
+  100% { text-decoration-color: transparent; transform: none; text-shadow: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  a.ero-dead:hover, a.ero-dead:focus-visible { animation: none; text-decoration-color: transparent; }
+}
+
+/* dummy pages (index, random): same black look, to be designed later */
+.ero-sub { position: relative; min-height: 100vh; padding: 60px 22px 60px; }
+.ero-sub-fig { display: block; width: 110px; margin-bottom: 56px; }
+.ero-sub-fig svg { display: block; width: 100%; height: auto; }
+/* hover: the figure turns the turquoise you see when the page glitches (the orange inverted: #1cb9db) */
+.ero-sub-fig svg g { transition: stroke .15s steps(2, end), fill .15s steps(2, end); }
+.ero-sub-fig:hover svg g:first-child, .ero-sub-fig:focus-visible svg g:first-child { stroke: #1cb9db; }
+.ero-sub-fig:hover svg g:last-child, .ero-sub-fig:focus-visible svg g:last-child { fill: #1cb9db; }
+.ero-sub h1 { font-size: clamp(30px, 4vw, 58px); font-weight: 300; margin: 0 0 26px; }
+.ero-sub p { margin: 0 0 18px; max-width: 540px; }
+.ero-sub .ero-status { margin-top: 44px; }
+.ero-sub .ero-back { display: inline-block; margin-top: 40px; font-size: 12px; }
+
+/* "EROSION.EXE / RUNNING" → hover shows INTERCEPT; click deletes the page and glitches home */
+.ero-intercept { position: relative; justify-self: end; font: inherit; color: inherit; text-align: right; cursor: var(--cursor-link); }
+.ero-intercept::after {
+  content: 'INTERCEPT'; position: absolute; inset: -4px -8px; display: grid; place-items: center;
+  background: var(--accent); color: #060606; font-weight: 700; letter-spacing: .12em; opacity: 0;
+}
+.ero-intercept:hover::after, .ero-intercept:focus-visible::after, .ero-intercept.is-active::after { opacity: 1; animation: intercept-flicker .4s steps(2, end) infinite; }
+@keyframes intercept-flicker { 50% { opacity: .75; transform: translateX(1px); } }
+
+.ero-caret { display: inline-block; width: .6em; height: 1em; margin-left: 1px; vertical-align: -2px; background: var(--accent); animation: caret-blink .7s steps(1) infinite; }
+@keyframes caret-blink { 50% { opacity: 0; } }
+.ero-hidden { opacity: 0 !important; transition: opacity .35s steps(4, end); }
+.ero-figure, .ero-texture, .ero-unresolved img { transition: opacity .6s steps(5, end); }
+.ero-flicker { filter: invert(1) contrast(3); }
+
+.ero-main { position: relative; min-height: 880px; overflow: hidden; }
+.ero-figure { position: absolute; left: 6%; top: 60px; width: 13%; min-width: 120px; }
+.ero-texture { position: absolute; left: 21%; top: 250px; width: 33%; opacity: .85; pointer-events: none; }
+.ero-intro { position: absolute; left: 59%; top: 80px; max-width: 540px; }
+.ero-intro h1 { font-size: 15px; font-weight: 400; margin: 0; }
+.ero-intro p { margin: 0 0 18px; }
+.ero-status { color: var(--accent); font-size: 10px; margin-top: 60px !important; }
+
+.ero-items { list-style: none; margin: 0; padding: 0; }
+.ero-items li { position: absolute; left: var(--x); top: var(--y); font-size: 14px; line-height: 1.7; z-index: 2; }
+
+.ero-unresolved { position: absolute; left: 76%; top: 50%; margin: 0; width: 220px; text-align: center; font-size: 14px; }
+.ero-unresolved img { margin-top: 20px; }
+.ero-fault { position: absolute; left: 5%; top: 84%; color: var(--accent); font-size: 12px; }
+.ero-mutation { position: absolute; left: 76%; top: 92%; font-size: 9px; color: #9a978f; }
+
+@media (max-width: 1000px) {
+  .ero-header { grid-template-columns: 1fr auto; gap: 10px 20px; font-size: 11px; }
+  .ero-header > :nth-child(even) { text-align: right; }
+  .ero-main { min-height: 0; padding: 20px 20px 40px; display: flex; flex-direction: column; gap: 26px; }
+  .ero-main > * { position: relative !important; inset: auto !important; }
+  .ero-figure { width: 110px; }
+  .ero-texture { position: absolute !important; inset: 160px auto auto 0 !important; width: 100%; opacity: .5; z-index: 0; }
+  .ero-intro, .ero-items, .ero-unresolved { z-index: 1; }
+  .ero-intro { max-width: none; }
+  .ero-status { margin-top: 24px !important; }
+  .ero-items { display: grid; gap: 22px; }
+  .ero-items li { position: static; font-size: 12px; }
+  .ero-unresolved { width: 100%; max-width: 300px; text-align: left; }
+}
+
+/* the page you are on, in the header */
+.ero-here { color: var(--accent); }
+
+/* doors: links to every room, at the bottom of each Erosion page */
+.ero-doors { display: flex; flex-wrap: wrap; gap: 10px 26px; padding: 22px 22px 30px; border-top: 1px solid #262626; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+.ero-doors-label { opacity: .6; }
+.ero-doors a:hover, .ero-doors a[aria-current] { color: var(--accent); }
+.ero-light .ero-doors { border-top-color: rgba(0, 0, 0, .18); }
+
+/* front page: the list of doors */
+.ero-door-list a { display: inline-block; margin-right: 6px; }
+.ero-door-list a:hover { color: var(--accent); }

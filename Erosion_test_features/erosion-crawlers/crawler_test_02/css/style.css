@@ -1,0 +1,192 @@
+/* EROSION.EXE demo 02. One dark world, orange line on near-black. */
+:root {
+  --bg: #060606;
+  --fg: #ece8e1;
+  --text: #c9c4bb;
+  --dim: #7d7a75;
+  --rule: #23211f;
+  --line: #e8441b;
+  --scar: rgba(232, 68, 27, 0.45);
+  --gutter: 20px;
+  --font: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  padding: 0 var(--gutter);
+}
+
+/* ---- Top bar (stays put while you scroll) ---- */
+.bar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 18px;
+  margin: 0 calc(-1 * var(--gutter));
+  padding: 12px var(--gutter);
+  background: var(--bg);
+  border-bottom: 1px solid var(--rule);
+  text-transform: uppercase;
+}
+.ero-controls { display: flex; flex-wrap: wrap; gap: 8px; }
+.meta { color: var(--dim); }
+
+button {
+  font: inherit;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--fg);
+  background: none;
+  border: 1px solid var(--dim);
+  padding: 8px 12px;
+  cursor: pointer;
+}
+button:hover { border-color: var(--line); color: var(--line); }
+button:focus-visible { outline: 2px solid var(--line); outline-offset: 3px; }
+button[aria-pressed="true"] { border-color: var(--line); color: var(--line); }
+button .ero-state { color: var(--dim); margin-left: 0.5em; }
+button[aria-pressed="true"] .ero-state { color: var(--fg); }
+
+/* ---- The world: the page the creatures live on ---- */
+.ero-world {
+  position: relative;
+  max-width: 860px;
+  margin: 0 auto;
+  padding-bottom: 140px;
+}
+
+#figure {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  overflow: visible;
+  pointer-events: none; /* clicks go through to the text... */
+}
+#figure .hit {
+  fill: transparent;
+  pointer-events: visible; /* ...except on the creatures themselves */
+  cursor: pointer;
+  touch-action: none;
+}
+#figure .limb, #figure .ero-tongue {
+  stroke: var(--line);
+  stroke-width: 1.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+#figure .dot { fill: var(--line); }
+
+/* ---- The nest where they sleep ---- */
+.ero-nest {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--rule);
+}
+.ero-cell {
+  position: relative;
+  height: 250px;
+}
+.ero-cell + .ero-cell { border-left: 1px solid var(--rule); }
+.ero-cell p {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 10px;
+  margin: 0;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.ero-cell .ero-state { color: var(--dim); }
+
+.hint {
+  margin: 0;
+  padding: 16px 0 8px;
+  color: var(--dim);
+  text-transform: uppercase;
+  max-width: 60ch;
+  line-height: 1.5;
+}
+
+/* ---- The article (Wikipedia-ish) ---- */
+.ero-article {
+  color: var(--text);
+  font-size: 16px;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+.ero-article h1 {
+  color: var(--fg);
+  font-size: clamp(32px, 6vw, 52px);
+  font-weight: 400;
+  letter-spacing: 0;
+  margin: 36px 0 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--rule);
+}
+.ero-article h2 {
+  color: var(--fg);
+  font-size: 24px;
+  font-weight: 400;
+  letter-spacing: 0;
+  margin: 2em 0 0.4em;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.ero-article h3 { color: var(--fg); font-size: 17px; margin: 1.4em 0 0.2em; }
+.ero-article b { color: var(--fg); }
+.ero-article a { color: var(--fg); text-decoration: underline dotted var(--dim); text-underline-offset: 3px; }
+.ero-article a:hover { color: var(--line); }
+.ero-from { color: var(--dim); font-size: 13px; margin-top: 0; }
+.ero-hatnote { color: var(--dim); font-style: italic; padding-left: 1.6em; }
+.ero-toc {
+  display: inline-block;
+  border: 1px solid var(--rule);
+  padding: 10px 22px 12px;
+  font-size: 14px;
+  margin: 8px 0 12px;
+}
+.ero-toc-title { margin: 0; text-align: center; color: var(--fg); font-weight: 700; }
+.ero-toc ol { margin: 4px 0 0; padding-left: 1.4em; }
+.ero-notes { font-size: 13px; color: var(--dim); }
+
+/* ---- Words the creatures touch (classes only; the text never changes) ---- */
+.ero-w { transition: color 0.25s ease, opacity 1.2s ease; }
+.ero-w.ero-gripped { color: var(--line); }
+.ero-w.ero-worn { opacity: 0.45; }
+.ero-w.ero-swallowed {
+  animation: ero-gulp 0.7s ease forwards;
+  text-decoration-line: underline;
+  text-decoration-style: dotted;
+  text-decoration-color: var(--scar);
+}
+@keyframes ero-gulp {
+  from { color: var(--line); }
+  to { color: transparent; }
+}
+
+@media (max-width: 640px) {
+  .ero-nest { grid-template-columns: 1fr; }
+  .ero-cell { height: 220px; }
+  .ero-cell + .ero-cell { border-left: 0; border-top: 1px solid var(--rule); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ero-w { transition: none; }
+  .ero-w.ero-swallowed { animation-duration: 0.01s; }
+}

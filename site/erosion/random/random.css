@@ -1,0 +1,65 @@
+/* Erosion.exe: random piece 07, "notes on measuring the kitchen".
+   From the mockup erosion_random_piece.png / random_piece.html. */
+body.ero-random { --wall: #3a3936; --dim: #8d8a84; background: #090909; }
+.ero-random .ero-here { color: var(--accent); }
+.rp-label { margin: 0; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--dim); }
+
+.rp-world {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(300px, 600px) minmax(0, 600px) 120px minmax(0, 470px);
+  gap: 0 28px;
+  padding: 20px clamp(16px, 2.6vw, 50px) 50px;
+  border-top: 1px solid var(--wall);
+}
+.rp-cell { border: 1px solid var(--wall); }
+.rp-essay { padding: 40px 38px; min-height: 900px; border-right-color: transparent; color: #d9d5cc; position: relative; }
+.rp-essay h1 { margin: 20px 0 40px; font-size: clamp(26px, 2.3vw, 38px); font-weight: 400; letter-spacing: .14em; line-height: 1.25; color: #ece8e1; }
+.rp-essay p { font-size: 17px; line-height: 1.85; margin: 0 0 24px; }
+.rp-eaten { display: inline-block; width: 3.6em; height: .9em; background: repeating-linear-gradient(90deg, #3a3936 0 3px, transparent 3px 6px); vertical-align: -1px; }
+.rp-string { width: 120px; height: 56px; vertical-align: -26px; }
+.rp-todo { color: #ece8e1; font-size: 19px !important; letter-spacing: .06em; }
+
+.rp-mid { display: flex; flex-direction: column; gap: 30px; padding-top: 0; }
+.rp-mid > .rp-label { margin: 0 0 -18px; }
+.rp-draw { height: 420px; overflow: hidden; }
+.rp-draw svg { width: 100%; height: 100%; }
+.rp-vid { height: 150px; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; border-top-color: transparent; }
+.rp-tri { width: 0; height: 0; border-left: 30px solid #ece8e1; border-top: 13px solid transparent; border-bottom: 13px solid transparent; transform: scaleX(5) scaleY(.7); }
+.rp-vid:hover .rp-tri { border-left-color: var(--accent); }
+.rp-vid.is-gone .rp-tri { opacity: .15; }
+.rp-num { position: relative; height: 340px; overflow: hidden; border-bottom-color: transparent; }
+.rp-num span { position: absolute; left: -10px; top: -80px; font-size: 460px; line-height: 1; letter-spacing: -.04em; color: transparent; -webkit-text-stroke: 1.2px #ece8e1; white-space: nowrap; font-weight: 300; }
+.rp-num .rp-label { position: absolute; right: 16px; bottom: 12px; }
+
+.rp-photo svg { display: block; width: 120px; height: 700px; border: 1px solid var(--wall); }
+.rp-photo .rp-label { margin-top: 12px; }
+
+.rp-right { display: flex; flex-direction: column; gap: 60px; padding-top: 20px; }
+.rp-top { display: flex; gap: 20px; align-items: flex-start; }
+.rp-tiny { width: 190px; height: 125px; border: 1px solid var(--wall); display: grid; place-items: center; }
+.rp-tiny span { width: 28px; height: 28px; border-radius: 50%; background: #7d7a75; }
+.rp-empty { border-left: 1px solid var(--wall); padding: 14px 0 160px 18px; }
+.rp-note { border: 1px solid #ece8e1; padding: 26px 28px; transform: rotate(-2.2deg); }
+.rp-note p { margin: 0 0 10px; font-size: 16px; letter-spacing: .04em; }
+.rp-dim { color: var(--dim); }
+.rp-link { font-size: 12px; letter-spacing: .14em; }
+.rp-link:hover { color: var(--accent); }
+
+.rp-foot { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 18px clamp(16px, 2.6vw, 50px); border-top: 1px solid var(--wall); font-size: 12px; letter-spacing: .14em; color: var(--dim); }
+.rp-foot button { font-size: 12px; letter-spacing: .14em; color: var(--dim); }
+.rp-foot button:hover { color: var(--accent); }
+
+@media (max-width: 1300px) {
+  .rp-world { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 30px; }
+  .rp-photo { display: none; }
+  .rp-right { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; }
+  .rp-essay { min-height: 0; border-right-color: var(--wall); }
+}
+@media (max-width: 760px) {
+  .rp-world { grid-template-columns: minmax(0, 1fr); }
+  .rp-draw { height: 260px; }
+  .rp-num { height: 220px; }
+  .rp-num span { font-size: 300px; top: -50px; }
+  .rp-foot { flex-wrap: wrap; }
+}

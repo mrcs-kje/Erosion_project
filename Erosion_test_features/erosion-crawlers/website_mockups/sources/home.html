@@ -1,0 +1,91 @@
+<!doctype html><html><head><meta charset="utf-8"><title>home</title>
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--bg:#090909;--fg:#e9e5dc;--dim:#7c7872;--line:#e8441b;--wall:#3a3a38;--wall2:#706e69}
+body{width:1280px;height:800px;background:var(--bg);color:var(--fg);font:14px/1.5 "Helvetica Neue",Helvetica,"Liberation Sans",Arial,sans-serif;letter-spacing:.04em;overflow:hidden}
+.mono{font-family:"DejaVu Sans Mono","Liberation Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.wrap{position:relative;width:1216px;margin:34px auto 0}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:64px 240px 240px 170px;position:relative}
+.cell{padding:18px 20px;position:relative;display:flex;flex-direction:column;gap:12px;min-width:0}
+.walls{position:absolute;left:0;top:0;pointer-events:none;overflow:visible}
+.walls path{fill:none;stroke:var(--wall);stroke-width:1}
+.walls path.b{stroke:var(--wall2)}
+.hd{grid-area:1/1/2/7;flex-direction:row;justify-content:space-between;align-items:center;padding:0 4px}
+.hd .name{font-size:18px;letter-spacing:.14em}
+s{text-decoration-thickness:1px}
+.txt p{font-size:15px;line-height:1.55;max-width:34ch}
+.caret{display:inline-block;width:8px;height:15px;background:var(--line);vertical-align:-2px}
+.note li{list-style:none;font-size:14px;margin-bottom:6px}
+.note li:before{content:"– ";color:var(--dim)}
+.rules p{font-size:12.5px;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px}
+.cnt{display:flex;flex-direction:column;gap:6px}
+.cnt b{font-weight:400;color:var(--line)}
+</style></head><body>
+<div class="wrap"><div class="grid">
+
+<div class="cell hd"><span class="name">EROSION.EXE</span><span class="mono"><s>INDEX / 404</s> &nbsp;&nbsp; <s>RANDOM / OFFLINE</s></span><span class="mono" style="color:var(--fg)">EROSION.EXE / RUNNING</span></div>
+
+<div class="cell txt" style="grid-area:2/1/3/3"><span class="mono">Text / abandoned mid-sentence</span>
+<p>I started this to explain why the staircase in my grandmother's house had thirteen steps going up and twelve coming down, and then <span class="caret"></span></p></div>
+
+<div class="cell" style="grid-area:2/3/4/4"><span class="mono">Drawing / 3 of ?</span>
+<svg width="190" height="400" viewBox="0 0 190 400" style="overflow:visible;position:absolute;left:10px;top:-30px">
+ <g fill="none" stroke="#e9e5dc" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M10 360 H52 V322 H94 V284 H136 V246 H178 V208"/>
+  <path d="M12 363 H50 V325 H97 V287 H133 V249 H181 V204" opacity=".45"/>
+  <path d="M178 208 V40" opacity=".5" stroke-dasharray="3 5"/>
+  <path d="M60 322 q-6 -26 8 -34" stroke="#e8441b"/>
+ </g>
+ <text x="26" y="350" class="m" fill="#7c7872" font-size="10" font-family="DejaVu Sans Mono,monospace">1</text>
+ <text x="68" y="312" fill="#7c7872" font-size="10" font-family="DejaVu Sans Mono,monospace">2</text>
+ <text x="110" y="274" fill="#7c7872" font-size="10" font-family="DejaVu Sans Mono,monospace">3 ...</text>
+ <text x="150" y="196" fill="#e8441b" font-size="11" font-family="DejaVu Sans Mono,monospace">13? 12?</text>
+</svg></div>
+
+<div class="cell" style="grid-area:2/4/3/6;padding:0"><svg id="cs" width="100%" height="100%" viewBox="0 0 405 240" style="overflow:visible">
+ <path d="M391 90 V14 H14 V226 H391 V150" fill="none" stroke="#4d4b47" stroke-dasharray="5 6"/>
+ <text x="34" y="46" fill="#7c7872" font-size="10.5" font-family="DejaVu Sans Mono,monospace" letter-spacing="1">WALL REMOVED. WAS:</text>
+ <text x="34" y="66" fill="#e9e5dc" font-size="14" letter-spacing="1" text-decoration="line-through">ABOUT</text>
+</svg></div>
+
+<div class="cell" style="grid-area:2/6/4/7"><span class="mono">Loop 00:12 / click to open</span>
+ <div style="position:relative;left:-30px;width:190px;height:116px;border:1px solid #8a8780;display:flex;align-items:center;justify-content:center;background:var(--bg)"><svg width="30" height="30" viewBox="0 0 30 30"><path d="M8 4 L25 15 L8 26 Z" fill="none" stroke="#e8441b" stroke-width="1.5"/></svg></div>
+ <span class="mono" style="margin-top:22px">Game / no goal</span>
+ <svg width="120" height="84" viewBox="0 0 120 84"><g id="gd" fill="#4d4b47"></g></svg>
+ <span class="mono" style="margin-top:auto;color:var(--fg)">[ ZINE_003.PDF ]</span>
+</div>
+
+<div class="cell" style="grid-area:3/1/4/2"><span class="mono">Crawler / dormant</span>
+<svg width="104" height="132" viewBox="0 0 130 165" style="overflow:visible">
+ <g stroke="#e8441b" stroke-width="1.2" fill="none" stroke-linecap="round">
+  <path d="M42 4 L26 32 L54 42 L58 23 Z M42 4 L37 50 L32 79 L34 99 M32 79 L57 67 L77 57 L99 65 L34 99"/>
+  <path d="M32 79 L9 150 M34 99 L40 156" opacity=".4"/></g>
+ <g fill="#e8441b"><circle cx="42" cy="4" r="2.4"/><circle cx="26" cy="32" r="2.4"/><circle cx="54" cy="42" r="2.4"/><circle cx="58" cy="23" r="2.4"/><circle cx="37" cy="50" r="2.4"/><circle cx="32" cy="79" r="2.4"/><circle cx="34" cy="99" r="2.4"/><circle cx="57" cy="67" r="2.4"/><circle cx="77" cy="57" r="2.4"/><circle cx="99" cy="65" r="2.4"/><circle cx="9" cy="150" r="2.4" opacity=".4"/><circle cx="40" cy="156" r="2.4" opacity=".4"/></g>
+</svg><span class="mono" style="margin-top:auto">Tap a dot</span></div>
+
+<div class="cell" style="grid-area:3/2/4/3"><span class="mono">Sound / 0:07 / no title</span>
+<svg width="150" height="60" viewBox="0 0 150 60" style="margin-top:20px"><g id="wf" stroke="#e9e5dc" stroke-width="1.4" stroke-linecap="round"></g></svg>
+<span class="mono" style="margin-top:auto">Ends early. Nobody knows why.</span></div>
+
+<div class="cell note" style="grid-area:3/4/4/6"><span class="mono">Notes without a destination</span>
+<ul style="margin-top:6px"><li>ask about the door that doesn't close</li><li>14.10 something was eaten, not sure what</li><li><s style="color:var(--dim)">the third floor is a rumor</s> the third floor is a room</li><li>bring tape</li></ul></div>
+
+<div class="cell rules" style="grid-area:4/1/5/4"><span class="mono">House rules / contradictory</span>
+<div style="margin-top:6px"><p>Room 3 has no back button.</p><p>Every door in room 5 opens twice.</p><p>Room 8 is only open when it is raining somewhere.</p></div></div>
+
+<div class="cell cnt mono" style="grid-area:4/4/5/7;justify-content:flex-start"><span><b>07</b> pieces</span><span><b>02</b> squatters</span><span><b>01</b> room closed for repairs</span><span><b>00</b> rules, see left</span></div>
+
+<svg class="walls" width="1216" height="714"><path d="M0 64 H520 M560 64 H1216"/><path class="b" d="M0 544 H700 M770 544 H1100 M1130 544 H1216"/><path d="M0 304 H405 M608 304 H880 M930 304 H1013"/><path d="M0 714 H300 M330 714 H1216"/><path d="M202.67 304 V400 M202.67 440 V544"/><path class="b" d="M405.33 64 V180 M405.33 230 V544"/><path d="M608 64 V120 M608 150 V714"/><path class="b" d="M1013.33 64 V380 M1013.33 420 V544"/><path d="M0 64 V600 M0 640 V714"/><path d="M1216 64 V300 M1216 360 V714"/></svg>
+</div></div>
+<script>
+const ns='http://www.w3.org/2000/svg';
+function worm(svg,pts,col){const g=document.createElementNS(ns,'g');g.setAttribute('stroke',col);g.setAttribute('fill',col);g.setAttribute('stroke-linecap','round');
+ let s='';for(let i=1;i<pts.length;i++){const[a,b]=[pts[i-1],pts[i]];s+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke-width="1.8"/>`;
+  if(i%2==0){const dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy)||1,nx=-dy/d,ny=dx/d;
+   for(const k of[1,-1]){const mx=b[0]+nx*7*k,my=b[1]+ny*7*k;s+=`<polyline points="${b[0]},${b[1]} ${mx},${my} ${mx+dx/d*5+nx*4*k},${my+dy/d*5+ny*4*k}" fill="none" stroke-width="1.1"/>`}}}
+ pts.forEach((p,i)=>{s+=`<circle cx="${p[0]}" cy="${p[1]}" r="${i==pts.length-1?4.6:2.6}" stroke="none"/>`});g.innerHTML=s;svg.appendChild(g)}
+document.getElementById('gd').innerHTML=[0,1,2,3].map(r=>[0,1,2,3,4,5].map(c=>`<circle cx="${10+c*20}" cy="${10+r*20}" r="2.6" ${(r==2&&c==3)?'fill="#e8441b"':''}/>`).join('')).join('');
+document.getElementById('wf').innerHTML=Array.from({length:30},(_,i)=>{const h=4+Math.abs(Math.sin(i*.7)*18+Math.cos(i*1.9)*9);return `<line x1="${5+i*4.8}" y1="${30-h}" x2="${5+i*4.8}" y2="${30+h}" ${i>21?'opacity=".25"':''}/>`}).join('');
+const pts=[];for(let k=0;k<=22;k++){const t=k/22;pts.push([+(70+t*350).toFixed(1),+(200-t*t*115+Math.sin(k*1.1)*4).toFixed(1)])}
+worm(document.getElementById('cs'),pts,'#e8441b');
+</script></body></html>

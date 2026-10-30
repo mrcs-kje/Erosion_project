@@ -1,0 +1,60 @@
+<!doctype html><html><head><meta charset="utf-8"><title>crawlers</title>
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--bg:#090909;--fg:#e9e5dc;--dim:#7c7872;--wall:#3a3a38}
+body{width:1280px;height:800px;background:var(--bg);color:var(--fg);font:14px/1.5 "Helvetica Neue",Helvetica,"Liberation Sans",Arial,sans-serif;letter-spacing:.04em;overflow:hidden;padding:28px 40px}
+.mono{font-family:"DejaVu Sans Mono","Liberation Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.top{display:flex;justify-content:space-between;align-items:baseline;height:40px}
+.top .t{font-size:18px;letter-spacing:.14em;color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:330px 330px;margin-top:10px}
+.cell{border-top:1px solid var(--wall);border-left:1px solid var(--wall);display:flex;flex-direction:column;align-items:center;padding:10px 0 14px}
+.cell:nth-child(5n){border-right:1px solid var(--wall)}
+.cell:nth-child(n+6){border-bottom:1px solid var(--wall)}
+.cell:nth-child(4){border-left-color:transparent}
+.cell:nth-child(8){border-top-color:transparent}
+.nm{font-family:"DejaVu Sans Mono",monospace;font-size:14px;letter-spacing:.06em;color:var(--fg);margin-top:auto}
+.ds{margin-top:2px}
+</style></head><body>
+<div class="top"><span class="t">CRAWLERS / 10 FORMS</span><span class="mono">Reference sheet / names are for reference only</span></div>
+<div class="grid" id="g"></div>
+<script>
+const O='#e8441b';
+let sd=11;const rnd=()=>{sd=(sd*9301+49297)%233280;return sd/233280};
+const dot=(x,y,r=2.7,o=1)=>`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${O}" opacity="${o}"/>`;
+const ln=(a,b,w=1.6,o=1)=>`<line x1="${a[0].toFixed(1)}" y1="${a[1].toFixed(1)}" x2="${b[0].toFixed(1)}" y2="${b[1].toFixed(1)}" stroke="${O}" stroke-width="${w}" stroke-linecap="round" opacity="${o}"/>`;
+const pl=(pts,w=1.4)=>`<polyline points="${pts.map(p=>p[0].toFixed(1)+','+p[1].toFixed(1)).join(' ')}" fill="none" stroke="${O}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+const F=[];
+// 1 worm
+F.push(()=>{let p=[];for(let k=0;k<=13;k++)p.push([30+k*14,140+Math.sin(k*.8)*16]);let s=pl(p,1.9);
+ for(let i=2;i<p.length;i+=2){const a=p[i-1],b=p[i],dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy),nx=-dy/d,ny=dx/d;for(const k of[1,-1]){const m=[b[0]+nx*9*k,b[1]+ny*9*k];s+=pl([b,m,[m[0]+dx/d*5+nx*4*k,m[1]+dy/d*5+ny*4*k]],1.1)}}
+ p.forEach((q,i)=>s+=dot(q[0],q[1],i==13?4.8:2.7));return s});
+// 2 spider
+F.push(()=>{let s='';const cx=120,cy=135,k=1.25;for(let i=0;i<8;i++){const sd=i<4?-1:1,j=i%4,ay=(-24+j*16)*k;s+=pl([[cx,cy],[cx+sd*30*k,cy+ay-8*k],[cx+sd*56*k,cy+ay+14*k]],1.5)}
+ return s+dot(cx,cy,9,1)+dot(cx,cy-14,5.5)});
+// 3 marcher
+F.push(()=>{let s='';for(let i=0;i<9;i++){const x=34+i*22;s+=pl([[x,126],[x+5,114]],1.3)+pl([[x,154],[x+5,166]],1.3)}
+ s+=ln([34,140],[210,140],1.8);for(let i=0;i<9;i++)s+=dot(34+i*22,140,i==8?6:4.2);
+ return s+pl([[214,134],[224,122]],1.2)+pl([[214,146],[224,158]],1.2)});
+// 4 netling
+F.push(()=>{const n=[[60,110],[105,76],[165,100],[190,150],[140,190],[80,170],[120,135]];const e=[[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[6,0],[6,2],[6,4],[1,6]];
+ return e.map(([a,b])=>ln(n[a],n[b],1)).join('')+n.map(p=>dot(p[0],p[1],3.6)).join('')+`<circle cx="214" cy="84" r="3" fill="none" stroke="${O}"/>`});
+// 5 drifter
+F.push(()=>{let s=`<path d="M66 118 C66 56,174 56,174 118 Q120 130 66 118" fill="none" stroke="${O}" stroke-width="2" stroke-linejoin="round"/>`;
+ for(let i=0;i<5;i++){const x=80+i*20;s+=`<path d="M${x} 122 q-9 22 0 44 q9 22 0 44" fill="none" stroke="${O}" stroke-width="1.3" stroke-linecap="round"/>`+dot(x,212,2.3)}
+ return s+dot(120,86,4.2)});
+// 6 spore
+F.push(()=>`<ellipse cx="120" cy="140" rx="92" ry="52" fill="none" stroke="#4d4b47" stroke-dasharray="3 6" transform="rotate(-18 120 140)"/><path d="M92 128 C92 96,134 90,150 106 C170 124,160 160,134 168 C106 176,86 158,92 128 Z" fill="none" stroke="${O}" stroke-width="2.2" stroke-linejoin="round"/>`+dot(122,134,5.6)+[[34,170],[62,100],[196,92],[210,150],[170,200],[84,196]].map(p=>dot(p[0],p[1],2.6)).join(''));
+// 7 serpent
+F.push(()=>{let p=[];for(let x=26;x<=212;x+=6)p.push([x,140+Math.sin(x/21)*38]);let s=pl(p,2.2);for(let i=0;i<p.length;i+=4)s+=dot(p[i][0],p[i][1],1.7+i/p.length*1.6);
+ const h=p[p.length-1];return s+dot(h[0],h[1],5.6)+pl([[h[0]+4,h[1]-3],[h[0]+14,h[1]-10]],1)+pl([[h[0]+4,h[1]+3],[h[0]+14,h[1]+9]],1)});
+// 8 figure
+F.push(()=>{const N=[[42,4],[26,32],[54,42],[58,23],[37,50],[32,79],[34,99],[57,67],[77,57],[99,65],[9,150],[40,156]].map(([x,y])=>[x*1.2+62,y*1.2+24]);
+ const L=[[0,1],[1,2],[2,3],[3,0],[0,4],[4,5],[5,6],[5,7],[7,8],[8,9],[6,9]];return L.map(([a,b])=>ln(N[a],N[b],1.4)).join('')+ln(N[5],N[10],1.4,.4)+ln(N[6],N[11],1.4,.4)+N.map((p,i)=>dot(p[0],p[1],3,i>9?.4:1)).join('')});
+// 9 creeper
+F.push(()=>{let s='';function br(x,y,a,l,d){const x2=x+Math.cos(a)*l,y2=y+Math.sin(a)*l;s+=ln([x,y],[x2,y2],1+d*.25);if(d>0){br(x2,y2,a-.45-rnd()*.25,l*.74,d-1);br(x2,y2,a+.4+rnd()*.25,l*.74,d-1)}else s+=dot(x2,y2,2.6)}
+ br(120,252,-Math.PI/2,52,5);return s+dot(120,252,3.4)});
+// 10 glyph
+F.push(()=>{const ch='@%&#§~!/+*=?<>:;'.split('');let s='';for(let i=0;i<22;i++){const t=i/21,x=34+t*172,y=146+Math.sin(t*6.5)*48,sz=i==21?26:20-t*8;s+=`<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" fill="${O}" font-size="${sz.toFixed(1)}" font-family="DejaVu Sans Mono,monospace" text-anchor="middle" opacity="${(1-t*.35).toFixed(2)}">${i==21?'@':ch[i%ch.length]}</text>`}return s});
+const D=['worm / chain with paired legs','spider / hub and eight legs','marcher / many short legs','netling / loose graph, no legs','drifter / bell, trailing strands','spore / blob with orbiting dots','serpent / long body, no legs','figure / dots and limbs','creeper / branches as it grows','glyph / body made of characters'];
+document.getElementById('g').innerHTML=F.map((f,i)=>`<div class="cell"><svg width="240" height="270" viewBox="0 0 240 270" style="overflow:visible">${f()}</svg><span class="nm">crawl_${i+1}</span><span class="mono ds">${D[i]}</span></div>`).join('');
+</script></body></html>

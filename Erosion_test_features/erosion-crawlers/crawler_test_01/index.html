@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EROSION.EXE / SPIDER TEST 01</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <header class="bar">
+    <span>EROSION.EXE / SPIDER TEST 01</span>
+    <span id="status" aria-live="polite">DORMANT</span>
+  </header>
+
+  <main>
+    <div id="stage" class="stage">
+      <svg id="figure" role="group" aria-label="A dormant line spider. Activate any body dot to wake it."></svg>
+    </div>
+
+    <p class="hint">Tap the body to wake it. It crawls from word to word and shies away from your cursor. Catch it to drag it. Feed it words and it grows more legs.</p>
+
+    <div class="controls">
+      <button id="purge" type="button">PURGE</button>
+      <span class="meta" id="meta"></span>
+    </div>
+  </main>
+
+  <script src="./js/figure.js"></script>
+</body>
+</html>

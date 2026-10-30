@@ -1,0 +1,56 @@
+# EROSION.EXE
+
+Standalone project. It is its own world, separate from the portfolio website. It may be attached to the portfolio's domain later, so keep every path relative and do not depend on any shared CSS or JS.
+
+## The concept
+A playground for unfinished, playful, in-progress work, shared between artists. Not serious. Generative "crawlers" (simple orange line-and-dot creatures) live on the site. They can be woken, released, mutate and morph into each other, and erode the pages until a purge or reload. Each contributing artist may later get their own hidden portfolio folder (for example `/friend1/`) with its own look.
+
+## Look
+- Near-black background, off-white text, one orange line colour (`--line`).
+- Small uppercase system labels, wide letter-spacing, like a status readout.
+- Super simple: lines and tiny dots, no glow, no filters, no images in the creatures.
+
+## Rules for building
+- Keep it light. Draw only lines and dots. Stop the animation loop when nothing is moving.
+- Respect `prefers-reduced-motion`.
+- Relative paths only (`./css/style.css`). No build step for now: plain HTML, CSS and classic JS so it opens by double-clicking `index.html`.
+- Explain what you change as you go. The owner is learning Claude Code and wants to understand the code.
+- Prefix any new CSS classes that could clash later with `ero-`.
+
+## Current state (demo 08)
+Demo 08 = demo 07 plus visitor damage: double-click (or double-tap) a creature and `ERO.zap(c, point, now)` cuts off the part nearest the click (the form's own `hurt()`), and only lines, dots and letters within 42 px of the hit turn turquoise for 1.4 s (class `ero-zap`, see `zapPaint` in `js/creatures.js`). Damage also costs fondness. `ERO.words.list` exposes the wrapped words.
+
+### Demo 07 base
+Same article page and the same three nest creatures as demo 06, now with the full life cycle the owner described (interview 29 Oct 2026, see `../CREATURE_LAB_NOTES.md`).
+- Five forms per line, with a PUPA between each. A pupa can be bitten and torn open (4 bites), and is then food.
+  - CRAWLER -> SCORPION (6 legs, 2 pincers, stinger) -> EMPEROR -> WARLORD (fewer, thick legs, 3 pincer tails) -> THRONE (body made of eaten letters, 5 stingers).
+  - STRIDER -> COLOSSUS -> BROODMOTHER -> WEAVER (spins a web between letters) -> CATHEDRAL (8 legs written in brackets). All strider legs have 2 segments now (less lag).
+  - SNAKE -> SQUID -> OLD ONE -> LEVIATHAN (drags a second body on a chain) -> ABYSS (glyph spine of ribs, eyes).
+- `evolveAt` / `splitAt` per stage sit in `ERO.makeCrawler` etc. at the bottom of `js/creatures.js`.
+- Death: the creature falls apart into debris that fades after 5 s (`CORPSE_MS`); the pieces are food. A nest creature hatches again 9-17 s later out of a word on screen (the word cracks, its letters fly into the new body).
+- Split: a fifth form that eats `splitAt` dies and two small MUTANTS crawl out (`makeGlyph`: RIBS, BRACE, QUILL, from crawl_33/38/39). Mutants have 5 levels and can split again. Now and then one hatches from a word by itself (only while something is awake). At most 12 creatures.
+- Words: some creatures carry a swallowed word and drop it into another scar; words inside `#` links are doors (the creature comes out where the link points).
+- Fondness: stay near a creature (or hold it gently) and it grows fond: follows you, brings word gifts, attacks creatures near your cursor. Throwing undoes it.
+- `js/main.js`: loop, pointer, buttons, mutants (`ERO.spawnMutant(x, y, kind)`), wild hatching, purge (also removes mutants).
+- Console: `ERO.creatures.crawler.evolve()`, `.hatch()`, `.split()`, `.kill()`.
+
+The same creature code is used live on the site's Archive page: `site/erosion/archive/` with the shared copy in `site/erosion/crawlers/`. Change it here first, then copy `words.js` and `creatures.js` across.
+
+## Saved versions
+- `../crawler_test_01/`: the first word spider (one screen, scattered words).
+- `../crawler_test_02/`: demo 02 (article page, crawler/snake/strider, before roaming and the squid).
+- `../crawler_test_03/`: demo 03 (roaming, tendril snake, squid with eyes and short tentacles, no pupa).
+- `../crawler_test_04/`: demo 04 (pupa, squid with long tentacles and fins, cursor-eating, no fights or adults for crawler/strider).
+- `../crawler_test_05/`: demo 05 (fights that just remove a part, one pupation, scorpion/colossus/squid as final forms, laggy dragging).
+- `../crawler_test_07/`: demo 07 (five forms, mutants, fondness, link doors).
+- `../erosion-exe/`: demo 06 (two pupations, three forms per line, death sends the young form home dormant).
+- `../creature_pngs/`: screenshots of each creature in demo 04; `demo_05/` and `demo_06/` hold the later demos (demo_06 includes emperor, broodmother and old one).
+
+## Planned next steps, in order
+1. Limbs that grow: start as a plain thread, sprout buds, then gripping limbs.
+2. Several creatures sharing one canvas, with a fixed budget of points (a "point pool").
+3. Creature forms: worm, spider, centipede, netling (a graph), glitch (made of characters), spore.
+4. Mutation rules on a slow tick (about 5 per second): merge, split, mutate, decay. Text on the page is food; eaten text gets damaged via CSS classes only, never by changing the real content.
+5. Infection state saved in `sessionStorage` so it carries across pages. PURGE clears it.
+6. Pet page, then host pages the crawlers can infect.
+7. Video: click-to-load Vimeo/YouTube pop-up, not autoplay embeds on page load.

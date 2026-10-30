@@ -1,0 +1,280 @@
+/* Erosion.exe archive: an article about erosion, with live inhabitants
+   on it (see ../crawlers/).
+   Layout from the mockups: thin grey frames, a dashed nest, wide-spaced
+   labels, a SELECTED panel and a LOG. The nest and the panel are kept
+   small and quiet, and will be hidden later. */
+
+body.ero-archive {
+  --accent: #e8441b;
+  --arc-fg: #ece8e1;
+  --arc-text: #c9c4bb;
+  --arc-dim: #8d8a84;   /* 5.9:1 on the background */
+  --arc-rule: #2a2724;
+  --arc-frame: #5f5c57;
+  background: #060606;
+  color: var(--arc-fg);
+}
+.ero-archive .arc-here { color: var(--accent); }
+
+/* ---- Title row ---- */
+.arc-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 14px 22px 26px;
+}
+.arc-title p { margin: 0; }
+.arc-name { font-size: clamp(17px, 2vw, 26px); letter-spacing: 0.14em; font-weight: 400; }
+.arc-meta { font-size: 10px; color: var(--arc-dim); letter-spacing: 0.14em; }
+
+.arc-label {
+  margin: 28px 0 10px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--arc-dim);
+}
+.arc-small { margin: 14px 0 0; font-size: 11px; letter-spacing: 0.12em; color: var(--arc-dim); }
+
+/* ---- The world: one grid the creatures roam over ---- */
+.arc-world {
+  position: relative;
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr) 180px;
+  grid-template-areas:
+    "side nest    rail"
+    "side article rail";
+  grid-template-rows: auto 1fr;
+  gap: 0 36px;
+  padding: 0 22px 160px;
+}
+.arc-side { grid-area: side; }
+.arc-nest { grid-area: nest; }
+.arc-rail { grid-area: rail; }
+.arc-article { grid-area: article; }
+.arc-side-in, .arc-rail-in { position: sticky; top: 16px; }
+.arc-rail-in { max-height: calc(100vh - 32px); overflow-y: auto; scrollbar-width: thin; }
+.arc-side-in { max-height: calc(100vh - 32px); overflow: hidden; }
+
+/* ---- Left: navigation and log ---- */
+.arc-fig { width: 84px; margin: 0 0 8px; }
+.arc-nav ul { list-style: none; margin: 0; padding: 0; font-size: 14px; line-height: 1.9; }
+.arc-nav a:hover { color: var(--accent); }
+.arc-tools { color: var(--arc-dim); }
+.ero-archive .ero-dead { text-decoration: line-through; text-decoration-thickness: 1px; opacity: 0.7; }
+.arc-log ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  color: var(--arc-dim);
+}
+.arc-log li { margin: 0 0 8px; }
+.arc-log li.is-new { color: var(--arc-fg); }
+.arc-log time { margin-right: 0.6em; }
+
+/* ---- The nest ---- */
+.arc-nest { border: 1px dashed var(--arc-frame); margin-bottom: 8px; }
+.arc-nest .arc-label { margin: 0; padding: 8px 12px; font-size: 9px; }
+.arc-nest-foot { text-align: left; }
+.arc-cells { display: grid; grid-template-columns: repeat(3, 1fr); }
+.ero-archive .ero-cell { position: relative; height: 220px; }
+.ero-archive .ero-cell p {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 6px;
+  margin: 0;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--arc-dim);
+}
+.ero-archive .ero-cell .ero-state { color: var(--arc-dim); }
+
+/* ---- Right: the selected creature ---- */
+.arc-rail-in { font-size: 9px; }
+.arc-rail .arc-label { margin: 14px 0 5px; font-size: 9px; }
+.arc-rail-in > .arc-label:first-child { margin-top: 0; }
+.arc-mood { margin: 0 0 3px; font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
+.arc-soon { margin: 0 0 3px; font-size: 10px; letter-spacing: 0.1em; color: var(--accent); }
+.arc-form { margin: 0; font-size: 9px; letter-spacing: 0.12em; color: var(--arc-dim); }
+.arc-rail .arc-small { margin-top: 10px; font-size: 9px; }
+.arc-squares { display: flex; flex-wrap: wrap; gap: 3px; }
+.arc-squares span { width: 7px; height: 7px; border: 1px solid var(--arc-frame); }
+.arc-squares span.on { background: var(--accent); border-color: var(--accent); }
+.arc-bar { height: 4px; border: 1px solid var(--arc-frame); }
+.arc-bar span { display: block; height: 100%; width: 0; background: var(--accent); }
+
+.arc-buttons { display: flex; flex-wrap: wrap; gap: 4px; }
+.arc-buttons + .arc-buttons { margin-top: 4px; }
+.arc-buttons[role="group"] { flex-direction: column; }
+/* Summon: pick any line and stage, and it hatches out of a word on screen. */
+.arc-summon { flex-wrap: nowrap; }
+.ero-archive .arc-summon select {
+  flex: 1;
+  min-width: 0;
+  font: inherit;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--arc-dim);
+  background: transparent;
+  border: 1px solid var(--arc-rule);
+  border-radius: 0;
+  padding: 3px 4px;
+}
+.ero-archive .arc-summon select:focus-visible { outline: 1px solid var(--accent); }
+.ero-archive .arc-summon option, .ero-archive .arc-summon optgroup { color: #111; background: #fff; }
+.ero-archive .arc-rail button {
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: var(--arc-dim);
+  border: 1px solid var(--arc-rule);
+  padding: 4px 7px;
+  text-align: left;
+}
+.arc-buttons[role="group"] button { display: flex; justify-content: space-between; gap: 12px; }
+.ero-archive .arc-rail button:hover { border-color: var(--accent); color: var(--accent); }
+.ero-archive .arc-rail button[aria-pressed="true"] { border-color: var(--accent); }
+.ero-archive .arc-rail button .ero-state { color: var(--arc-dim); }
+.ero-archive .arc-rail button[aria-pressed="true"] .ero-state { color: var(--accent); }
+.ero-archive .arc-rail button:disabled { opacity: 0.35; cursor: not-allowed; border-color: var(--arc-frame); color: var(--arc-fg); }
+
+/* ---- The article ---- */
+.arc-article {
+  max-width: 780px;
+  color: var(--arc-text);
+  font-size: 16px;
+  line-height: 1.7;
+}
+.arc-article h1 {
+  color: var(--arc-fg);
+  font-size: clamp(34px, 5vw, 54px);
+  font-weight: 300;
+  margin: 40px 0 4px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--arc-rule);
+}
+.arc-article h2 {
+  clear: right;
+  color: var(--arc-fg);
+  font-size: 23px;
+  font-weight: 400;
+  margin: 2em 0 0.4em;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--arc-rule);
+}
+.arc-article h3 { color: var(--arc-fg); font-size: 17px; font-weight: 600; margin: 1.4em 0 0.2em; }
+.arc-article p { margin: 0 0 1em; }
+.arc-article b { color: var(--arc-fg); font-weight: 600; }
+.arc-article a { color: var(--arc-fg); text-decoration: underline dotted var(--arc-dim); text-underline-offset: 3px; }
+.arc-article a:hover { color: var(--accent); }
+.arc-article :target { scroll-margin-top: 24px; }
+.arc-from { color: var(--arc-dim); font-size: 13px; }
+.arc-hatnote { color: var(--arc-dim); font-style: italic; padding-left: 1.6em; }
+.arc-ref { font-size: 0.7em; vertical-align: super; line-height: 0; text-decoration: none !important; color: var(--accent) !important; }
+.arc-cn { font-size: 0.75em; vertical-align: super; line-height: 0; color: var(--accent); margin-left: 2px; }
+.arc-red { color: var(--accent); }
+
+.arc-notice {
+  border: 1px dashed var(--accent);
+  padding: 12px 16px 4px;
+  margin: 0 0 20px;
+  font-size: 14px;
+}
+.arc-notice .arc-label { margin: 0 0 4px; color: var(--accent); }
+
+.arc-infobox {
+  float: right;
+  width: 270px;
+  margin: 0 0 18px 26px;
+  border: 1px solid var(--arc-rule);
+  border-collapse: collapse;
+  font-size: 13px;
+  line-height: 1.45;
+}
+.arc-infobox caption {
+  padding: 8px;
+  border: 1px solid var(--arc-rule);
+  border-bottom: 0;
+  color: var(--arc-fg);
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.arc-infobox th, .arc-infobox td { padding: 5px 10px; text-align: left; vertical-align: top; border-top: 1px solid var(--arc-rule); }
+.arc-infobox th { color: var(--arc-fg); font-weight: 600; width: 42%; }
+.arc-infobox-img { text-align: center; }
+.arc-infobox-img svg { display: block; width: 100%; height: auto; margin: 6px 0; }
+.arc-infobox-img p { margin: 0 0 4px; color: var(--arc-dim); font-size: 12px; }
+
+.arc-toc {
+  display: inline-block;
+  border: 1px solid var(--arc-rule);
+  padding: 10px 24px 12px 18px;
+  font-size: 14px;
+  margin: 8px 0 12px;
+}
+.arc-toc-title { margin: 0 !important; text-align: center; color: var(--arc-fg); font-weight: 600; }
+.arc-toc ol { margin: 4px 0 0; padding-left: 1.4em; }
+.arc-toc ol ol { margin: 0; }
+
+.arc-table-wrap { overflow-x: auto; margin: 0 0 8px; }
+.arc-table, .arc-attempts { border-collapse: collapse; font-size: 14px; }
+.arc-table caption, .arc-attempts caption { text-align: left; color: var(--arc-dim); font-size: 13px; padding-bottom: 6px; }
+.arc-table th, .arc-table td { border: 1px solid var(--arc-rule); padding: 6px 12px; text-align: left; }
+.arc-table thead th { color: var(--arc-dim); font-weight: 400; letter-spacing: 0.12em; }
+.arc-table tbody th { color: var(--arc-fg); font-weight: 600; }
+.arc-small-print { font-size: 13px; color: var(--arc-dim); }
+
+/* The raw mockup's old-web table. */
+.arc-attempts { border: 3px double var(--arc-frame); margin: 8px 0 0; }
+.arc-attempts th, .arc-attempts td { border: 1px solid var(--arc-frame); padding: 4px 12px; }
+.arc-attempts th { color: var(--arc-fg); }
+.arc-disputed s { color: var(--arc-dim); }
+.arc-notes { font-size: 13px; color: var(--arc-dim); }
+.arc-edited { margin-top: 40px !important; padding-top: 14px; border-top: 1px solid var(--arc-rule); font-size: 13px; color: var(--arc-dim); }
+
+/* ---- Narrower screens ---- */
+@media (max-width: 1200px) {
+  .arc-world {
+    grid-template-columns: minmax(0, 1fr) 170px;
+    grid-template-areas:
+      "side    side"
+      "nest    rail"
+      "article rail";
+    grid-template-rows: auto auto 1fr;
+  }
+  .arc-side-in { position: static; max-height: none; display: flex; flex-wrap: wrap; gap: 0 48px; margin-bottom: 26px; }
+  .arc-side-in .arc-label { margin-top: 4px; }
+  .arc-nav { display: flex; gap: 0 48px; }
+  .arc-log { flex: 1; min-width: 220px; }
+}
+
+@media (max-width: 800px) {
+  .arc-world {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "nest" "rail" "article" "side";
+    grid-template-rows: none;
+    padding: 0 16px 120px;
+  }
+  .arc-title { padding: 10px 16px 18px; }
+  .arc-rail-in { position: static; max-height: none; }
+  .arc-rail { margin-top: 18px; }
+  .arc-side-in { display: block; margin-top: 50px; }
+  .arc-nav { display: block; }
+  .arc-infobox { float: none; width: 100%; margin: 0 0 20px; }
+  .arc-infobox-img svg { max-width: 260px; margin: 6px auto; }
+  .arc-buttons[role="group"] { flex-direction: row; }
+}
+
+@media (max-width: 560px) {
+  .arc-cells { grid-template-columns: 1fr; }
+  .ero-archive .ero-cell { height: 190px; }
+  .ero-archive .ero-cell + .ero-cell { border-top: 1px dashed var(--arc-rule); }
+}

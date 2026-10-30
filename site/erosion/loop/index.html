@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Loop 012 | Erosion.exe | Marcus Kje</title>
+  <meta name="description" content="Erosion.exe: loop 012, no sound. A corridor that never ends. Nobody knows who filmed this.">
+  <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../../fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../erosion.css">
+  <link rel="stylesheet" href="../crawlers/crawlers.css">
+  <link rel="stylesheet" href="loop.css">
+</head>
+<body class="erosion ero-loop">
+  <header class="ero-header">
+    <a href="../../index.html">TERMINATE PROCESS → HOME</a>
+    <a class="ero-dim ero-dead" href="../random/index.html" data-random>RANDOM / OFFLINE</a>
+    <a class="ero-dim ero-dead" href="../index/index.html">INDEX / 404</a>
+    <button class="ero-intercept" type="button" aria-label="Intercept process">EROSION.EXE / RUNNING</button>
+  </header>
+
+  <main id="world" class="loop-world">
+    <svg id="figure" aria-hidden="true"></svg>
+
+    <p class="loop-brand">EROSION.EXE</p>
+    <div class="loop-behind" aria-hidden="true" data-no-eggs>
+      <div class="loop-cell"><p class="loop-label">TEXT / ABANDONED</p><p data-ero-food>I started this to explain why the staircase in my grandmother's house had thirteen steps</p></div>
+      <div class="loop-cell"><p class="loop-label">DRAWING / 3 OF ?</p></div>
+      <div class="loop-cell loop-dashed"><p class="loop-label">WALL REMOVED. WAS: ABOUT</p></div>
+      <div class="loop-cell"><p class="loop-label" data-ero-food>CRAWLER / DORMANT</p></div>
+      <div class="loop-cell"><p data-ero-food>ask about the door that doesn't close. something was eaten, not sure what. bring tape.</p></div>
+      <div class="loop-cell"><p class="loop-label">LOOP 00:12 / CLICK TO OPEN</p></div>
+    </div>
+
+    <section class="loop-player" role="dialog" aria-labelledby="loop-title">
+      <div class="loop-head">
+        <p id="loop-title" data-ero-food>LOOP <span id="loop-n">012</span> / NO SOUND</p>
+        <a href="../index.html">[ X ] CLOSE</a>
+      </div>
+      <svg class="loop-screen" id="loop-screen" viewBox="0 0 1100 600" role="img" aria-label="A grey corridor that never gets shorter, with a red door at the end">
+        <rect class="loop-wall" x="0" y="0" width="1100" height="600"/>
+        <g id="loop-rings"></g>
+        <g id="loop-edges"></g>
+        <a href="../room/index.html" class="loop-door-link" aria-label="Open the red door (room 3)">
+          <rect class="loop-door" id="loop-door" x="0" y="0" width="1" height="1"/>
+          <circle class="loop-knob" id="loop-knob" cx="0" cy="0" r="3"/>
+        </a>
+      </svg>
+      <div class="loop-bar" aria-hidden="true"><span id="loop-bar"></span></div>
+      <div class="loop-foot">
+        <p><span id="loop-time">00:00</span> / 00:12 / LOOPS</p>
+        <p data-ero-food>NOBODY KNOWS WHO FILMED THIS</p>
+      </div>
+    </section>
+  </main>
+  <script src="../../js/main.js"></script>
+  <script src="../sub.js"></script>
+  <script src="../nav.js"></script>
+  <script src="../crawlers/words.js"></script>
+  <script src="../crawlers/creatures.js"></script>
+  <script src="../crawlers/page.js"></script>
+  <script src="loop.js"></script>
+</body>
+</html>

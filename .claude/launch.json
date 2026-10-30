@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "portfolio",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "C:\\Users\\Bruger\\Desktop\\erosion_WIP_workfolder\\tools\\serve.ps1", "-Port", "5174"],
+      "port": 5174
+    }
+  ]
+}

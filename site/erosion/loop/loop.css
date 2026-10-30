@@ -1,0 +1,34 @@
+/* Erosion.exe: loop 012. From the mockup erosion_page_loop.png. */
+body.ero-loop { background: #060606; }
+.ero-loop .ero-here { color: var(--accent); }
+.loop-world { position: relative; min-height: 1000px; padding: 10px clamp(16px, 3.8vw, 72px) 60px; overflow: hidden; }
+.loop-brand { margin: 0 0 40px; font-size: 26px; letter-spacing: .14em; color: #3a3936; }
+.loop-behind { display: grid; grid-template-columns: 1.3fr 1fr 1.6fr; grid-auto-rows: 340px; border: 1px solid #171717; }
+.loop-cell { border: 1px solid #171717; padding: 26px; color: #3a3936; font-size: 21px; line-height: 1.5; }
+.loop-dashed { border-style: dashed; }
+.loop-label { margin: 0 0 18px; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: #2c2b29; }
+
+main.loop-world > section.loop-player { /* beats the portfolio's "main > section" rule */
+  position: absolute; left: 50%; top: 110px; transform: translateX(-50%);
+  width: min(1180px, calc(100% - 32px)); padding: 26px 30px 22px;
+  background: #0b0b0b; border: 1px solid #8d8a84;
+}
+.loop-head, .loop-foot { display: flex; justify-content: space-between; gap: 16px; font-size: 13px; letter-spacing: .16em; text-transform: uppercase; }
+.loop-head p, .loop-foot p { margin: 0; }
+.loop-head a:hover { color: var(--accent); }
+.loop-foot { color: #8d8a84; margin-top: 16px; }
+.loop-screen { display: block; width: 100%; height: auto; margin-top: 22px; border: 1px solid #3a3936; }
+.loop-wall { fill: #111; }
+#loop-edges line, #loop-rings rect { stroke: #4a4946; stroke-width: 1.2; fill: none; }
+#loop-rings rect { stroke: #262624; }
+.loop-door { fill: none; stroke: var(--accent); stroke-width: 2; }
+.loop-knob { fill: var(--accent); }
+.loop-door-link:hover .loop-door, .loop-door-link:focus-visible .loop-door { fill: rgba(232, 68, 27, .18); }
+.loop-bar { height: 4px; background: #2c2b29; margin-top: 24px; }
+.loop-bar span { display: block; height: 100%; width: 0; background: var(--accent); }
+
+@media (max-width: 760px) {
+  .loop-behind { grid-template-columns: 1fr; grid-auto-rows: 200px; }
+  main.loop-world > section.loop-player { top: 80px; padding: 16px; }
+  .loop-head, .loop-foot { font-size: 11px; flex-direction: column; }
+}

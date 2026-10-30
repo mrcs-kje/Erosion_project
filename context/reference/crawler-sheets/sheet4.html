@@ -1,0 +1,83 @@
+<!doctype html><html><head><meta charset="utf-8"><title>tentacle spines</title>
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--bg:#090909;--fg:#e9e5dc;--dim:#7c7872;--wall:#3a3a38}
+body{width:1280px;height:800px;background:var(--bg);color:var(--fg);font:14px/1.5 "Helvetica Neue",Helvetica,"Liberation Sans",Arial,sans-serif;letter-spacing:.04em;overflow:hidden;padding:28px 40px}
+.mono{font-family:"DejaVu Sans Mono","Liberation Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.top{display:flex;justify-content:space-between;align-items:baseline;height:40px}
+.top .t{font-size:18px;letter-spacing:.14em;color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);grid-template-rows:330px 330px;margin-top:10px}
+.cell{border-top:1px solid var(--wall);border-left:1px solid var(--wall);display:flex;flex-direction:column;align-items:center;padding:6px 0 14px}
+.cell:nth-child(5n){border-right:1px solid var(--wall)}
+.cell:nth-child(n+6){border-bottom:1px solid var(--wall)}
+.cell:nth-child(4){border-top-color:transparent}
+.cell:nth-child(7){border-left-color:transparent}
+.nm{font-family:"DejaVu Sans Mono",monospace;font-size:14px;letter-spacing:.06em;color:var(--fg);margin-top:auto}
+.ds{margin-top:2px;text-align:center}
+</style></head><body>
+<div class="top"><span class="t">CRAWLERS / TENTACLE SPINES</span><span class="mono">Reference sheet 4 / variations on crawl_26</span></div>
+<div class="grid" id="g"></div>
+<script>
+const O='#e8441b',G='#4d4b47';
+let sd=17;const rnd=()=>{sd=(sd*9301+49297)%233280;return sd/233280};
+const f=n=>n.toFixed(1);
+const esc=c=>c==='&'?'&amp;':c==='<'?'&lt;':c==='>'?'&gt;':c;
+const dot=(x,y,r=2.7,o=1)=>`<circle cx="${f(x)}" cy="${f(y)}" r="${r}" fill="${O}" opacity="${o}"/>`;
+const ln=(a,b,w=1.5,o=1)=>`<line x1="${f(a[0])}" y1="${f(a[1])}" x2="${f(b[0])}" y2="${f(b[1])}" stroke="${O}" stroke-width="${w}" stroke-linecap="round" opacity="${o}"/>`;
+const pl=(p,w=1.4,o=1)=>`<polyline points="${p.map(q=>f(q[0])+','+f(q[1])).join(' ')}" fill="none" stroke="${O}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round" opacity="${o}"/>`;
+const tx=(c,x,y,s,r=0,o=1)=>`<text x="${f(x)}" y="${f(y)}" font-size="${f(s)}" fill="${O}" font-family="DejaVu Sans Mono,monospace" text-anchor="middle" dominant-baseline="central" opacity="${o.toFixed(2)}" transform="rotate(${f(r)} ${f(x)} ${f(y)})">${esc(c)}</text>`;
+function along(P,d){let a=0;for(let i=1;i<P.length;i++){const dx=P[i][0]-P[i-1][0],dy=P[i][1]-P[i-1][1],l=Math.hypot(dx,dy);if(l>0&&a+l>=d){const t=(d-a)/l;return[P[i-1][0]+dx*t,P[i-1][1]+dy*t,Math.atan2(dy,dx)]}a+=l}return null}
+const plen=P=>{let L=0;for(let i=1;i<P.length;i++)L+=Math.hypot(P[i][0]-P[i-1][0],P[i][1]-P[i-1][1]);return L};
+const tendril=(x,y,a,len,cf,steps=44)=>{const P=[[x,y]];let g=a;for(let i=1;i<=steps;i++){const t=i/steps;g+=cf(t)/steps;x+=Math.cos(g)*len/steps;y+=Math.sin(g)*len/steps;P.push([x,y,g])}return P};
+const line=(P,w=1.2,o=1,suck=false)=>{let s=pl(P,w,o);if(suck)for(let i=5;i<P.length;i+=5)s+=dot(P[i][0],P[i][1],Math.max(.9,2.4-i/P.length*1.6),o);const e=P[P.length-1];return s+dot(e[0],e[1],1.6,o)};
+const chars=(P,str,s0,s1,o=1)=>{const L=plen(P);let s='',d=5,k=0;while(d<L){const q=along(P,d);if(!q)break;const t=d/L,sz=s0+(s1-s0)*t;s+=tx(str[k%str.length],q[0],q[1],sz,q[2]*57.3,o*(1-t*.5));d+=sz*.7+1;k++}return s};
+const B=[['(',')'],['{','}'],['[',']'],['<','>']];
+const vb=(x,y,i,half,sz,o=1)=>tx(B[i%4][0],x-half,y,sz,0,o)+tx(B[i%4][1],x+half,y,sz,0,o)+dot(x,y,Math.max(1,sz/11),o);
+const head=(x,y,r=13)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#090909" stroke="${O}" stroke-width="1.6"/>`+tx('@',x,y,r*1.5);
+function bez(p0,c,p1,n=60){const P=[];for(let i=0;i<=n;i++){const t=i/n,u=1-t;P.push([u*u*p0[0]+2*u*t*c[0]+t*t*p1[0],u*u*p0[1]+2*u*t*c[1]+t*t*p1[1]])}return P}
+function spineOn(P,step,half,sz0,sz1,from=16,to=null){let s='',L=plen(P),i=0;to=to??L-14;for(let d=from;d<to;d+=step,i++){const q=along(P,d);if(!q)break;const t=d/L,sz=sz0+(sz1-sz0)*t,rot=q[2]*57.3+90,nx=-Math.sin(q[2]),ny=Math.cos(q[2]);
+ s+=tx(B[i%4][0],q[0]+nx*half,q[1]+ny*half,sz,rot)+tx(B[i%4][1],q[0]-nx*half,q[1]-ny*half,sz,rot)+dot(q[0],q[1],1.6)}return s}
+const F=[];
+// 31 anemone
+F.push(()=>{let s='';for(let i=0;i<5;i++)s+=vb(120,236-i*17,i,11+i*2.2,22,1-i*.1);const hy=150;
+ for(let k=0;k<13;k++){const a=(-165+k*(150/12))*Math.PI/180,L=68+((k*37)%25),sg=k%2?1:-1,P=tendril(120,hy,a,L,t=>sg*(1.4+4*t*t)+Math.sin(t*9+k)*.9);s+=k%3==0?chars(P,"~`'",13,6):line(P,1.2,.9,true)}return s+head(120,hy,14)});
+// 32 squid
+F.push(()=>{let s=pl([[100,52],[76,44],[96,76]],1.4)+pl([[140,52],[164,44],[144,76]],1.4);for(let i=0;i<5;i++)s+=vb(120,46+i*14,i,7+i*4,20-i*.6,1-i*.06);
+ s+=tx('o',98,122,15)+tx('o',142,122,15)+dot(120,122,3);
+ for(let k=0;k<8;k++){const a=(90+(k-3.5)*10)*Math.PI/180,sg=k%2?1:-1;s+=line(tendril(120+(k-3.5)*7,132,a,78+rnd()*16,t=>sg*(.8+2.4*t*t)+Math.sin(t*7+k)*.6),1.2,.9,true)}
+ for(const sg of[-1,1]){const P=tendril(120+sg*8,132,(90+sg*12)*Math.PI/180,108,t=>-sg*(.5+1.4*t));const e=P[P.length-1];s+=pl(P,1.3)+tx('[',e[0]-4,e[1],15,e[2]*57.3+90)+tx(']',e[0]+4,e[1],15,e[2]*57.3+90)}return s});
+// 33 ribs
+F.push(()=>{let s=head(120,22,11);for(let i=0;i<10;i++){const y=48+i*20,half=11,len=18+Math.sin((i+.5)/10*Math.PI)*50*(1-i*.045);s+=vb(120,y,i,half,21-i*.5,1-i*.05);
+  s+=line(tendril(120+half+6,y,0,len,t=>2.4+7*t*t*t),1.1,.9-i*.03)+line(tendril(120-half-6,y,Math.PI,len,t=>-(2.4+7*t*t*t)),1.1,.9-i*.03)}return s});
+// 34 hydra
+F.push(()=>{const H=[[52,86],[120,48],[188,86]],C=[[56,210],[120,150],[184,210]];let s='';
+ H.forEach((h,j)=>{const P=bez([120,254],C[j],h);s+=spineOn(P,15,7,15,19,22,plen(P)-20);
+  for(let k=0;k<5;k++){const a=(-150+k*30+(j-1)*-24)*Math.PI/180,sg=k%2?1:-1;s+=line(tendril(h[0],h[1],a,40+rnd()*18,t=>sg*(1.6+5*t*t)),1.1,.9)}s+=head(h[0],h[1],11)});
+ return s+dot(120,254,4)});
+// 35 vine
+F.push(()=>{const P=[];for(let i=0;i<=80;i++){const u=i/80;P.push([120+60*Math.sin(u*3.2),252-u*210])}let s=spineOn(P,13,8,13,19,8,plen(P)-18);
+ const L=plen(P);let k=0;for(let d=30;d<L-24;d+=39,k++){const q=along(P,d),sg=k%2?1:-1,a=q[2]+sg*Math.PI/2;s+=line(tendril(q[0]+Math.cos(a)*12,q[1]+Math.sin(a)*12,a,36+rnd()*14,t=>sg*(.9+16*Math.pow(t,3))),1.2,.9)}
+ const e=P[P.length-1];return s+head(e[0],e[1]-6,11)+line(tendril(e[0]-6,e[1]-14,-2.3,26,t=>-(1+10*t*t*t)),1.1,.9)+line(tendril(e[0]+6,e[1]-14,-.8,26,t=>(1+10*t*t*t)),1.1,.9)});
+// 36 roots
+F.push(()=>{let s=`<line x1="64" y1="20" x2="176" y2="20" stroke="${G}" stroke-dasharray="3 5"/>`+ln([120,20],[120,28],1)+head(120,40,11);for(let i=0;i<5;i++)s+=vb(120,72+i*16,i,22-i*2.4,20-i*1.3,1-i*.07);
+ function root(x,y,a,len,d,w){const sg=rnd()<.5?-1:1,P=tendril(x,y,a,len,t=>sg*.9*Math.sin(t*5),30);s+=pl(P,w,.95);const e=P[P.length-1];if(d>0){root(e[0],e[1],e[2]-.55,len*.72,d-1,w*.8);root(e[0],e[1],e[2]+.55,len*.72,d-1,w*.8)}else s+=dot(e[0],e[1],1.8)}
+ for(let k=0;k<5;k++)root(120,148,(90+(k-2)*27)*Math.PI/180,46,2,1.5);return s+dot(120,148,3.4)});
+// 37 antler
+F.push(()=>{let s='';for(let i=0;i<5;i++)s+=vb(120,238-i*15,i,11+i*1.5,21,1-i*.08);const hy=156;
+ const T='<>[]{}()'.split('');function br(x,y,a,len,d,w){const sg=rnd()<.5?-1:1,P=tendril(x,y,a,len,t=>sg*.5*t,22);s+=pl(P,w,.95);const e=P[P.length-1];if(d>0){br(e[0],e[1],e[2]-.6,len*.72,d-1,w*.78);br(e[0],e[1],e[2]+.55,len*.72,d-1,w*.78)}else s+=tx(T[Math.floor(rnd()*8)],e[0],e[1],13,e[2]*57.3+90)}
+ br(120,hy,-2.1,48,2,1.7);br(120,hy,-1.04,48,2,1.7);br(120,hy,-2.7,34,1,1.3);br(120,hy,-.44,34,1,1.3);return s+head(120,hy,13)});
+// 38 octobrace
+F.push(()=>{let s=tx('{',90,86,66)+tx('}',150,86,66)+head(120,86,12);const S='()(){}()[]';
+ for(let k=0;k<8;k++){const ang=[22,44,64,82,98,116,136,158][k],a=ang*Math.PI/180,sg=k<4?1:-1,P=tendril(120,122,a,84+42*Math.sin(a),t=>sg*(.5+1.3*t*t)+Math.sin(t*5+k)*.35);s+=chars(P,S.slice(k%4)+S,19,9)+dot(P[P.length-1][0],P[P.length-1][1],1.8)}return s});
+// 39 feather
+F.push(()=>{const sp=[];for(let y=240;y>=52;y-=4)sp.push([120+6*Math.sin(y/30),y]);let s=pl(sp,1.4,.8);
+ for(let i=0;i<12;i++){const y=64+i*14,x=120+6*Math.sin(y/30),len=18+Math.sin(i/11*Math.PI)*34;s+=vb(x,y,i,6,13,1-i*.04);
+  for(const sg of[-1,1])for(const ph of[0,1]){const a=(sg>0?(40+ph*22):(140-ph*22))*Math.PI/180,P=tendril(x+sg*8,y,a,len*(ph?.7:1),t=>-sg*.5*t,12);s+=pl(P,.9,.85)+dot(P[12][0],P[12][1],1.4)}}
+ return s+head(120,34,11)+line(tendril(112,26,-2.2,56,t=>-(1+8*t*t)),1.1,.9)+line(tendril(128,26,-.94,56,t=>(1+8*t*t)),1.1,.9)+line(tendril(120,240,1.5,34,t=>-(3+10*t*t)),1.3,.9)});
+// 40 knot
+F.push(()=>{const P=[];for(let i=0;i<=300;i++){const u=i/300*4.3;P.push([120+80*Math.sin(1.6*u+.4)*Math.cos(.55*u),138+60*Math.sin(2.2*u)*Math.cos(.9*u+.6)])}
+ let s=spineOn(P,15,7,12,17,8,plen(P)-14);const e=P[P.length-1],p2=P[P.length-6],a=Math.atan2(e[1]-p2[1],e[0]-p2[0]);
+ for(let k=0;k<6;k++){const sg=k%2?1:-1,aa=a+(-1.1+k*.44);s+=line(tendril(e[0],e[1],aa,38+rnd()*16,t=>sg*(1.2+6*t*t)),1.1,.9)}return s+head(e[0],e[1],9)});
+const N=['anemone / crown of tendrils','squid / eight arms, two clubs','ribs / a tendril per bone','hydra / three spines, heads','vine / curling tips','roots / hangs and branches','antler / bracket-tipped','octobrace / bracket arms','feather / barbs along the spine','knot / a tied spine'];
+document.getElementById('g').innerHTML=F.map((fn,i)=>`<div class="cell"><svg width="240" height="274" viewBox="0 0 240 274" style="overflow:visible">${fn()}</svg><span class="nm">crawl_${i+31}</span><span class="mono ds">${N[i]}</span></div>`).join('');
+</script></body></html>

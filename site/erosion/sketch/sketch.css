@@ -1,0 +1,134 @@
+/* Erosion.exe: drawings, dump 02. An endless sheet of paper you drag around
+   (sketch.js). No tape, no grid of cards: drawings lie where they fell. */
+body.ero-sketch {
+  --accent: #c2330f;
+  --paper: #e3e0d6;
+  --ink: #17191d;
+  --graphite: #8d8e8c;
+  --ero-text: #17191d;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--paper);
+  color: var(--ink);
+}
+.ero-sketch .ero-header { position: relative; z-index: 5; background: linear-gradient(var(--paper) 55%, rgba(227, 224, 214, 0)); }
+.ero-sketch .ero-dim { color: #3c4048; }
+
+/* the sheet fills the window; #world stays put, the paper moves */
+.sk-world {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: grab;
+}
+.sk-world.sk-grabbing, .sk-world.sk-grabbing * { cursor: grabbing !important; }
+
+/* faint crosses every 120 px, bigger ones every 600 px; they move with the paper */
+.sk-grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M0 0h4M0 0v4M120 0h-4M0 120v-4' stroke='%23b4b1a7' stroke-width='1'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cpath d='M0 0h10M0 0v10M600 0h-10M0 600v-10' stroke='%239c998f' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 120px 120px, 600px 600px;
+}
+
+.sk-sheet { position: absolute; inset: 0; }
+.sk-item { position: absolute; left: 0; top: 0; display: block; color: inherit; transform-origin: 0 0; will-change: transform; }
+/* (no visibility: hidden off screen: Tab must still reach every drawing) */
+.sk-item svg { display: block; width: 100%; height: auto; overflow: visible; }
+.sk-item img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; -webkit-user-drag: none; }
+
+/* lines */
+.sk-item .k, .sk-item .g, .sk-item .r {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.sk-item .k { stroke: var(--ink); stroke-width: 1.1; }
+.sk-item .k2 { stroke-width: 1.9; }
+.sk-item .thin { stroke-width: .7; }
+.sk-item .g { stroke: var(--graphite); stroke-width: .8; }
+.sk-item .r { stroke: var(--accent); stroke-width: 1.3; }
+.sk-item .dash { stroke-dasharray: 4 5; }
+.sk-item .f { fill: var(--accent); }
+.sk-item .d { fill: var(--ink); }
+.sk-t { font-family: var(--ero-mono, monospace); font-size: 9px; letter-spacing: .08em; fill: #3c4048; }
+.sk-tg { fill: var(--graphite); }
+
+.sk-label {
+  margin: 12px 0 0;
+  font-size: 11px;
+  letter-spacing: .14em;
+  color: #3c4048;
+}
+
+/* doors: the drawing turns red under the cursor */
+a.sk-item:hover .k, a.sk-item:focus-visible .k { stroke: var(--accent); }
+a.sk-item:hover .sk-label, a.sk-item:focus-visible .sk-label { color: var(--accent); }
+
+/* the map: its boxes are links */
+.sk-map { position: relative; }
+.sk-nodes { position: absolute; inset: 0; }
+.sk-node {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  font-size: calc(var(--k, 1) * 9px);
+  letter-spacing: .06em;
+  white-space: nowrap;
+  color: var(--ink);
+}
+a.sk-node:hover, a.sk-node:focus-visible { color: var(--accent); }
+.sk-here { color: var(--accent); }
+
+/* moving drawings */
+.sk-cut .sk-gone { opacity: 0; transition: opacity .4s steps(3, end); }
+.sk-ghost { opacity: 0; }
+.sk-ghost-r .k, .sk-ghost-r .g { stroke: #e8441b; }
+.sk-ghost-b .k, .sk-ghost-b .g { stroke: #3a6bff; }
+.sk-ghost .f, .sk-ghost .d { fill: transparent; }
+
+/* random stuff */
+.sk-note {
+  margin: 0;
+  font-family: var(--ero-mono, monospace);
+  font-size: 13px;
+  line-height: 1.5;
+  color: #2a2d33;
+}
+.sk-note s { text-decoration-color: var(--accent); }
+.sk-ticket {
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--ink);
+  border-left-style: dashed;
+  font-size: 13px;
+  letter-spacing: .16em;
+  line-height: 1.7;
+}
+.sk-ticket .sk-valid { color: var(--accent); }
+a.sk-item:hover .sk-ticket, a.sk-item:focus-visible .sk-ticket { border-color: var(--accent); color: var(--accent); }
+.sk-missing { display: grid; place-items: center; height: 120px; border: 1px dashed var(--graphite); }
+.sk-missing p { margin: 0; font-size: 11px; letter-spacing: .14em; text-align: center; color: #3c4048; }
+
+/* what stays on the glass: title, where you are, how to move */
+.sk-hud { position: absolute; z-index: 1; margin: 0; font-size: 11px; letter-spacing: .16em; color: #3c4048; pointer-events: none; }
+.sk-hud .ero-w { pointer-events: auto; }
+.sk-title { top: 66px; left: 22px; }
+.sk-coords { bottom: 16px; left: 22px; font-variant-numeric: tabular-nums; white-space: pre; }
+.sk-hint { bottom: 16px; right: 22px; transition: opacity 1.2s steps(6, end); }
+.sk-hint.sk-used { opacity: 0; }
+
+@media (max-width: 760px) {
+  .sk-title { top: 96px; left: 16px; right: 16px; }
+  .sk-coords { left: 16px; }
+  .sk-hint { right: 16px; left: 16px; bottom: 38px; }
+}
+.sk-coarse { display: none; }
+@media (pointer: coarse) { .sk-fine { display: none; } .sk-coarse { display: inline; } }

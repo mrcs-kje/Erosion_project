@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Walk to the door | Erosion.exe | Marcus Kje</title>
+  <meta name="description" content="Erosion.exe: walk to the door. A game with no goal. Nobody has reached the door.">
+  <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../../fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../erosion.css">
+  <link rel="stylesheet" href="../crawlers/crawlers.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body class="erosion ero-light ero-game">
+  <header class="ero-header">
+    <a href="../../index.html">TERMINATE PROCESS → HOME</a>
+    <a class="ero-dim ero-dead" href="../random/index.html" data-random>RANDOM / OFFLINE</a>
+    <a class="ero-dim ero-dead" href="../index/index.html">INDEX / 404</a>
+    <button class="ero-intercept" type="button" aria-label="Intercept process">EROSION.EXE / RUNNING</button>
+  </header>
+
+  <main id="world" class="game-world">
+    <svg id="figure" aria-hidden="true"></svg>
+
+    <div class="game-top">
+      <div>
+        <h1 class="game-title" data-ero-food>WALK TO THE DOOR</h1>
+        <p class="game-count" id="game-count" aria-live="off">4113</p>
+        <p class="game-label">STEPS</p>
+      </div>
+      <div class="game-info" aria-live="polite">
+        <p>DOOR: <span id="game-away">12</span> STEPS AWAY</p>
+        <p>WAS: <span id="game-was">11</span></p>
+        <p class="game-goal" id="game-goal">GOAL: -</p>
+      </div>
+    </div>
+
+    <svg class="game-stage" id="game-stage" viewBox="0 0 1760 260" role="img" aria-label="A stick figure on a long ruler, and a door that moves away">
+      <g class="game-ghosts" id="game-ghosts"></g>
+      <g class="game-ground" id="game-ground"></g>
+      <g class="game-door" id="game-door">
+        <rect x="0" y="40" width="78" height="150"/>
+        <circle class="game-knob" cx="57" cy="121" r="5"/>
+        <text x="39" y="20">⋮</text>
+      </g>
+      <g class="game-man" id="game-man">
+        <circle cx="0" cy="37" r="17"/>
+        <line x1="0" y1="54" x2="0" y2="130"/>
+        <polyline id="game-arms" points="-34,110 0,80 36,100"/>
+        <polyline id="game-legs" points="-25,190 0,130 26,190"/>
+      </g>
+    </svg>
+
+    <div class="game-bottom">
+      <div class="game-keys">
+        <p data-ero-food>PRESS → TO WALK</p>
+        <button type="button" id="game-back" aria-label="Step back">←</button>
+        <button type="button" id="game-step" aria-label="Step forward">→</button>
+      </div>
+      <p data-ero-food>NOBODY HAS REACHED THE DOOR. SOMEONE HAS TRIED A LOT.</p>
+    </div>
+  </main>
+  <script src="../../js/main.js"></script>
+  <script src="../sub.js"></script>
+  <script src="../nav.js"></script>
+  <script src="../crawlers/words.js"></script>
+  <script src="../crawlers/creatures.js"></script>
+  <script src="../crawlers/page.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

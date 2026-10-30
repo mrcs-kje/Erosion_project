@@ -1,0 +1,240 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 940" width="1600" height="940"><rect width="1600" height="940" fill="#090909"/>
+<text x="40" y="52" font-family="Helvetica,Arial,sans-serif" font-size="20" fill="#ece8e1" text-anchor="start" letter-spacing="3.5" opacity="1">EROSION.EXE / SITE MAP</text>
+<text x="40" y="74" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">HYPOTHETICAL PAGES AND HOW THEY LINK. NOTHING HERE IS FIXED.</text>
+<line x1="40.0" y1="400.0" x2="91.5" y2="400.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="129.6" y1="400.0" x2="210.0" y2="400.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="210.0" y1="400.0" x2="210.0" y2="439.4" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="210.0" y1="455.4" x2="210.0" y2="490.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="40.0" y1="490.0" x2="112.7" y2="490.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="134.1" y1="490.0" x2="210.0" y2="490.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="40" y1="400" x2="40" y2="490" stroke="#ece8e1" stroke-width="1.2"/>
+<text x="54" y="426" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#ece8e1" text-anchor="start" letter-spacing="2.2" opacity="1">/ ENTRY</text>
+<text x="54" y="474" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">BLANK PAGE, ONE LINK</text>
+<line x1="210" y1="445" x2="300" y2="445" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="293.7,448.0 300.0,445.0 293.7,442.0" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<line x1="300.0" y1="170.0" x2="367.6" y2="170.0" stroke="#ece8e1" stroke-width="1.4"/>
+<line x1="412.7" y1="170.0" x2="540.0" y2="170.0" stroke="#ece8e1" stroke-width="1.4"/>
+<line x1="540" y1="170" x2="540" y2="670" stroke="#ece8e1" stroke-width="1.4"/>
+<line x1="300.0" y1="670.0" x2="378.8" y2="670.0" stroke="#ece8e1" stroke-width="1.4"/>
+<line x1="431.6" y1="670.0" x2="540.0" y2="670.0" stroke="#ece8e1" stroke-width="1.4"/>
+<line x1="300" y1="170" x2="300" y2="670" stroke="#ece8e1" stroke-width="1.4"/>
+<text x="314" y="198" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#ece8e1" text-anchor="start" letter-spacing="2.2" opacity="1">HOME</text>
+<text x="314" y="654" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">THE GRID, SIZES RANDOM</text>
+<line x1="316" y1="210" x2="408" y2="210" stroke="#4a4a47" stroke-width="1"/>
+<line x1="408.0" y1="210.0" x2="408.0" y2="281.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="408.0" y1="296.3" x2="408.0" y2="330.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="316" y1="330" x2="408" y2="330" stroke="#4a4a47" stroke-width="1"/>
+<line x1="316.0" y1="210.0" x2="316.0" y2="246.1" stroke="#4a4a47" stroke-width="1"/>
+<line x1="316.0" y1="262.7" x2="316.0" y2="330.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="416.0" y1="210.0" x2="473.8" y2="210.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="489.9" y1="210.0" x2="524.0" y2="210.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="524" y1="210" x2="524" y2="280" stroke="#4a4a47" stroke-width="1"/>
+<line x1="416" y1="280" x2="524" y2="280" stroke="#4a4a47" stroke-width="1"/>
+<line x1="416.0" y1="210.0" x2="416.0" y2="240.9" stroke="#4a4a47" stroke-width="1"/>
+<line x1="416.0" y1="250.0" x2="416.0" y2="280.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="416.0" y1="288.0" x2="433.4" y2="288.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="445.8" y1="288.0" x2="470.0" y2="288.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="470.0" y1="288.0" x2="470.0" y2="321.1" stroke="#4a4a47" stroke-width="1"/>
+<line x1="470.0" y1="340.8" x2="470.0" y2="380.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="416" y1="380" x2="470" y2="380" stroke="#4a4a47" stroke-width="1"/>
+<line x1="416.0" y1="288.0" x2="416.0" y2="336.6" stroke="#4a4a47" stroke-width="1"/>
+<line x1="416.0" y1="357.9" x2="416.0" y2="380.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="478.0" y1="288.0" x2="498.7" y2="288.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="508.1" y1="288.0" x2="524.0" y2="288.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="524" y1="288" x2="524" y2="380" stroke="#4a4a47" stroke-width="1"/>
+<line x1="478" y1="380" x2="524" y2="380" stroke="#4a4a47" stroke-width="1"/>
+<line x1="478.0" y1="288.0" x2="478.0" y2="342.6" stroke="#4a4a47" stroke-width="1"/>
+<line x1="478.0" y1="355.3" x2="478.0" y2="380.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="316.0" y1="338.0" x2="352.0" y2="338.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="362.2" y1="338.0" x2="386.0" y2="338.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="386" y1="338" x2="386" y2="448" stroke="#4a4a47" stroke-width="1"/>
+<line x1="316.0" y1="448.0" x2="349.9" y2="448.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="366.8" y1="448.0" x2="386.0" y2="448.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="316" y1="338" x2="316" y2="448" stroke="#4a4a47" stroke-width="1"/>
+<line x1="394" y1="388" x2="524" y2="388" stroke="#4a4a47" stroke-width="1"/>
+<line x1="524.0" y1="388.0" x2="524.0" y2="417.6" stroke="#4a4a47" stroke-width="1"/>
+<line x1="524.0" y1="430.5" x2="524.0" y2="448.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="394" y1="448" x2="524" y2="448" stroke="#4a4a47" stroke-width="1"/>
+<line x1="394" y1="388" x2="394" y2="448" stroke="#4a4a47" stroke-width="1"/>
+<line x1="316" y1="456" x2="416" y2="456" stroke="#4a4a47" stroke-width="1"/>
+<line x1="416" y1="456" x2="416" y2="526" stroke="#4a4a47" stroke-width="1"/>
+<line x1="316" y1="526" x2="416" y2="526" stroke="#4a4a47" stroke-width="1"/>
+<line x1="316" y1="456" x2="316" y2="526" stroke="#4a4a47" stroke-width="1"/>
+<line x1="424.0" y1="456.0" x2="473.6" y2="456.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="495.9" y1="456.0" x2="524.0" y2="456.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="524" y1="456" x2="524" y2="548" stroke="#4a4a47" stroke-width="1"/>
+<line x1="424" y1="548" x2="524" y2="548" stroke="#4a4a47" stroke-width="1"/>
+<line x1="424.0" y1="456.0" x2="424.0" y2="491.4" stroke="#4a4a47" stroke-width="1"/>
+<line x1="424.0" y1="512.3" x2="424.0" y2="548.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="316.0" y1="534.0" x2="337.4" y2="534.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="345.0" y1="534.0" x2="368.0" y2="534.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="368.0" y1="534.0" x2="368.0" y2="558.4" stroke="#4a4a47" stroke-width="1"/>
+<line x1="368.0" y1="580.2" x2="368.0" y2="624.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="316.0" y1="624.0" x2="333.5" y2="624.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="343.0" y1="624.0" x2="368.0" y2="624.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="316" y1="534" x2="316" y2="624" stroke="#4a4a47" stroke-width="1"/>
+<line x1="376.0" y1="534.0" x2="392.3" y2="534.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="400.6" y1="534.0" x2="416.0" y2="534.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="416" y1="534" x2="416" y2="594" stroke="#4a4a47" stroke-width="1"/>
+<line x1="376" y1="594" x2="416" y2="594" stroke="#4a4a47" stroke-width="1"/>
+<line x1="376" y1="534" x2="376" y2="594" stroke="#4a4a47" stroke-width="1"/>
+<line x1="424.0" y1="556.0" x2="463.5" y2="556.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="481.3" y1="556.0" x2="524.0" y2="556.0" stroke="#4a4a47" stroke-width="1"/>
+<line x1="524" y1="556" x2="524" y2="622" stroke="#4a4a47" stroke-width="1"/>
+<line x1="424" y1="622" x2="524" y2="622" stroke="#4a4a47" stroke-width="1"/>
+<line x1="424.0" y1="556.0" x2="424.0" y2="576.6" stroke="#4a4a47" stroke-width="1"/>
+<line x1="424.0" y1="586.9" x2="424.0" y2="622.0" stroke="#4a4a47" stroke-width="1"/>
+<circle cx="372" cy="270" r="3" fill="#e8441b"/>
+<circle cx="388" cy="282" r="2" fill="#e8441b"/>
+<line x1="372" y1="270" x2="388" y2="282" stroke="#e8441b" stroke-width="1"/>
+<circle cx="590" cy="0" r="0"/>
+<line x1="700.0" y1="120.0" x2="783.9" y2="120.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="826.8" y1="120.0" x2="900.0" y2="120.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="900.0" y1="120.0" x2="900.0" y2="142.6" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="900.0" y1="159.5" x2="900.0" y2="210.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="700" y1="210" x2="900" y2="210" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="700" y1="120" x2="700" y2="210" stroke="#ece8e1" stroke-width="1.2"/>
+<text x="714" y="146" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#ece8e1" text-anchor="start" letter-spacing="2.2" opacity="1">INDEX</text>
+<text x="714" y="194" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">EVERYTHING, AS A LIST</text>
+<line x1="700" y1="270" x2="900" y2="270" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="900" y1="270" x2="900" y2="360" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="700" y1="360" x2="900" y2="360" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="700" y1="270" x2="700" y2="360" stroke="#ece8e1" stroke-width="1.2"/>
+<text x="714" y="296" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#ece8e1" text-anchor="start" letter-spacing="2.2" opacity="1">RANDOM</text>
+<text x="714" y="344" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">JUMPS TO ANY PIECE</text>
+<line x1="700" y1="640" x2="900" y2="640" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="900.0" y1="640.0" x2="900.0" y2="690.8" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="900.0" y1="712.9" x2="900.0" y2="730.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="700" y1="730" x2="900" y2="730" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="700" y1="640" x2="700" y2="730" stroke="#ece8e1" stroke-width="1.2"/>
+<text x="714" y="666" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#ece8e1" text-anchor="start" letter-spacing="2.2" opacity="1">404</text>
+<text x="714" y="714" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">ERODED, LEADS HOME</text>
+<polyline points="540,430 640,430 640,165 700,165" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="693.7,168.0 700,165 693.7,162.0" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="540,430 640,430 640,315 700,315" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="693.7,318.0 700,315 693.7,312.0" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="540,430 985,430" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="900,165 985,165" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="900,315 985,315" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<line x1="985" y1="145.0" x2="985" y2="775.0" stroke="#ece8e1" stroke-width="1.1" opacity=".9"/>
+<line x1="985" y1="145.0" x2="1040" y2="145.0" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1033.7,148.0 1040.0,145.0 1033.7,142.0" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<line x1="1040" y1="110" x2="1420" y2="110" stroke="#e8441b" stroke-width="1.2"/>
+<line x1="1420" y1="110" x2="1420" y2="180" stroke="#e8441b" stroke-width="1.2"/>
+<line x1="1040.0" y1="180.0" x2="1219.4" y2="180.0" stroke="#e8441b" stroke-width="1.2"/>
+<line x1="1268.7" y1="180.0" x2="1420.0" y2="180.0" stroke="#e8441b" stroke-width="1.2"/>
+<line x1="1040.0" y1="110.0" x2="1040.0" y2="132.6" stroke="#e8441b" stroke-width="1.2"/>
+<line x1="1040.0" y1="142.8" x2="1040.0" y2="180.0" stroke="#e8441b" stroke-width="1.2"/>
+<text x="1054" y="136" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#e8441b" text-anchor="start" letter-spacing="2.2" opacity="1">NEST</text>
+<text x="1054" y="164" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">CRAWLERS LIVE HERE</text>
+<line x1="985" y1="235.0" x2="1040" y2="235.0" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1033.7,238.0 1040.0,235.0 1033.7,232.0" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<line x1="1040.0" y1="200.0" x2="1142.0" y2="200.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1187.6" y1="200.0" x2="1420.0" y2="200.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1420.0" y1="200.0" x2="1420.0" y2="220.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1420.0" y1="232.5" x2="1420.0" y2="270.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040.0" y1="270.0" x2="1251.3" y2="270.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1334.2" y1="270.0" x2="1420.0" y2="270.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040.0" y1="200.0" x2="1040.0" y2="223.7" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040.0" y1="236.0" x2="1040.0" y2="270.0" stroke="#ece8e1" stroke-width="1.2"/>
+<text x="1054" y="226" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#ece8e1" text-anchor="start" letter-spacing="2.2" opacity="1">RAW</text>
+<text x="1054" y="254" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">A TABLE, A DUMP OF NUMBERS</text>
+<line x1="985" y1="325.0" x2="1040" y2="325.0" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1033.7,328.0 1040.0,325.0 1033.7,322.0" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<line x1="1040" y1="290" x2="1420" y2="290" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1420.0" y1="290.0" x2="1420.0" y2="328.3" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1420.0" y1="347.8" x2="1420.0" y2="360.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040" y1="360" x2="1420" y2="360" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040" y1="290" x2="1040" y2="360" stroke="#ece8e1" stroke-width="1.2"/>
+<text x="1054" y="316" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#ece8e1" text-anchor="start" letter-spacing="2.2" opacity="1">SKETCH</text>
+<text x="1054" y="344" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">A DRAWING, HATCHING</text>
+<line x1="985" y1="415.0" x2="1040" y2="415.0" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1033.7,418.0 1040.0,415.0 1033.7,412.0" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<line x1="1040.0" y1="380.0" x2="1148.6" y2="380.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1215.0" y1="380.0" x2="1420.0" y2="380.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1420.0" y1="380.0" x2="1420.0" y2="417.8" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1420.0" y1="428.0" x2="1420.0" y2="450.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040.0" y1="450.0" x2="1261.5" y2="450.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1339.2" y1="450.0" x2="1420.0" y2="450.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040.0" y1="380.0" x2="1040.0" y2="410.8" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040.0" y1="419.5" x2="1040.0" y2="450.0" stroke="#ece8e1" stroke-width="1.2"/>
+<text x="1054" y="406" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#ece8e1" text-anchor="start" letter-spacing="2.2" opacity="1">GAME</text>
+<text x="1054" y="434" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">DOORS, TICKS, A GHOST</text>
+<line x1="985" y1="505.0" x2="1040" y2="505.0" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1033.7,508.0 1040.0,505.0 1033.7,502.0" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<line x1="1040" y1="470" x2="1420" y2="470" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1420" y1="470" x2="1420" y2="540" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040" y1="540" x2="1420" y2="540" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040" y1="470" x2="1040" y2="540" stroke="#ece8e1" stroke-width="1.2"/>
+<text x="1054" y="496" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#ece8e1" text-anchor="start" letter-spacing="2.2" opacity="1">LOOP</text>
+<text x="1054" y="524" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">A VIDEO, CLICK TO LOAD</text>
+<line x1="985" y1="595.0" x2="1040" y2="595.0" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1033.7,598.0 1040.0,595.0 1033.7,592.0" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<line x1="1040.0" y1="560.0" x2="1183.8" y2="560.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1239.5" y1="560.0" x2="1420.0" y2="560.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1420" y1="560" x2="1420" y2="630" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040" y1="630" x2="1420" y2="630" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040" y1="560" x2="1040" y2="630" stroke="#ece8e1" stroke-width="1.2"/>
+<text x="1054" y="586" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#ece8e1" text-anchor="start" letter-spacing="2.2" opacity="1">ESSAY</text>
+<text x="1054" y="614" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">TEXT, UNFINISHED</text>
+<line x1="985" y1="685.0" x2="1040" y2="685.0" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1033.7,688.0 1040.0,685.0 1033.7,682.0" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<line x1="1040.0" y1="650.0" x2="1164.7" y2="650.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1259.6" y1="650.0" x2="1420.0" y2="650.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1420" y1="650" x2="1420" y2="720" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040" y1="720" x2="1420" y2="720" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040" y1="650" x2="1040" y2="720" stroke="#ece8e1" stroke-width="1.2"/>
+<text x="1054" y="676" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#ece8e1" text-anchor="start" letter-spacing="2.2" opacity="1">NOTE</text>
+<text x="1054" y="704" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">A SCRAP, THREE LINES</text>
+<line x1="985" y1="775.0" x2="1040" y2="775.0" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1033.7,778.0 1040.0,775.0 1033.7,772.0" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<line x1="1040" y1="740" x2="1420" y2="740" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1420" y1="740" x2="1420" y2="810" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040.0" y1="810.0" x2="1203.8" y2="810.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1271.1" y1="810.0" x2="1420.0" y2="810.0" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040.0" y1="740.0" x2="1040.0" y2="758.2" stroke="#ece8e1" stroke-width="1.2"/>
+<line x1="1040.0" y1="769.7" x2="1040.0" y2="810.0" stroke="#ece8e1" stroke-width="1.2"/>
+<text x="1054" y="766" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#ece8e1" text-anchor="start" letter-spacing="2.2" opacity="1">HOLE</text>
+<text x="1054" y="794" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">A CELL WITH NOTHING IN IT</text>
+<polyline points="1230.0,810 1230.0,870 800,870 800,730" fill="none" stroke="#ece8e1" stroke-width="1.1" stroke-dasharray="4 4" opacity="0.9"/>
+<polyline points="803.0,736.3 800,730 797.0,736.3" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<text x="1240.0" y="862" font-family="'DejaVu Sans Mono',monospace" font-size="10" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">LEADS NOWHERE, SO HERE</text>
+<polyline points="700,685 420,685 420,670" fill="none" stroke="#ece8e1" stroke-width="1.1" stroke-dasharray="4 4" opacity="0.9"/>
+<polyline points="423.0,676.3 420,670 417.0,676.3" fill="none" stroke="#ece8e1" stroke-width="1.1" opacity="0.9"/>
+<text x="560" y="678" font-family="'DejaVu Sans Mono',monospace" font-size="10" fill="#7d7a75" text-anchor="middle" letter-spacing="1.2" opacity="1">BACK</text>
+<line x1="300.0" y1="790.0" x2="418.2" y2="790.0" stroke="#e8441b" stroke-width="1.2"/>
+<line x1="483.7" y1="790.0" x2="540.0" y2="790.0" stroke="#e8441b" stroke-width="1.2"/>
+<line x1="540" y1="790" x2="540" y2="870" stroke="#e8441b" stroke-width="1.2"/>
+<line x1="300" y1="870" x2="540" y2="870" stroke="#e8441b" stroke-width="1.2"/>
+<line x1="300" y1="790" x2="300" y2="870" stroke="#e8441b" stroke-width="1.2"/>
+<text x="314" y="816" font-family="Helvetica,Arial,sans-serif" font-size="15" fill="#e8441b" text-anchor="start" letter-spacing="2.2" opacity="1">PURGE</text>
+<text x="314" y="854" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">CLEARS THE DAMAGE</text>
+<polyline points="360,790 360,672" fill="none" stroke="#e8441b" stroke-width="1.2" stroke-dasharray="2 5" opacity="0.9"/>
+<polyline points="363.0,678.3 360,672 357.0,678.3" fill="none" stroke="#e8441b" stroke-width="1.2" opacity="0.9"/>
+<line x1="1500" y1="145.0" x2="1500" y2="775.0" stroke="#e8441b" stroke-width="1.1" stroke-dasharray="3 5" opacity=".9"/>
+<polyline points="1420,145.0 1500,145.0" fill="none" stroke="#e8441b" stroke-width="1.1" stroke-dasharray="3 5" opacity="0.9"/>
+<polyline points="1500,235.0 1420,235.0" fill="none" stroke="#e8441b" stroke-width="1.1" stroke-dasharray="3 5" opacity="0.9"/>
+<polyline points="1426.3,232.0 1420,235.0 1426.3,238.0" fill="none" stroke="#e8441b" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1500,325.0 1420,325.0" fill="none" stroke="#e8441b" stroke-width="1.1" stroke-dasharray="3 5" opacity="0.9"/>
+<polyline points="1426.3,322.0 1420,325.0 1426.3,328.0" fill="none" stroke="#e8441b" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1500,415.0 1420,415.0" fill="none" stroke="#e8441b" stroke-width="1.1" stroke-dasharray="3 5" opacity="0.9"/>
+<polyline points="1426.3,412.0 1420,415.0 1426.3,418.0" fill="none" stroke="#e8441b" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1500,505.0 1420,505.0" fill="none" stroke="#e8441b" stroke-width="1.1" stroke-dasharray="3 5" opacity="0.9"/>
+<polyline points="1426.3,502.0 1420,505.0 1426.3,508.0" fill="none" stroke="#e8441b" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1500,595.0 1420,595.0" fill="none" stroke="#e8441b" stroke-width="1.1" stroke-dasharray="3 5" opacity="0.9"/>
+<polyline points="1426.3,592.0 1420,595.0 1426.3,598.0" fill="none" stroke="#e8441b" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1500,685.0 1420,685.0" fill="none" stroke="#e8441b" stroke-width="1.1" stroke-dasharray="3 5" opacity="0.9"/>
+<polyline points="1426.3,682.0 1420,685.0 1426.3,688.0" fill="none" stroke="#e8441b" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1500,775.0 1420,775.0" fill="none" stroke="#e8441b" stroke-width="1.1" stroke-dasharray="3 5" opacity="0.9"/>
+<polyline points="1426.3,772.0 1420,775.0 1426.3,778.0" fill="none" stroke="#e8441b" stroke-width="1.1" opacity="0.9"/>
+<polyline points="1500,145.0 1500,92 240,92 240,170 300,170" fill="none" stroke="#e8441b" stroke-width="1.1" stroke-dasharray="3 5" opacity="0.7"/>
+<polyline points="293.7,173.0 300,170 293.7,167.0" fill="none" stroke="#e8441b" stroke-width="1.1" opacity="0.7"/>
+<text x="1516" y="149.0" font-family="'DejaVu Sans Mono',monospace" font-size="10" fill="#ece8e1" text-anchor="start" letter-spacing="1.2" opacity="1"></text>
+<text transform="translate(1526,460.0) rotate(90)" font-family="DejaVu Sans Mono,monospace" font-size="10.5" fill="#e8441b" text-anchor="middle" letter-spacing="1.5">CRAWLERS TRAVEL TO ANY PAGE</text>
+<line x1="40" y1="900" x2="82" y2="900" stroke="#ece8e1" stroke-width="1.1"/>
+<text x="94" y="904" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">LINK</text>
+<line x1="150" y1="900" x2="192" y2="900" stroke="#ece8e1" stroke-width="1.1" stroke-dasharray="4 4"/>
+<text x="204" y="904" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">ODD ROUTE</text>
+<line x1="300" y1="900" x2="342" y2="900" stroke="#e8441b" stroke-width="1.1" stroke-dasharray="3 5"/>
+<text x="354" y="904" font-family="'DejaVu Sans Mono',monospace" font-size="10.5" fill="#7d7a75" text-anchor="start" letter-spacing="1.2" opacity="1">CRAWLER SPREAD (SESSION ONLY)</text>
+</svg>

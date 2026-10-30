@@ -1,0 +1,9 @@
+# original photos and sources stay on the PC
+assets/
+
+desktop.ini
+Thumbs.db
+
+# drawings for the drawing dump: originals stay on the PC (web copies go in site/erosion/sketch/drawings/)
+drawings_inbox/*
+!drawings_inbox/README.txt

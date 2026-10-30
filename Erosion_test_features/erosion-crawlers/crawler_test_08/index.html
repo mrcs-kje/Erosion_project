@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EROSION.EXE</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <header class="bar">
+    <span class="ero-brand">EROSION.EXE / DEMO 08</span>
+    <nav class="ero-controls" aria-label="Creatures">
+      <button type="button" data-wake="crawler" aria-pressed="false"><span class="ero-name">CRAWLER</span> <span class="ero-state">DORMANT</span></button>
+      <button type="button" data-wake="snake" aria-pressed="false"><span class="ero-name">SNAKE</span> <span class="ero-state">DORMANT</span></button>
+      <button type="button" data-wake="strider" aria-pressed="false"><span class="ero-name">STRIDER</span> <span class="ero-state">DORMANT</span></button>
+      <button type="button" id="purge">PURGE</button>
+    </nav>
+    <span class="meta" id="count" aria-live="polite">0 WORDS SWALLOWED</span>
+  </header>
+
+  <main id="world" class="ero-world">
+    <svg id="figure" aria-hidden="true"></svg>
+
+    <div class="ero-column">
+    <section class="ero-nest" aria-label="The nest">
+      <div class="ero-cell" data-home="crawler"><p><span class="ero-name">CRAWLER</span> <span class="ero-state">DORMANT</span></p></div>
+      <div class="ero-cell" data-home="snake"><p><span class="ero-name">SNAKE</span> <span class="ero-state">DORMANT</span></p></div>
+      <div class="ero-cell" data-home="strider"><p><span class="ero-name">STRIDER</span> <span class="ero-state">DORMANT</span></p></div>
+    </section>
+
+    <p class="hint">Tap a creature (or its button) to wake it. They roam the whole page, grip letters and swallow words, so scroll around to find them. Feed them enough and they pupate, four times, through five forms. A fifth form that keeps eating splits into two small mutants. They fight and eat each other, and a dead creature falls apart into pieces the others can eat; later it hatches again out of a word. Some carry words off and drop them somewhere else, and some crawl into links. Stay near one, or hold it gently, and it grows fond of you: it follows you, brings you words and fights for you. Throwing it undoes that. Double-click a creature to hurt it: the part you hit falls off. PURGE puts them back in the nest and heals the page.</p>
+
+    <article id="article" class="ero-article">
+      <h1>Erosion</h1>
+      <p class="ero-from">From EROSION.EXE, the free crawler encyclopedia</p>
+      <p class="ero-hatnote">This article is about the slow removal of material from a surface. For the creatures currently eating this page, see the nest above.</p>
+
+      <p><b>Erosion</b> is the action of surface processes that remove soil, rock, or dissolved material from one location on a surface and carry it to another. It is distinct from weathering, which breaks material down where it lies without moving it. In practice the two are rarely separate: a stone is cracked by frost in winter, and the loose pieces are carried off by the first heavy rain of spring. Together they shape almost every landscape on the planet, from the deepest canyons to the soft rounding of very old hills.</p>
+      <p>The agents of erosion are usually described as water, wind, ice, and gravity, with living things acting as a fifth and often underestimated force. Each agent leaves a recognisable signature. Water cuts channels and sorts grains by size. Wind polishes and scours, and builds dunes from what it cannot lift for long. Ice grinds and plucks and leaves broad U-shaped valleys. Gravity simply pulls, sometimes so slowly that a hillside creeps a few millimetres a year, sometimes all at once in a landslide that takes seconds.</p>
+      <p>Erosion is a natural process, but human activity has increased its rate in many regions by ten to a hundred times. Clearing forests, ploughing slopes, overgrazing, building roads, and mining all expose surfaces that would otherwise be held together by roots and plant cover. The loss of fertile topsoil is now considered one of the most serious long-term environmental problems, because soil forms far more slowly than it can be lost.</p>
+
+      <nav class="ero-toc" aria-label="Contents">
+        <p class="ero-toc-title">Contents</p>
+        <ol>
+          <li><a href="#processes">Processes</a></li>
+          <li><a href="#water">Water</a></li>
+          <li><a href="#wind">Wind</a></li>
+          <li><a href="#ice">Ice</a></li>
+          <li><a href="#gravity">Gravity and mass wasting</a></li>
+          <li><a href="#coast">Coastal erosion</a></li>
+          <li><a href="#factors">Factors affecting the rate</a></li>
+          <li><a href="#human">Human activity</a></li>
+          <li><a href="#culture">In art and culture</a></li>
+          <li><a href="#digital">Digital erosion</a></li>
+          <li><a href="#see">See also</a></li>
+        </ol>
+      </nav>
+
+      <h2 id="processes">Processes</h2>
+      <p>Every erosional process involves three stages: detachment, transport, and deposition. A particle must first be loosened from the surface it belongs to. It must then be carried, whether by a raindrop, a gust, a sliding glacier, or its own weight. Finally it comes to rest somewhere else, often in a river delta, a lake bed, the foot of a slope, or the floor of the ocean. Sediment that settles in one place may be eroded again later, so a single grain of sand can travel for millions of years before it is buried and pressed back into rock.</p>
+      <h3>Physical erosion</h3>
+      <p>Physical, or mechanical, erosion removes material without changing its chemistry. Particles are knocked loose by impact, dragged along by flowing water or air, or scraped away by other particles already in motion. This last mechanism, abrasion, is responsible for much of the polishing seen on river pebbles and desert rocks. The harder and faster the carried material, the stronger the abrasion; a sandstorm can strip paint from a car in an afternoon.</p>
+      <h3>Chemical erosion</h3>
+      <p>Some material leaves a surface by dissolving. Rainwater is slightly acidic because it absorbs carbon dioxide from the air, and over long periods it can dissolve limestone, gypsum, and salt. The result is a karst landscape: caves, sinkholes, disappearing streams, and towers of rock that remain where the surrounding stone has been carried away in solution. Chemical erosion is quiet and invisible from moment to moment, yet it can hollow out cave systems hundreds of kilometres long.</p>
+
+      <h2 id="water">Water</h2>
+      <p>Water is the most important agent of erosion on land. It acts in several distinct ways, and they tend to follow one another as water gathers and gains speed on its way downhill.</p>
+      <h3>Splash and sheet erosion</h3>
+      <p>When a raindrop hits bare soil, it strikes with surprising force and throws small particles into the air. On a slope, more of them land downhill than uphill, so every storm moves the surface a little. Once the ground is saturated, water begins to flow across it as a thin, even sheet. Sheet erosion removes the finest and most fertile layer of soil so evenly that it often goes unnoticed until the colour of a field changes, or the roots of fence posts begin to show.</p>
+      <h3>Rills and gullies</h3>
+      <p>Sheet flow rarely stays even. Small irregularities gather the water into tiny channels called rills, which deepen as they carry more flow. Rills can be smoothed away by a plough, but if they keep growing they become gullies: channels too deep to cross with farm machinery, which can advance headward across a landscape by several metres in a single wet season. A gully is, in a sense, a river that has not yet found its valley.</p>
+      <h3>Rivers and streams</h3>
+      <p>Rivers erode their beds and banks and carry an enormous load of sediment. Some of it rolls and bounces along the bottom, some is held in suspension and gives the water its brown or milky colour, and some is carried invisibly in solution. A river cuts down until it approaches its base level, usually the sea, and then begins to cut sideways, swinging back and forth in wide meanders. Over geological time this patient work produces valleys, gorges, and canyons, and the layered walls of those canyons become a record of everything the river has passed through.</p>
+      <p>Floods do a disproportionate share of the work. A river may spend years moving little more than fine silt, then rearrange its entire channel in a few days of high water. Boulders that sit motionless for decades are rolled downstream, banks collapse, and new channels open across the floodplain. Much of the shape of a river valley is the memory of its rarest and most violent days.</p>
+
+      <h2 id="wind">Wind</h2>
+      <p>Wind erosion, also called aeolian erosion, is most important in dry regions where there is little vegetation and the soil is loose. Wind removes material in two main ways. Deflation is the lifting and carrying away of fine particles, which can lower a whole landscape and leave behind a surface of tightly packed pebbles known as desert pavement. Abrasion is the sand-blasting of exposed surfaces by grains carried along close to the ground.</p>
+      <p>Because sand is heavy, most of it travels within a metre of the surface in a series of short hops called saltation. This is why wind-carved rocks are often undercut at the base, standing on narrow necks beneath wider tops. Finer dust can be carried thousands of kilometres. Dust from the Sahara regularly falls on Europe and crosses the Atlantic, where it fertilises soils and ocean waters far from where it was lifted. Erosion in one place is always deposition somewhere else.</p>
+
+      <h2 id="ice">Ice</h2>
+      <p>Glaciers are among the most powerful agents of erosion, although they move slowly, often only a few centimetres to a few metres per day. A glacier erodes by plucking, in which meltwater freezes into cracks in the bedrock and pulls blocks away as the ice moves, and by abrasion, in which rocks frozen into the base of the ice scrape the surface beneath it like coarse sandpaper.</p>
+      <p>The landforms left behind are distinctive: steep-sided U-shaped valleys, bowl-shaped hollows called cirques, sharp ridges between them, and long scratches on exposed bedrock that point in the direction the ice once travelled. When a glacier retreats it drops everything it carried, leaving ridges of unsorted rubble and isolated boulders, sometimes the size of houses, far from the rock they were broken from.</p>
+      <p>Ice also works on a smaller scale. In climates where the temperature frequently crosses freezing point, water seeps into cracks by day and expands as it freezes at night. Repeated thousands of times, this frost wedging splits rock apart and feeds slopes of broken stone at the foot of cliffs. It is the same process that opens potholes in roads every winter.</p>
+
+      <h2 id="gravity">Gravity and mass wasting</h2>
+      <p>Mass wasting is the downslope movement of rock and soil under the direct influence of gravity, without a flowing medium to carry it. It ranges from creep, a movement so slow that it can only be seen in leaning trees, tilted walls, and bent fence lines, to rockfalls and landslides that move at the speed of a falling object.</p>
+      <p>Slopes stay in place as long as the friction and cohesion holding them together are greater than the pull of gravity. Anything that changes this balance can set a slope in motion: heavy rain that soaks the ground and adds weight while reducing friction, an earthquake, a river undercutting the base, the removal of vegetation, or a road cut into the hillside. Many of the deadliest landslides in history were triggered by long periods of rain falling on slopes that had already been weakened.</p>
+
+      <h2 id="coast">Coastal erosion</h2>
+      <p>Along coastlines, erosion is driven by waves, tides, and currents. Waves attack cliffs by hydraulic action, compressing air into cracks until the rock breaks, and by throwing sand and pebbles against the cliff face. Headlands of harder rock resist while softer rock between them is carried away, so a coastline slowly develops bays and promontories. At the tips of headlands, waves can carve caves that become arches, and arches that collapse leave isolated pillars called stacks.</p>
+      <p>Some coasts are retreating by more than a metre a year. Villages that stood well inland a few centuries ago are now under the sea, and churches, roads, and graveyards have gone over the edge of crumbling cliffs. Sea walls, groynes, and imported sand can slow the retreat locally, but they often move the problem along the coast, starving neighbouring beaches of the sediment they would otherwise have received.</p>
+
+      <h2 id="factors">Factors affecting the rate</h2>
+      <p>The rate of erosion depends on the strength of the eroding agent and the resistance of the surface. Several factors are especially important.</p>
+      <ul>
+        <li><b>Climate.</b> The amount, intensity, and timing of rainfall matter more than the yearly total. A few violent storms can do more damage than a whole season of gentle rain.</li>
+        <li><b>Vegetation.</b> Plant cover is the single most effective protection. Leaves break the impact of raindrops, roots bind the soil, and fallen litter slows the flow of water across the ground.</li>
+        <li><b>Slope.</b> Steeper and longer slopes let water gather speed and carry more material. Terracing, an ancient technique, works by breaking a long slope into many short flat ones.</li>
+        <li><b>Soil and rock type.</b> Loose sandy or silty soils erode easily. Clay is more cohesive but can fail suddenly when wet. Hard crystalline rock may resist for millions of years.</li>
+        <li><b>Time.</b> Even very slow processes produce dramatic results when given enough of it.</li>
+      </ul>
+
+      <h2 id="human">Human activity</h2>
+      <p>Since the beginning of agriculture, people have accelerated erosion wherever they have removed natural vegetation. Hillsides cleared for farming in antiquity lost their soils within a few generations, and the sediment filled harbours and built new land at river mouths. In the 1930s, years of drought combined with intensive ploughing turned large areas of the North American plains into the Dust Bowl, when storms carried away topsoil in clouds that darkened cities hundreds of kilometres away.</p>
+      <p>Today, construction sites, logging roads, and mining operations are among the most intense sources of sediment. Sediment is itself a pollutant: it clouds rivers, smothers fish spawning grounds, fills reservoirs, and carries fertilisers and pesticides that are bound to soil particles. Dams interrupt the natural flow of sediment, so that deltas and beaches downstream begin to shrink.</p>
+      <p>Conservation methods are mostly simple and old. Keeping the ground covered with crops or mulch, ploughing along the contour of a slope instead of up and down it, planting hedgerows and windbreaks, leaving strips of vegetation along streams, and avoiding bare soil during the wettest months can reduce soil loss dramatically. The difficulty is less technical than economic: the costs of protection are paid now, while the costs of erosion arrive slowly and are often paid by someone else.</p>
+
+      <h2 id="culture">In art and culture</h2>
+      <p>Erosion has long served as an image of time and impermanence. Poets have used the wearing of stone by water to describe patience, grief, and the slow work of love. Painters of the romantic period were drawn to ruins, sea cliffs, and gorges because they made visible a span of time far longer than a human life. Sculptors have left works outdoors on purpose, so that weather becomes a collaborator that finishes the piece long after the artist has gone.</p>
+      <p>Many artists describe their working process in similar terms. A drawing is begun, rubbed out, and redrawn, and each erased layer leaves a faint trace in the paper. A text is drafted, cut back, and rewritten until only a few lines survive from the first version. Seen this way, a finished work is less a construction than what remains after everything unnecessary has been worn away. Unfinished work shows the process in the middle, with the eroded and the uneroded side by side.</p>
+
+      <h2 id="digital">Digital erosion</h2>
+      <p>Digital files appear permanent, but they erode too. Storage media degrade, formats fall out of use, links break, and the software needed to open old files disappears. Archivists sometimes call this bit rot, after the gradual decay of stored data. A website that is not maintained loses its images, then its styling, then its pages, until only fragments survive in caches and archives.</p>
+      <p>Some artists have made this decay their subject. Images are copied and compressed again and again until they dissolve into blocks of colour. Videos are deliberately corrupted so that frames smear into one another. Web pages are built to change, break, or be eaten while they are being read. In these works erosion is not damage to be repaired but the point of the piece: the surface records every visit, and no two readers see quite the same page.</p>
+      <p>On this page, erosion is carried out by small line creatures. They wander over the text, grip it with their feet, and swallow individual words, which fade out of sight and leave a dotted scar behind. Nothing is actually deleted. The words are still there underneath, and a purge restores the page to its original state, ready to be worn down again by the next reader.</p>
+
+      <h2 id="see">See also</h2>
+      <ul>
+        <li>Weathering</li>
+        <li>Sediment transport</li>
+        <li>Soil conservation</li>
+        <li>Karst</li>
+        <li>Glacial landforms</li>
+        <li>Coastal management</li>
+        <li>Link rot</li>
+        <li>Palimpsest</li>
+      </ul>
+
+      <h2>Notes</h2>
+      <ol class="ero-notes">
+        <li>This article was written for EROSION.EXE as reading material for its crawlers. It is a general overview, not a scientific source.</li>
+        <li>Swallowed words are hidden with CSS only. The text of the page is never changed.</li>
+        <li>Last edited during an unfinished session. Expect drafts.</li>
+      </ol>
+    </article>
+    </div>
+  </main>
+
+  <script src="./js/words.js"></script>
+  <script src="./js/creatures.js"></script>
+  <script src="./js/main.js"></script>
+</body>
+</html>

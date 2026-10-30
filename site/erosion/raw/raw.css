@@ -1,0 +1,12 @@
+/* Erosion.exe: a raw page, the browser's own default look on purpose
+   (from the mockup erosion_page_raw.png). Only the creature layer needs
+   a little help. */
+body.ero-raw { --ero-text: #000; margin: 8px 16px; background: #fff; color: #000; font-family: "Times New Roman", Times, serif; font-size: 22px; }
+#world { position: relative; }
+.raw-header, .raw-doors { font-size: 16px; }
+.raw-header .ero-intercept { font: inherit; }
+.raw-indent { margin-left: 2.6em; }
+.raw-check { margin: 6px 0; }
+.raw-check input { width: 18px; height: 18px; vertical-align: -2px; margin-right: 10px; }
+table { margin: 24px 0; }
+th, td { padding: 6px 8px; text-align: left; }

@@ -1,0 +1,19 @@
+/* Erosion.exe: the index. A plain directory listing of every room. */
+.idx-world { position: relative; min-height: 760px; padding: 50px 22px 80px; overflow: hidden; }
+.idx-title { margin: 0 0 40px; font-size: clamp(22px, 3vw, 40px); font-weight: 300; letter-spacing: .06em; }
+.idx-table { width: 100%; max-width: 1100px; border-collapse: collapse; font-size: 13px; letter-spacing: .08em; }
+.idx-table th { padding: 0 18px 12px 0; text-align: left; font-weight: 400; font-size: 10px; letter-spacing: .16em; color: #9a978f; border-bottom: 1px solid #262626; }
+.idx-table td { padding: 12px 18px 12px 0; border-bottom: 1px solid #171717; vertical-align: top; }
+.idx-table td:first-child { white-space: nowrap; }
+.idx-table td:nth-child(2), .idx-table td:nth-child(3) { color: #9a978f; white-space: nowrap; }
+.idx-table a:hover { color: var(--accent); }
+.idx-dead td { color: #5c5a55 !important; }
+.idx-dead td:first-child { text-decoration: line-through; text-decoration-thickness: 1px; }
+.idx-count { margin-top: 44px; font-size: 10px; letter-spacing: .14em; color: var(--accent); }
+
+@media (max-width: 760px) {
+  .idx-world { padding: 30px 20px 60px; }
+  .idx-table th:nth-child(2), .idx-table td:nth-child(2),
+  .idx-table th:nth-child(3), .idx-table td:nth-child(3) { display: none; }
+  .idx-table td:first-child { white-space: normal; }
+}

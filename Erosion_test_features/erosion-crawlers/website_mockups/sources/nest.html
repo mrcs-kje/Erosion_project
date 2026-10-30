@@ -1,0 +1,68 @@
+<!doctype html><html><head><meta charset="utf-8"><title>nest</title>
+<style>
+*{box-sizing:border-box;margin:0}
+:root{--bg:#090909;--fg:#e9e5dc;--dim:#7c7872;--line:#e8441b;--wall:#3a3a38}
+body{width:1280px;height:800px;background:var(--bg);color:var(--fg);font:14px/1.5 "Helvetica Neue",Helvetica,"Liberation Sans",Arial,sans-serif;letter-spacing:.04em;overflow:hidden;padding:30px 40px}
+.mono{font-family:"DejaVu Sans Mono","Liberation Mono",monospace;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--dim)}
+.top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:22px}
+.top .t{font-size:18px;letter-spacing:.14em}
+.main{display:grid;grid-template-columns:860px 1fr;gap:34px}
+.field{border:1px dashed #4a4845;height:560px;position:relative}
+.food{margin-top:14px;font-size:15px;max-width:70ch}
+.food .gp{display:inline-block;width:62px;border-bottom:1px dashed var(--line);margin:0 3px}
+.side{display:flex;flex-direction:column;gap:24px}
+.stage{display:flex;flex-direction:column;gap:6px;font-size:13px;text-transform:uppercase}
+.stage span{color:var(--dim)} .stage span.on{color:var(--line)}
+.sq{display:flex;gap:4px;margin-top:8px}.sq i{width:12px;height:12px;border:1px solid #6a6864}.sq i.f{background:var(--line);border-color:var(--line)}
+.bar{height:6px;border:1px solid #6a6864;margin-top:8px;position:relative}.bar b{position:absolute;left:0;top:0;bottom:0;background:var(--line);width:69%}
+.btns{display:flex;gap:12px}.btn{border:1px solid var(--dim);padding:8px 16px;text-transform:uppercase;font-size:12px}
+.log{display:flex;flex-direction:column;gap:6px}
+</style></head><body>
+<div class="top"><span class="t">CRAWLER-01 / THE NEST</span><span class="mono">Terminate process &rarr; home</span><span class="mono" style="color:var(--fg)">Population 09 / points 138 of 200</span></div>
+<div class="main">
+ <div><div class="field"><svg id="f" width="858" height="558" viewBox="0 0 858 558"></svg></div>
+ <p class="food">the staircase in the house had <span class="gp"></span> steps going up and <span class="gp"></span> coming down, and nobody would agree, so we <span class="gp" style="width:90px"></span> counting out loud</p></div>
+ <div class="side">
+  <div><span class="mono">Selected / worm 03</span><div class="stage" style="margin-top:10px"><span>Hungry</span><span class="on">&rarr; Chrysalis soon</span><span>Emerging</span></div></div>
+  <div><span class="mono">Words eaten 11 of 15</span><div class="sq"><script>document.write(Array.from({length:15},(_,i)=>`<i class="${i<11?'f':''}"></i>`).join(''))</script></div></div>
+  <div><span class="mono">Point pool 138 of 200</span><div class="bar"><b></b></div></div>
+  <div class="btns"><span class="btn">Release</span><span class="btn">Purge</span></div>
+  <div class="log mono"><span style="color:var(--fg)">Log</span><span>22:31 egg laid</span><span>22:33 spider + worm = netling</span><span>22:34 something eaten</span><span>22:36 chrysalis, form unknown</span><span>22:37 spore split in two</span></div>
+ </div>
+</div>
+<script>
+const ns='http://www.w3.org/2000/svg',svg=document.getElementById('f');
+let sd=7;const rnd=()=>{sd=(sd*9301+49297)%233280;return sd/233280};
+const add=(h)=>{svg.insertAdjacentHTML('beforeend',h)};
+const O='#e8441b';
+function worm(pts){let s=`<g stroke="${O}" fill="${O}" stroke-linecap="round">`;
+ for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i];s+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke-width="1.8"/>`;
+ if(i%2==0){const dx=b[0]-a[0],dy=b[1]-a[1],d=Math.hypot(dx,dy)||1,nx=-dy/d,ny=dx/d;for(const k of[1,-1]){const mx=b[0]+nx*8*k,my=b[1]+ny*8*k;s+=`<polyline points="${b[0]},${b[1]} ${mx},${my} ${mx+dx/d*5+nx*4*k},${my+dy/d*5+ny*4*k}" fill="none" stroke-width="1.1"/>`}}}
+ pts.forEach((p,i)=>s+=`<circle cx="${p[0]}" cy="${p[1]}" r="${i==pts.length-1?4.8:2.7}" stroke="none"/>`);add(s+'</g>')}
+const lab=(x,y,t)=>add(`<text x="${x}" y="${y}" fill="#7c7872" font-size="10" font-family="DejaVu Sans Mono,monospace" letter-spacing="1" text-anchor="middle">${t}</text>`);
+// worm
+let w=[];for(let k=0;k<=17;k++)w.push([70+k*19,120+Math.sin(k*.8)*14+k*1.6]);worm(w);lab(240,196,'WORM 03 / EATING');
+// second small worm
+w=[];for(let k=0;k<=9;k++)w.push([430+k*15,70-k*3+Math.sin(k*1.2)*6]);worm(w);lab(490,106,'WORM 04 / YOUNG');
+// spider
+(function(cx,cy,s){let g=`<g stroke="${O}" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round">`;
+ for(let i=0;i<8;i++){const side=i<4?-1:1,j=i%4,ay=(-24+j*16)*s;g+=`<path d="M${cx} ${cy} L${cx+side*30*s} ${cy+ay-8*s} L${cx+side*56*s} ${cy+ay+14*s}"/>`}
+ add(g+`</g><circle cx="${cx}" cy="${cy}" r="${8*s}" fill="${O}"/><circle cx="${cx}" cy="${cy-12*s}" r="${5*s}" fill="${O}"/>`)})(650,130,1.35);lab(650,224,'SPIDER 01 / WANDERING');
+// egg
+let e='';for(let i=0;i<11;i++){const a=rnd()*6.28,r=rnd()*15;e+=`<circle cx="${150+Math.cos(a)*r}" cy="${350+Math.sin(a)*r}" r="2.6" fill="${O}"/>`}
+add(e+`<circle cx="150" cy="350" r="30" fill="none" stroke="#6a6864" stroke-dasharray="3 5"/>`);lab(150,412,'EGG / HATCHES IN 00:08');
+// chrysalis
+let c=`<circle cx="410" cy="350" r="34" fill="none" stroke="#4a4845" stroke-dasharray="3 6"/><circle cx="410" cy="350" r="24" fill="none" stroke="#6a6864" stroke-dasharray="2 5"/><g stroke="${O}" stroke-width="1" fill="none">`;
+let pp=[];for(let i=0;i<9;i++){const a=rnd()*6.28,r=rnd()*13;pp.push([410+Math.cos(a)*r,350+Math.sin(a)*r])}
+for(let i=0;i<9;i++)for(let j=i+1;j<9;j++)if(rnd()<.45)c+=`<line x1="${pp[i][0]}" y1="${pp[i][1]}" x2="${pp[j][0]}" y2="${pp[j][1]}"/>`;
+add(c+'</g>'+pp.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="2.3" fill="${O}"/>`).join(''));lab(410,412,'CHRYSALIS / FORM UNKNOWN');
+// netling
+const nn=[[600,320],[640,300],[690,330],[665,378],[615,372],[720,380]];const ee=[[0,1],[1,2],[2,3],[3,4],[4,0],[1,3],[2,5],[3,5]];
+add(`<g stroke="${O}" stroke-width="1" fill="none">${ee.map(([a,b])=>`<line x1="${nn[a][0]}" y1="${nn[a][1]}" x2="${nn[b][0]}" y2="${nn[b][1]}"/>`).join('')}</g>`+nn.map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="3.4" fill="${O}"/>`).join(''));lab(660,412,'NETLING 02 / WEAVING');
+// spore
+add(`<path d="M765 230 C765 210,795 206,808 216 C824 228,818 252,800 258 C782 264,762 252,765 230 Z" fill="none" stroke="${O}" stroke-width="2"/><circle cx="788" cy="232" r="4.5" fill="${O}"/>`+[[830,200],[838,236],[826,268],[752,206],[748,246]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="2.4" fill="${O}"/>`).join(''));lab(790,296,'SPORE / SPLITTING');
+// glitch characters
+add(`<g fill="${O}" font-family="DejaVu Sans Mono,monospace">`+[['@',250,300,17],['%',270,310,13],['&',294,296,15],['#',318,308,12],['§',338,298,14],['~',358,306,11],['.',376,300,12],['!',284,326,12],['/',310,330,10]].map(([t,x,y,s])=>`<text x="${x}" y="${y}" font-size="${s}">${t}</text>`).join('')+'</g>');lab(310,364,'GLITCH / DECAYING');
+// eaten word hint
+add(`<text x="30" y="530" fill="#7c7872" font-size="10" font-family="DejaVu Sans Mono,monospace" letter-spacing="1">POINTS ARE SHARED. NOTHING IS ADDED, ONLY MOVED.</text>`);
+</script></body></html>

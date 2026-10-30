@@ -1,0 +1,29 @@
+<!doctype html><html><head><meta charset="utf-8"><title>game</title>
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1280px;height:800px;overflow:hidden;position:relative;background:#f1f1ef;color:#0d0d0d;font:15px/1.5 "Helvetica Neue",Helvetica,"Liberation Sans",Arial,sans-serif}
+.mono{font-family:"DejaVu Sans Mono","Liberation Mono",monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:#4a4a48}
+.num{position:absolute;left:56px;top:70px;font-size:132px;font-weight:200;letter-spacing:-.03em;line-height:1}
+</style></head><body>
+<div class="mono" style="position:absolute;left:56px;top:34px;color:#0d0d0d">Walk to the door</div>
+<div class="mono" style="position:absolute;right:56px;top:34px">Terminate process &rarr; home</div>
+<div class="num">4113</div>
+<div class="mono" style="position:absolute;left:62px;top:218px">Steps</div>
+<div style="position:absolute;right:56px;top:96px;text-align:right"><div class="mono">Door: 12 steps away</div><div class="mono">Was: 11</div><div class="mono" style="margin-top:14px;color:#0d0d0d">Goal: &mdash;</div></div>
+<svg width="1280" height="800" viewBox="0 0 1280 800" style="position:absolute;left:0;top:0">
+ <line x1="56" y1="540" x2="1224" y2="540" stroke="#0d0d0d" stroke-width="1.4"/>
+ <g id="tk" stroke="#0d0d0d" stroke-width="1"></g>
+ <g fill="none" stroke="#0d0d0d" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+  <circle cx="190" cy="438" r="11"/><path d="M190 449 V500 M190 466 L168 486 M190 466 L214 480 M190 500 L174 540 M190 500 L208 540"/>
+ </g>
+ <g id="gh" fill="none" stroke="#0d0d0d" stroke-width="1.2"></g>
+ <rect x="1074" y="440" width="52" height="100" fill="none" stroke="#0d0d0d" stroke-width="1.6"/>
+ <circle cx="1112" cy="494" r="3.4" fill="#e8441b"/>
+ <path d="M1100 428 L1100 410" stroke="#0d0d0d" stroke-width="1" stroke-dasharray="2 4"/>
+</svg>
+<div class="mono" style="position:absolute;left:56px;bottom:56px;color:#0d0d0d">Press &rarr; to walk</div>
+<div class="mono" style="position:absolute;right:56px;bottom:56px">Nobody has reached the door. Someone has tried a lot.</div>
+<script>
+document.getElementById('tk').innerHTML=Array.from({length:30},(_,i)=>`<line x1="${96+i*38}" y1="540" x2="${96+i*38}" y2="${i%5==0?556:548}"/>`).join('');
+document.getElementById('gh').innerHTML=[[1016,.1],[1000,.16],[980,.24],[955,.34],[925,.48],[890,.66]].map(([x,o])=>`<rect x="${x-26}" y="440" width="52" height="100" opacity="${o}"/>`).join('');
+</script></body></html>
