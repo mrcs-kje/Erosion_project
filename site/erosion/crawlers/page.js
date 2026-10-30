@@ -125,7 +125,7 @@
   ERO.room = () => MAX_POP - all.length;
   // A splitting fifth form leaves two small ones: a colony sheds polyps.
   ERO.onSplit = (parent, x, y) => {
-    const kind = parent.line === 'siphon' ? 'siphon' : null;
+    const kind = parent.line === 'siphon' || parent.line === 'squid' ? parent.line : null; // a kraken bursts into specks
     spawn(x - 30, y, kind);
     spawn(x + 30, y, kind);
   };

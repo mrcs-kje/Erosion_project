@@ -2,7 +2,7 @@
 
 A handoff document for the creature experiments in `erosion-crawlers/`. It is written so a future Claude session (in Claude Code or in the claude.ai "Erosion.exe Project") can pick up the work and fold it into the main EROSION.EXE site without the original chat.
 
-Latest working version: `crawler_test_15/` (demo 15, 30 Oct 2026: demo 14 plus BUILDING: strands between words, bridges, and rarely a mended dead link). Its `CLAUDE.md` has the detailed description; this document covers the history, the ideas behind it, and how to integrate it. Demo 15 also runs live on the site: the Archive page (`site/erosion/archive/`) and the rooms built from the mockups (room, game, loop, sketch, raw, random), all sharing `site/erosion/crawlers/` (`page.js` is the runner for the rooms: trembling egg words that hatch a creature when clicked, nest cells, purge, travellers coming in). Sections 3 and 4 below describe demo 06; demo 07 changes are in section 3b.
+Latest working version: `crawler_test_16/` (demo 16, 30 Oct 2026: demo 15, but creatures that only grow longer no longer pupate). Its `CLAUDE.md` has the detailed description; this document covers the history, the ideas behind it, and how to integrate it. Demo 16 also runs live on the site: the Archive page (`site/erosion/archive/`) and the rooms built from the mockups (room, game, loop, sketch, raw, random), all sharing `site/erosion/crawlers/` (`page.js` is the runner for the rooms: trembling egg words that hatch a creature when clicked, nest cells, purge, travellers coming in). Sections 3 and 4 below describe demo 06; demo 07 changes are in section 3b.
 
 ---
 
@@ -39,6 +39,8 @@ These experiments build the creatures on a long, Wikipedia-style article page ("
 | `crawler_test_10/` (demo 10) | The glyph crawlers evolve into new made-up forms instead of only growing: RIBS/CHOIR/LANTERN/RELIQUARY/OSSUARY, BRACE/ASTERISK/TANGLE/MEDUSA/CHANDELIER, QUILL/PLUME/FROND/SERAPH/PALIMPSEST (`MUTANT_STAGES`). Sheet: `creature_pngs/demo_10/glyph_stages.png` |
 | `crawler_test_11/` (demo 11) | Fond creatures now and then stop, face you and "speak" gibberish like `#&&[1j`. A creature you hurt flees for 5 s, and often escapes through the nearest link to another page |
 | `crawler_test_12/` (demo 12) | Every legged creature has 4 to 6 legs; pupas ripple and twitch before hatching; `ERO.catalog` lists all lines and stages, and the Archive's SUMMON menu calls any of them |
+| `crawler_test_17/` (demo 17) | New squid family made of characters, after the owner's photos of squid larvae and drifting sea animals: SPECK, SQUIDLET, SQUID, GIANT, KRAKEN (`makeCephalo`). Grows the whole way with no pupa, from a speck to very, very big; a KRAKEN bursts into specks. OLD ONE and LEVIATHAN are out for now. Picture: `creature_pngs/demo_17/squid_family.png` |
+| `crawler_test_16/` (demo 16) | No pupa for creatures that only grow longer: glyph crawlers, siphon colonies, INKLING to SQUID, OLD ONE to LEVIATHAN grow into the next stage as they eat (`grow: true` stages). The pupa stays for real changes of shape. |
 | `crawler_test_15/` (demo 15) | Creatures build as well as eat: strands between words (scaffolds grow off older strands), bridges others cross, strands snap when an anchor word is eaten; rarely a dead link is mended for a while. Pictures: `creature_pngs/demo_15/` |
 | `crawler_test_14/` (demo 14) | The SNAKE no longer evolves: it grows a segment per word, its mandibles grow with food and age, and at full length it lays small snake eggs. The squid family is its own line (new first stage INKLING) that only appears as a random hatching. Sheet: `creature_pngs/demo_14/snake_and_squid.png` |
 | `crawler_test_13/` (demo 13) | New SIPHON line after the owner's siphonophore and hydra references: POLYP, BELL (Sarsia), CHAIN, COLONY, ARMADA. Pulsing swim, growth by budding (no pupa), beaded fishing tentacles that snag words. Feeding: hold a word to pull it out of the text and give it to a creature. Sheet: `creature_pngs/demo_13/siphon_stages.png` |
@@ -183,6 +185,21 @@ From the manifesto work: the creatures are partly a metaphor for the agents that
 - SNAPPING: when an anchor word is eaten the strand snaps and falls as food, and strands hanging off it snap too.
 - MENDING (rare): with the top of the page in view, a creature climbs under a dead header link (`a.ero-dead`), weaves five threads up to it, and the link loses its strike-through and leads to another page for 1 to 2 minutes, then dies again (threads fall). One at a time, 90 s apart. The Archive log notes it.
 - PURGE clears strands and kills mended links again.
+
+## 3j. Demo 16: growing instead of pupating (owner, 30 Oct 2026)
+Owner: "The creatures that grow in length should not pupate, just grow organically/dynamically as they eat/evolve. Only the creatures that drastically change shape should pupate as a transformation phase."
+- `makeLifeCycle` stages can say `grow: true`: the next form takes over where the old one stands (`growFrom(old)`: same length, starting at the old size) and keeps growing as it eats (`onEat`). Labels say TO GROW.
+- GROW (no pupa): all glyph stages (RIBS, QUILL, BRACE lines: each stage starts with the bones/arms of the one before and adds one every few words; bitten tails grow back by eating); siphon CHAIN -> COLONY -> ARMADA (stem point per word, bells and units carried over); INKLING -> SQUID; OLD ONE -> LEVIATHAN (the chain grows out of its back as it eats, the second body buds at the end).
+- PUPA kept: crawler and strider lines (every stage a new shape), SQUID -> OLD ONE, LEVIATHAN -> ABYSS. BUD kept: POLYP -> BELL -> CHAIN. The snake has one stage (demo 14).
+
+## 3k. Demo 17: a new squid family (owner, 30 Oct 2026)
+Owner: "i would like to exclude old one and leviathan for now, they dont really fit the atmosphere and i would like to develop new creatures. [...] Squid needs a whole different family that makes sense. it has to start very small and end up very very big". Inspiration photos: a sea angel (Clione), a transparent juvenile squid with orange dots, a flying-fish larva with fan fins, spiky fan-finned fish larvae, a paddle worm (polychaete).
+- `makeCephalo(svg, o)` in creatures.js: every part is a character. Mantle of ( and ) along a spine with ^ at the tip, fins of > turned outward, O eyes, chromatophore dots (• ·) that pulse, short sucker arms (o ° ·) and from SQUID on two long : tentacles with a club. Jet swimming (the mantle squeezes, the body shoots forward). Ink (~#%@*) when hurt.
+- Line: SPECK > SQUIDLET > SQUID > GIANT > KRAKEN (configs SPECK, SQUIDLET, SQUID2, GIANT, KRAKEN). No pupa anywhere: every stage after SPECK is `grow: true`, and size eases from `o.z0` to `o.z1` as it eats (KRAKEN up to 5x). Each stage adds arms, fins, spots and length.
+- KRAKEN is full size at 30 words and bursts into two SPECKs at 48 (page.js and archive.js onSplit, demo main.js).
+- Eating is paced by `o.biteGap` (arms wait while the beak is busy), so even a kraken eats a page slowly.
+- Hurt cuts an arm (its characters fall) or tears the mantle; it dies at `o.tears` tears or with fewer than 2 arms.
+- OLD ONE, LEVIATHAN, ABYSS and INKLING are out of the line for now. `makeSquid`/`makeElder` and their configs stay in the file, unused. The squid line still only turns up as a random hatching.
 
 ## 6. Integrating into the main EROSION.EXE site
 

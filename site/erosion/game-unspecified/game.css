@@ -1,0 +1,26 @@
+/* Erosion.exe: Unspecified game. The canvas fills everything under the header. */
+html:has(body.ero-ugame) { background: #060606; overflow: hidden; }
+body.ero-ugame { display: flex; flex-direction: column; height: 100vh; height: 100dvh; min-height: 0; overflow: hidden; }
+
+.ug-world { position: relative; flex: 1; min-height: 0; }
+#ug-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+
+.ug-top, .ug-bottom { position: absolute; left: 22px; right: 22px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 20px; font-size: 12px; letter-spacing: .08em; pointer-events: none; }
+.ug-top { top: 6px; }
+.ug-bottom { bottom: 16px; align-items: flex-end; }
+.ug-top p, .ug-bottom p { margin: 0; }
+.ug-here { color: var(--accent); }
+.ug-sound { pointer-events: auto; font: inherit; letter-spacing: inherit; color: #9a978f; padding: 4px 0; }
+.ug-sound:hover, .ug-sound:focus-visible { color: var(--accent); }
+.ug-sound[aria-pressed="true"] { color: #e8e6df; }
+#ug-drop { margin-right: 18px; color: #e8e6df; }
+#ug-drop[hidden] { display: none; }
+
+.ug-msg { flex-basis: 100%; min-height: 1.5em; font-size: 14px; letter-spacing: .04em; }
+.ug-status { color: var(--accent); font-size: 10px; }
+.ug-hint { color: #9a978f; font-size: 10px; }
+
+@media (max-width: 1000px) {
+  .ug-top, .ug-bottom { left: 20px; right: 20px; }
+  .ug-msg { font-size: 13px; }
+}

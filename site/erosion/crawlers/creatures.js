@@ -1,5 +1,29 @@
 /*
-  EROSION.EXE demo 15: the creatures.
+  EROSION.EXE demo 17: the creatures.
+
+  Demo 17 (owner, 30 Oct 2026): a new squid family made only of
+  characters, after the owner's photos of squid larvae and drifting sea
+  animals. SPECK > SQUIDLET > SQUID > GIANT > KRAKEN (makeCephalo): it
+  starts as a speck a few letters wide and ends up very, very big, growing
+  the whole way with no pupa. The mantle is ( and ), fins of > turned
+  outward, O eyes, pulsing dots, sucker arms and two long clubbed
+  tentacles; it squirts ink when hurt. A full-grown KRAKEN bursts into
+  specks. OLD ONE and LEVIATHAN are out of it for now (makeSquid and
+  makeElder are kept for later).
+
+  Demo 16:
+
+  Demo 16 (owner, 30 Oct 2026): creatures that only grow longer don't
+  pupate. A stage marked grow (makeLifeCycle) changes into the next one
+  where it stands, from the length and size it has, and keeps growing as it
+  eats: the glyph crawlers (RIBS, QUILL, BRACE) add a bone or an arm every
+  few words, the siphon colonies (CHAIN, COLONY, ARMADA) a stem point per
+  word, INKLING just gets bigger, and LEVIATHAN grows its chain out of an
+  OLD ONE's back. Only real changes of shape still go through a pupa (the
+  crawler and strider lines, SQUID to OLD ONE, LEVIATHAN to ABYSS) or a bud
+  (POLYP to BELL to CHAIN).
+
+  Demo 15:
 
   Demo 15 (owner, 30 Oct 2026): they build as well as eat (ERO.build).
   Now and then one spins a STRAND between two words (or off the middle of
@@ -2415,6 +2439,7 @@
     const broken = new Set(); // bitten-through mantle lines, like 'L3'
     let L = [], R = [];       // the mantle outline as last drawn
     c.mouth = () => spine[0];
+    c.span = o.width; // how big it is, for growing into the next form
 
     // Tentacles: long little snakes trailing from the back. Two are longer
     // still and end in a pincer.
@@ -2574,6 +2599,8 @@
       tentacles.forEach(tentRestore);
       straighten();
     };
+    // Growing out of a smaller squid (demo 16): from its size, no pupa.
+    c.growFrom = (old) => { grow = clamp((old.span || o.width) / o.width, 0.3, 1); };
 
     c.setHome = (x, y, scale) => {
       c.home.x = x; c.home.y = y;
@@ -2634,6 +2661,249 @@
 
     c.body = () => spine.concat(tentacles.filter((t) => !t.lost).map((t) => t.pts[t.len - 1]));
     c.label = () => tentacles.filter((t) => !t.lost).length + ' TENTACLES';
+    return c;
+  }
+
+  // ---- Cephalopod: the squid family, made of characters (demo 17) ---------
+  // After the owner's photos of squid larvae and other drifting sea animals
+  // (30 Oct 2026). It starts as a speck and ends up very, very big. Every
+  // part is a character: the mantle is ( and ) hugging a spine with a ^ at
+  // the tip, fins of < and >, two O eyes, chromatophore dots that pulse,
+  // arms of suckers (o o o ° ·) and, later, two long tentacles of : with a
+  // club at the end. It never pupates: it grows (o.z0 to o.z1 as it eats
+  // through the stage) and each stage adds parts.
+  function makeCephalo(svg, o) {
+    const c = base(o.name, o.tune, svg);
+    const g = c.g;
+    let S = 1, z = o.z0, grow = 1, jet = Math.random() * 6, pulse = 0, tears = 0;
+    const N = o.spine;
+    const spine = Array.from({ length: N }, () => ({ x: 0, y: 0 }));
+    const norms = spine.map(() => ({ x: 0, y: 0 }));
+    const glyph = (ch, cls) => { const el = make(g, 'text', 'ero-glyph' + (cls ? ' ' + cls : '')); el.textContent = ch; return el; };
+    const K = () => z * S * grow; // scale of everything right now
+    c.mouth = () => spine[N - 1];
+    c.span = o.z0;
+
+    // ---- the parts, back to front ----
+    const arms = [];
+    for (let i = 0; i < o.arms + o.longs; i++) {
+      const long = i >= o.arms;
+      const n = long ? o.longLen : o.armLen;
+      const pts = Array.from({ length: n }, () => ({ x: 0, y: 0 }));
+      const chars = pts.slice(1).map((_, j) => {
+        const u = (j + 1) / (n - 1);
+        if (long) return glyph(u > 0.82 ? o.club[Math.min(o.club.length - 1, Math.floor((u - 0.82) / 0.18 * o.club.length))] : ':');
+        return glyph(u < 0.55 ? 'o' : u < 0.85 ? '°' : '·');
+      });
+      arms.push({ k: i, long, pts, full: n, len: n, pincer: long, grip: null, nextTry: 0, lost: false, chars });
+    }
+    const fins = [0, 1].map(() => Array.from({ length: o.fins }, () => glyph('>')));
+    const mantle = spine.map(() => [glyph('('), glyph(')')]);
+    const tip = glyph('^');
+    const spots = Array.from({ length: o.spots }, () => ({ u: 0.15 + Math.random() * 0.7, v: (Math.random() - 0.5) * 1.1, ph: Math.random() * 6, el: glyph(Math.random() < 0.7 ? '•' : '·') }));
+    const eyes = [glyph('O'), glyph('O')];
+    c.hits = spine.map(() => make(g, 'circle', 'hit', { r: 16 }));
+    c.visible = false;
+
+    // Mantle half-width along the body (u 0 at the tip, 1 at the head).
+    function width(u) {
+      let w = 0.2 + 0.8 * Math.pow(Math.min(u / 0.8, 1), 0.7);
+      if (u > 0.8) w *= 1 - ((u - 0.8) / 0.2) * 0.25;
+      return w * o.width * (1 - 0.18 * pulse);
+    }
+    function computeNormals() {
+      for (let i = 0; i < N; i++) {
+        const a = spine[Math.max(0, i - 1)], b = spine[Math.min(N - 1, i + 1)];
+        const tx = a.x - b.x, ty = a.y - b.y, tl = Math.hypot(tx, ty) || 1;
+        norms[i].x = -ty / tl; norms[i].y = tx / tl;
+      }
+    }
+    // Where each arm is attached: spread round the head, long ones in the middle.
+    function anchor(arm) {
+      const h = spine[N - 1], n = norms[N - 1];
+      const f = arm.long ? (arm.k - o.arms - 0.5) * 0.4 : (arm.k / Math.max(1, o.arms - 1) - 0.5) * 2;
+      const half = width(1) * K() * 0.8;
+      return { x: h.x + n.x * f * half, y: h.y + n.y * f * half };
+    }
+    function straighten() {
+      const bx = -Math.cos(c.heading), by = -Math.sin(c.heading);
+      spine.forEach((p, i) => { p.x = c.B.x + bx * o.seg * K() * i; p.y = c.B.y + by * o.seg * K() * i; });
+      computeNormals();
+      arms.forEach((a) => {
+        tentLetGo(a);
+        const an = anchor(a);
+        a.pts.forEach((p, j) => { p.x = an.x + bx * o.tseg * K() * j; p.y = an.y + by * o.tseg * K() * j; });
+      });
+    }
+
+    // A squirt of ink: loose characters that drift off and fade.
+    function ink(now) {
+      const h = spine[N - 1];
+      for (let i = 0; i < 6 + Math.round(4 * z); i++) {
+        spawnLetter('~#%@*'[i % 5], h.x + (Math.random() - 0.5) * 20 * K(), h.y + (Math.random() - 0.5) * 20 * K(), null, now, 2600, spine[0]);
+      }
+    }
+
+    c.step = (now, env) => {
+      S = env.scale;
+      c.now = now;
+      if (grow < 1) grow = Math.min(1, grow + 0.012);
+      // It grows as it eats, slowly easing toward the size its food allows.
+      const want = o.z0 + (o.z1 - o.z0) * Math.min(1, c.eaten / o.food);
+      z += (want - z) * 0.01;
+      // Jet swimming: the mantle squeezes and the body shoots forward.
+      if (c.alive) jet += 0.06 / Math.sqrt(z);
+      pulse = c.alive ? Math.pow(Math.max(0, Math.sin(jet)), 2) : 0;
+      c.surge = c.alive ? 0.45 + 1.5 * pulse : 1;
+      steer(c, now, env);
+      spine[0].x = c.B.x; spine[0].y = c.B.y;
+      follow(spine, N, o.seg * K());
+      computeNormals();
+
+      const t = now / 1000, back = norms[N - 1];
+      // Arms stream out behind the head (away from the tip), fanned a little.
+      const hx = spine[N - 1].x - spine[N - 2].x, hy = spine[N - 1].y - spine[N - 2].y, hl = Math.hypot(hx, hy) || 1;
+      const drift = 0.9 * S * Math.sqrt(z);
+      arms.forEach((a) => {
+        if (a.lost) return;
+        const f = (a.long ? (a.k - o.arms - 0.5) * 0.3 : (a.k / Math.max(1, o.arms - 1) - 0.5) * 2) * o.fan * S;
+        tentUpdate(c, a, anchor(a), now, t, {
+          seg: o.tseg * K(), fanX: back.x * f + hx / hl * drift, fanY: back.y * f + hy / hl * drift, sway: 0.6 * S * Math.sqrt(z),
+          reach: (a.long ? o.longReach : o.reach) * K(), holdMs: a.long ? 900 : 1800, reachMs: 260 * Math.sqrt(z),
+          eats: true, canGrab: grow === 1 && !c.throwV && !c.held && now > c.nextBite
+        });
+      });
+      // Its beak takes whatever word it passes over with its head.
+      if (c.alive && now > c.nextBite) {
+        const w = words.under(spine[N - 1].x, spine[N - 1].y, 6 * K());
+        if (w) { eat(c, w); c.nextBite = now + o.biteGap; }
+      }
+      advanceBulges(c, 0.02);
+    };
+    // An arm that brings a word in makes the others wait a moment, so even a
+    // kraken eats a page slowly.
+    c.onEat = () => { c.nextBite = Math.max(c.nextBite, c.now + o.biteGap); };
+
+    c.draw = () => {
+      if (!paint(c)) return;
+      const k = K(), fw = Math.atan2(spine[0].y - spine[1].y, spine[0].x - spine[1].x);
+      // Arms first (behind the body).
+      arms.forEach((a) => {
+        a.chars.forEach((el, j) => {
+          const on = !a.lost && j + 1 < a.len;
+          show(el, on);
+          if (!on) return;
+          const p = a.pts[j + 1], q = a.pts[j];
+          const u = (j + 1) / (a.full - 1);
+          glyphAt(el, p.x, p.y, (a.long ? 8 : 10) * (1 - 0.5 * u) * k + (a.long && u > 0.82 ? 3 * k : 0), Math.atan2(p.y - q.y, p.x - q.x) + Math.PI / 2);
+        });
+      });
+      // Fins near the tip, sticking out to the sides.
+      fins.forEach((row, side) => row.forEach((el, i) => {
+        const u = 0.05 + 0.3 * i / Math.max(1, o.fins - 1);
+        const s = Math.min(N - 1, Math.round(u * (N - 1)));
+        const n = norms[s], sg = side ? -1 : 1;
+        const out = (width(u) + o.finW * (1 - i / Math.max(1, o.fins)) * (0.85 + 0.15 * Math.sin(c.now * 0.004 + i))) * k;
+        // (a > turned to point straight out from the body)
+        glyphAt(el, spine[s].x + n.x * sg * out, spine[s].y + n.y * sg * out, 12 * k * (1 - 0.3 * i / Math.max(1, o.fins)), Math.atan2(n.y * sg, n.x * sg));
+      }));
+      // The mantle: ( ) down both sides.
+      mantle.forEach((pair, i) => {
+        const u = i / (N - 1), n = norms[i], w = width(u) * k + bulgeAt(c, u) * 3 * k;
+        const a = i ? Math.atan2(spine[i - 1].y - spine[i].y, spine[i - 1].x - spine[i].x) : fw;
+        glyphAt(pair[0], spine[i].x + n.x * w, spine[i].y + n.y * w, 14 * k, a + Math.PI / 2);
+        glyphAt(pair[1], spine[i].x - n.x * w, spine[i].y - n.y * w, 14 * k, a + Math.PI / 2);
+      });
+      glyphAt(tip, spine[0].x + Math.cos(fw) * 6 * k, spine[0].y + Math.sin(fw) * 6 * k, 13 * k, fw + Math.PI / 2);
+      // Chromatophores: dots that slowly flash.
+      spots.forEach((sp) => {
+        const i = Math.min(N - 1, Math.round(sp.u * (N - 1))), n = norms[i], w = width(sp.u) * sp.v * k;
+        glyphAt(sp.el, spine[i].x + n.x * w, spine[i].y + n.y * w, 9 * k, 0);
+        sp.el.setAttribute('opacity', (0.35 + 0.65 * Math.abs(Math.sin(c.now * 0.002 + sp.ph))).toFixed(2));
+      });
+      // Eyes at the head, big when it is small.
+      const h = spine[N - 1], hn = norms[N - 1];
+      eyes.forEach((el, s) => {
+        const w = width(1) * 0.75 * k * (s ? -1 : 1);
+        glyphAt(el, h.x + hn.x * w, h.y + hn.y * w, 10 * o.eye * k, fw + Math.PI / 2);
+      });
+      spine.forEach((p, i) => setDot(c.hits[i], p.x, p.y, Math.max(14, width(i / (N - 1)) * k)));
+    };
+
+    c.emerge = (x, y, heading) => {
+      c.B.x = x; c.B.y = y;
+      c.V.x = c.V.y = 0;
+      c.heading = c.wanderA = heading;
+      grow = 0.2;
+      z = o.z0;
+      tears = 0;
+      arms.forEach(tentRestore);
+      Object.assign(c, { visible: true, alive: true, dead: false, dest: null, spot: null, nextStalk: 0, eaten: 0, bulges: [] });
+      straighten();
+    };
+    // Growing on from the stage before (no pupa): same size, same place.
+    c.size = () => z;
+    c.spinePts = () => spine;
+    c.armPts = (i) => (arms[i] ? arms[i].pts : null);
+    c.growFrom = (old) => {
+      z = old.size ? old.size() : o.z0;
+      grow = 1;
+      const src = old.spinePts ? old.spinePts() : [];
+      spine.forEach((p, i) => {
+        const q = src[Math.min(i, src.length - 1)] || c.B;
+        p.x = q.x; p.y = q.y;
+      });
+      arms.forEach((a, i) => {
+        const from = old.armPts ? old.armPts(i) : null;
+        a.pts.forEach((p, j) => { const q = from ? from[Math.min(j, from.length - 1)] : spine[N - 1]; p.x = q.x; p.y = q.y; });
+      });
+      computeNormals();
+    };
+    c.setHome = (x, y, scale) => {
+      c.home.x = x; c.home.y = y;
+      S = scale;
+      if (!c.alive && c.visible) { c.B.x = x; c.B.y = y; c.heading = c.restHeading; straighten(); }
+    };
+    c.teleport = (dx, dy) => {
+      c.B.x += dx; c.B.y += dy;
+      for (const p of spine) { p.x += dx; p.y += dy; }
+      for (const a of arms) { tentLetGo(a); for (const p of a.pts) { p.x += dx; p.y += dy; } }
+    };
+    c.gatherAt = (x, y) => c.teleport(x - c.B.x, y - c.B.y);
+
+    // A bite takes the end of an arm (its characters fall off) or tears the
+    // mantle (and it squirts ink). Too many tears, or too few arms, and it dies.
+    c.hurt = (now, p) => {
+      c.hurtUntil = now + 900;
+      p = p || c.B;
+      const tn = tentNearest(arms, p);
+      let bd = Infinity;
+      spine.forEach((q) => { bd = Math.min(bd, dist(p, q)); });
+      if (tn && tn.d < bd) {
+        const a = tn.ten, j = clamp(tn.j, 1, a.len - 1);
+        a.chars.slice(j - 1, a.len - 1).forEach((el) => spawnLetter(el.textContent, +el.getAttribute('x'), +el.getAttribute('y'), null, now, DEBRIS_MS, c.B));
+        tentLetGo(a);
+        a.len = j;
+        if (a.len < 3) a.lost = true;
+      } else {
+        tears++;
+        mantle[Math.floor(Math.random() * N)].forEach((el) => spawnLetter(el.textContent, +el.getAttribute('x'), +el.getAttribute('y'), null, now, DEBRIS_MS, c.B));
+      }
+      ink(now);
+      if (tears >= o.tears || arms.filter((a) => !a.lost).length < 2) c.dead = true;
+    };
+    c.parts = () => spine.concat(arms.filter((a) => !a.lost).map((a) => a.pts[Math.floor(a.len / 2)]));
+    c.body = () => spine.concat(arms.filter((a) => !a.lost).map((a) => a.pts[a.len - 1]));
+    c.wake = () => { c.alive = true; c.nextMood = 0; c.nextStalk = 0; c.dest = c.spot = null; };
+    c.sleep = () => { c.alive = false; c.stalkUntil = c.clingUntil = 0; c.foe = null; c.dest = c.spot = null; arms.forEach(tentLetGo); };
+    c.reset = () => {
+      arms.forEach(tentRestore);
+      tears = 0;
+      z = o.z0;
+      Object.assign(c, { eaten: 0, bulges: [], dead: false, throwV: null, clingUntil: 0 });
+    };
+    c.settled = () => !c.alive && !c.bulges.length && grow === 1 && c.now >= c.hurtUntil && Math.hypot(c.V.x, c.V.y) < 0.05;
+    c.label = () => arms.filter((a) => !a.lost).length + ' ARMS / ' + Math.round(z * 100) + '% SIZE';
     return c;
   }
 
@@ -2903,6 +3173,25 @@
       second = !!TB;
       layOut(0);
     };
+    // Growing out of an OLD ONE (demo 16): a little bigger, and the chain
+    // grows out of its back as it eats; the second body buds at the end of it.
+    c.span = o.radius;
+    c.growFrom = (old) => {
+      grow = clamp((old.span || o.radius) / o.radius, 0.3, 1);
+      if (TB) { chainLen = 2; second = false; tents2.forEach((ten) => { ten.lost = true; }); }
+    };
+    c.onEat = () => {
+      if (!TB || chainLen >= chain.length) return;
+      const end = chain[chainLen - 1];
+      chain[chainLen].x = end.x; chain[chainLen].y = end.y;
+      chainLen++;
+      if (chainLen === chain.length && !second) {
+        second = true;
+        brokenRing.clear();
+        tents2.forEach(tentRestore);
+        placeSecond(c.now / 1000, true);
+      }
+    };
 
     c.setHome = (x, y, scale) => {
       c.home.x = x; c.home.y = y;
@@ -3036,8 +3325,10 @@
     const brace = o.kind === 'brace';
     let S = 1, grow = 1, agit = 0, env = null;
     let count = o.bones;                      // vertebrae left (ribs, quill)
+    let armsOn = o.bones;                     // arms grown so far (brace)
     const spine = Array.from({ length: brace ? 1 : o.bones }, () => ({ x: 0, y: 0 }));
     c.mouth = () => spine[0];
+    c.span = z;
     const quill = o.kind === 'quill';
     const glyphs = o.glyphs || BRACKETS;
     const pairs = o.pairs || 1;               // ribs: rib pairs per bone
@@ -3072,7 +3363,7 @@
     const arms = brace ? Array.from({ length: o.bones }, (_, k) => {
       const pts = Array.from({ length: armFull(k) }, () => ({ x: 0, y: 0 }));
       return {
-        k, pts, len: pts.length, lost: false,
+        k, pts, len: pts.length, full: pts.length, lost: false,
         chars: pts.slice(1).map((_, j) => {
           const el = make(g, 'text', 'ero-glyph');
           el.textContent = armText[(k % 4 + j) % armText.length];
@@ -3125,8 +3416,15 @@
         if (arm.lost) return;
         // Arms trail behind the hub, fanned out, rippling.
         // (more arms fan out wider, up to a full bell)
-        const spread = Math.min(2.3, 1.25 + Math.max(0, o.bones - 4) * 0.12);
-        const at = c.heading + Math.PI + (arm.k / (o.bones - 1) - 0.5) * 2 * spread * (1 + 0.45 * agit);
+        const spread = Math.min(2.3, 1.25 + Math.max(0, armsOn - 4) * 0.12);
+        const at = c.heading + Math.PI + (Math.min(1, arm.k / (Math.max(2, armsOn) - 1)) - 0.5) * 2 * spread * (1 + 0.45 * agit);
+        // A new arm grows out of the hub a little at a time.
+        if (arm.growing && Math.random() < 0.08) {
+          const e = arm.pts[arm.len - 1];
+          arm.pts[arm.len].x = e.x; arm.pts[arm.len].y = e.y;
+          arm.len++;
+          if (arm.len >= arm.full) arm.growing = false;
+        }
         const seg = o.tseg * z * S * grow;
         arm.pts[0].x = c.B.x; arm.pts[0].y = c.B.y;
         for (let j = 1; j < arm.len; j++) {
@@ -3298,11 +3596,43 @@
       c.V.x = c.V.y = 0;
       c.heading = c.wanderA = heading;
       grow = 0.2;
-      count = o.bones;
-      arms.forEach((a) => { a.lost = false; a.len = a.pts.length; });
+      count = o.startBones || o.bones;
+      armsOn = o.startBones || o.bones;
+      arms.forEach((a) => { a.lost = a.k >= armsOn; a.len = a.pts.length; a.growing = false; });
       Object.assign(c, { visible: true, alive: true, dead: false, dest: null, spot: null, nextStalk: 0, eaten: 0, bulges: [] });
       straighten();
     };
+    // Growing (demo 16): a new vertebra (or arm) every o.growEvery words, up
+    // to o.bones. A bitten-off tail grows back the same way.
+    c.onEat = () => {
+      if (c.eaten % (o.growEvery || 3)) return;
+      if (brace) {
+        const a = arms.find((x) => x.k >= armsOn) || arms.find((x) => x.lost);
+        if (!a) return;
+        if (a.k >= armsOn) armsOn = a.k + 1;
+        a.lost = false;
+        a.len = 2;
+        a.growing = true;
+        a.pts.forEach((p) => { p.x = c.B.x; p.y = c.B.y; });
+      } else if (count < o.bones) {
+        spine[count].x = spine[count - 1].x; spine[count].y = spine[count - 1].y;
+        count++;
+      }
+    };
+    // Growing out of the stage before, no pupa: same body, same length,
+    // a little smaller to begin with.
+    c.growFrom = (old) => {
+      grow = clamp((old.span || z) / z, 0.4, 1);
+      if (brace) {
+        armsOn = clamp(old.armsOn ? old.armsOn() : armsOn, 2, o.bones);
+        arms.forEach((a) => { a.lost = a.k >= armsOn; a.len = a.pts.length; a.growing = false; });
+        return;
+      }
+      const src = old.body ? old.body() : [];
+      count = clamp(src.length, 2, o.bones);
+      spine.forEach((p, i) => { const q = src[Math.min(i, src.length - 1)] || c.B; p.x = q.x; p.y = q.y; });
+    };
+    c.armsOn = () => arms.filter((a) => !a.lost).length;
     c.setHome = (x, y, scale) => {
       c.home.x = x; c.home.y = y;
       S = scale;
@@ -3361,8 +3691,9 @@
     c.wake = () => { c.alive = true; c.nextMood = 0; c.nextStalk = 0; c.dest = c.spot = null; };
     c.sleep = () => { c.alive = false; c.stalkUntil = c.clingUntil = 0; c.foe = null; c.dest = c.spot = null; };
     c.reset = () => {
-      count = o.bones;
-      arms.forEach((a) => { a.lost = false; a.len = a.pts.length; });
+      count = o.startBones || o.bones;
+      armsOn = o.startBones || o.bones;
+      arms.forEach((a) => { a.lost = a.k >= armsOn; a.len = a.pts.length; a.growing = false; });
       Object.assign(c, { eaten: 0, bulges: [], dead: false, throwV: null, clingUntil: 0 });
     };
     c.settled = () => !c.bulges.length && grow === 1 && c.now >= c.hurtUntil && agit === 0 &&
@@ -3425,8 +3756,12 @@
     c.visible = false;
 
     // How many bell pairs and units it has grown so far (budding).
-    const pairsNow = () => Math.min(nect, (o.startPairs || 1) + Math.floor(c.eaten / 3));
-    const unitsNow = () => Math.min(units.length, (o.startUnits || 1) + Math.floor(c.eaten / 2));
+    let pairs0 = o.startPairs || 1, units0 = o.startUnits || 1; // what it starts with
+    const pairsNow = () => Math.min(nect, pairs0 + Math.floor(c.eaten / 3));
+    const unitsNow = () => Math.min(units.length, units0 + Math.floor(c.eaten / 2));
+    c.span = z;
+    c.pairsNow = () => pairsNow();
+    c.unitsNow = () => unitsNow();
     const unitAt = (j) => nect + 1 + j * (o.every || 3);   // stem point a unit hangs from
     const tang = (i) => {
       const a = spine[Math.max(0, i - 1)], b = spine[Math.min(count - 1, i + 1)];
@@ -3596,9 +3931,27 @@
       c.heading = c.wanderA = heading;
       grow = 0.2;
       count = o.len;
+      pairs0 = o.startPairs || 1;
+      units0 = o.startUnits || 1;
       bells.forEach((b) => { b.lost = false; });
       Object.assign(c, { visible: true, alive: true, dead: false, dest: null, spot: null, nextStalk: 0, eaten: 0, bulges: [] });
       straighten();
+    };
+    // A colony growing into a bigger colony (demo 16): no budding off, it
+    // keeps its stem, bells and units and grows on from there; the stem gets
+    // a point longer for every word.
+    c.growFrom = (old) => {
+      grow = clamp((old.span || z) / z, 0.4, 1);
+      const src = old.body ? old.body() : [];
+      count = clamp(src.length, 3, o.len);
+      spine.forEach((p, i) => { const q = src[Math.min(i, src.length - 1)] || c.B; p.x = q.x; p.y = q.y; });
+      if (old.pairsNow) pairs0 = clamp(old.pairsNow(), 1, nect);
+      if (old.unitsNow) units0 = clamp(old.unitsNow(), 1, units.length);
+    };
+    c.onEat = () => {
+      if (!colony || count >= o.len) return;
+      spine[count].x = spine[count - 1].x; spine[count].y = spine[count - 1].y;
+      count++;
     };
     c.setHome = (x, y, scale) => {
       c.home.x = x; c.home.y = y;
@@ -3726,6 +4079,26 @@
       form = forms[stage];
     }
 
+    // A stage marked grow (demo 16): no pupa. The creature just carries on
+    // growing into the next form where it is, from the size and length it
+    // has now (only creatures that change shape a lot still pupate).
+    function growNext(now) {
+      const cur = forms[stage], next = forms[stage + 1];
+      dropCarry(cur);
+      next.emerge(cur.B.x, cur.B.y, cur.heading);
+      if (next.growFrom) next.growFrom(cur);
+      cur.sleep();
+      cur.visible = false;
+      cur.alive = false;
+      stage++;
+      form = next;
+    }
+    function change(now) {
+      if (stages[stage + 1] && stages[stage + 1].grow) growNext(now);
+      else if (opts.bud) budNext(now);
+      else toPupa(now);
+    }
+
     function hatch() {
       stage++;
       forms[stage].emerge(pupa.B.x, pupa.B.y, pupa.heading);
@@ -3835,8 +4208,7 @@
       } else if (form === pupa) {
         if (pupa.done(now)) hatch();
       } else if (form.alive && st.evolveAt && form.eaten >= st.evolveAt) {
-        if (opts.bud) budNext(now);
-        else toPupa(now);
+        change(now);
       } else if (form.alive && st.splitAt && form.eaten >= st.splitAt) {
         split(now);
       }
@@ -3850,8 +4222,7 @@
       if (!gone && form.ripen && stage === forms.length - 1) { form.ripen(); kick(); return; } // a snake: full grown now
       if (gone || form === pupa || stage >= forms.length - 1) return;
       if (!form.alive) form.wake();
-      if (opts.bud) budNext(performance.now());
-      else toPupa(performance.now());
+      change(performance.now());
       kick();
     };
     c.hatch = () => {
@@ -3887,7 +4258,7 @@
       if (form === pupa) return pupa.label();
       const st = stages[stage], left = (n) => Math.max(0, n - form.eaten);
       return 'STAGE ' + (stage + 1) + ' / ' + form.label() + ' / ' +
-        (st.evolveAt ? left(st.evolveAt) + (opts.bud ? ' TO BUD' : ' TO PUPA') : st.splitAt ? left(st.splitAt) + ' TO SPLIT' : form.eaten + ' EATEN');
+        (st.evolveAt ? left(st.evolveAt) + (stages[stage + 1].grow ? ' TO GROW' : opts.bud ? ' TO BUD' : ' TO PUPA') : st.splitAt ? left(st.splitAt) + ' TO SPLIT' : form.eaten + ' EATEN');
     };
 
     // How far it is toward its next change: { eaten, at, next: 'PUPA' | 'SPLIT' | null }.
@@ -4323,11 +4694,18 @@
       { name: 'PALIMPSEST', barbs: 3, branch: true, wings: true, tipText: 'ERODEWRITEOVER', crown: '·:·' }
     ]
   };
+  // (demo 16) Glyph crawlers grow instead of pupating: each stage starts
+  // with the bones (or arms) of the one before and grows the rest as it eats.
+  const mutantBones = (kind, L) => (kind === 'quill' ? 4 + Math.round(L * 1.5) : kind === 'brace' ? 2 + L * 2 : 3 + L);
   function mutantForm(kind, L) {
+    const bones = mutantBones(kind, L);
+    const startBones = L > 1 ? mutantBones(kind, L - 1) : Math.max(kind === 'brace' ? 3 : 2, bones - 2);
+    const food = L < 5 ? 8 + L * 3 : 26; // words in this stage
     return Object.assign({
       kind,
       size: 0.5 + L * 0.13,
-      bones: kind === 'quill' ? 4 + Math.round(L * 1.5) : kind === 'brace' ? 2 + L * 2 : 3 + L, // vertebrae (or arms)
+      bones, startBones, // vertebrae (or arms): at most, and to begin with
+      growEvery: Math.max(1, Math.floor(food * 0.7 / Math.max(1, bones - startBones))),
       seg: kind === 'ribs' ? 20 : 14,
       armLen: 7 + L * 2, tseg: 8,
       biteGap: 800 - L * 60,
@@ -4344,7 +4722,8 @@
     return makeLifeCycle(svg, [1, 2, 3, 4, 5].map((L) => ({
       form: makeGlyph(svg, mutantForm(kind, L)),
       evolveAt: L < 5 ? 8 + L * 3 : 0,
-      splitAt: L === 5 ? 26 : 0
+      splitAt: L === 5 ? 26 : 0,
+      grow: L > 1 // no pupa: it grows into the next stage (demo 16)
     })), { mutant: true, kind, line: 'mutant' });
   };
 
@@ -4367,13 +4746,27 @@
     { form: makeSnake(svg, SNAKE) }
   ], Object.assign({ line: 'snake' }, opts)); // opts.mutant: no nest, gone for good when it dies
   // The squid family is a line of its own (demo 14), and it only turns up
-  // as a random hatching: no nest, no egg of its own.
+  // as a random hatching: no nest, no egg of its own. Demo 17: a new family
+  // made of characters, from a speck to something very, very big; it never
+  // pupates, it grows. (OLD ONE, LEVIATHAN and ABYSS are out of it for now;
+  // makeSquid and makeElder are kept for later.)
+  const CEPH_TUNE = { cruise: 2.2, flee: 9, fleeRadius: 220, turn: 0.22, pauseChance: 0.06, roam: 1.4, fightRange: 240, aggression: 0.25, wiggle: 0.12, wavelength: 200 };
+  const SPECK = { name: 'SPECK', biteGap: 1400, z0: 0.3, z1: 0.5, food: 10, spine: 4, seg: 9, width: 9, eye: 1.6, arms: 6, armLen: 4, longs: 0, longLen: 2, club: '%', tseg: 9, fan: 0.6,
+    fins: 0, finW: 0, spots: 1, reach: 28, longReach: 0, tears: 2, tune: Object.assign({}, CEPH_TUNE, { cruise: 2.6, fleeRadius: 260, aggression: 0.05 }) };
+  const SQUIDLET = { name: 'SQUIDLET', biteGap: 1200, z0: 0.5, z1: 0.8, food: 16, spine: 6, seg: 10, width: 10, eye: 1.35, arms: 8, armLen: 6, longs: 0, longLen: 2, club: '%', tseg: 9, fan: 0.55,
+    fins: 2, finW: 7, spots: 4, reach: 34, longReach: 0, tears: 3, tune: Object.assign({}, CEPH_TUNE, { cruise: 2.4, aggression: 0.12 }) };
+  const SQUID2 = { name: 'SQUID', biteGap: 1000, z0: 0.8, z1: 1.25, food: 24, spine: 8, seg: 11, width: 11, eye: 1.15, arms: 8, armLen: 8, longs: 2, longLen: 15, club: 'o%#', tseg: 9, fan: 0.5,
+    fins: 3, finW: 9, spots: 8, reach: 40, longReach: 80, tears: 4, tune: CEPH_TUNE };
+  const GIANT = { name: 'GIANT', biteGap: 1100, z0: 1.25, z1: 2.4, food: 32, spine: 9, seg: 11, width: 11, eye: 1, arms: 8, armLen: 10, longs: 2, longLen: 20, club: 'oJ}#', tseg: 9, fan: 0.5,
+    fins: 4, finW: 10, spots: 14, reach: 44, longReach: 95, tears: 5, tune: Object.assign({}, CEPH_TUNE, { cruise: 1.7, flee: 6.5, fleeRadius: 160, fightRange: 340, aggression: 0.45 }) };
+  const KRAKEN = { name: 'KRAKEN', biteGap: 1500, z0: 2.4, z1: 5, food: 30, spine: 10, seg: 11, width: 11, eye: 0.9, arms: 8, armLen: 12, longs: 2, longLen: 26, club: 'oJ}#@', tseg: 9, fan: 0.45,
+    fins: 5, finW: 11, spots: 20, reach: 48, longReach: 110, tears: 7, tune: Object.assign({}, CEPH_TUNE, { cruise: 1.2, flee: 4.5, fleeRadius: 110, fightRange: 480, aggression: 0.6, wiggle: 0.08 }) };
   ERO.makeSquid = (svg, opts) => makeLifeCycle(svg, [
-    { form: makeSquid(svg, INKLING), evolveAt: 14 },
-    { form: makeSquid(svg, SQUID), evolveAt: 30 },
-    { form: makeElder(svg, ELDER), evolveAt: 36 },
-    { form: makeElder(svg, LEVIATHAN), evolveAt: 40 },
-    { form: makeGlyph(svg, ABYSS), splitAt: 45 }
+    { form: makeCephalo(svg, SPECK), evolveAt: 10 },
+    { form: makeCephalo(svg, SQUIDLET), evolveAt: 16, grow: true },
+    { form: makeCephalo(svg, SQUID2), evolveAt: 24, grow: true },
+    { form: makeCephalo(svg, GIANT), evolveAt: 32, grow: true },
+    { form: makeCephalo(svg, KRAKEN), splitAt: 48, grow: true } // full size at 30, bursts into specks at 48
   ], Object.assign({ line: 'squid' }, opts));
 
   // ---- Feeding (demo 13) ---------------------------------------------------
@@ -4461,8 +4854,8 @@
     { form: makeSiphon(svg, POLYP), evolveAt: 12 },
     { form: makeSiphon(svg, SARSIA), evolveAt: 18 },
     { form: makeSiphon(svg, CHAIN), evolveAt: 22 },
-    { form: makeSiphon(svg, COLONY), evolveAt: 28 },
-    { form: makeSiphon(svg, ARMADA), splitAt: 34 }
+    { form: makeSiphon(svg, COLONY), evolveAt: 28, grow: true }, // the colony just grows longer (demo 16)
+    { form: makeSiphon(svg, ARMADA), splitAt: 34, grow: true }
   ], Object.assign({ line: 'siphon', bud: true }, opts)); // buds instead of pupating; splits into polyps
 
   // Every line and the names of its five stages, for summoning (the Archive).
@@ -4471,7 +4864,7 @@
     { line: 'crawler', kind: null, names: [CRAWLER, SCORPION, EMPEROR, WARLORD, THRONE].map((f) => f.name) },
     { line: 'strider', kind: null, names: [STRIDER, COLOSSUS, BROODMOTHER, WEAVER, CATHEDRAL].map((f) => f.name) },
     { line: 'snake', kind: null, names: ['SNAKE'] },
-    { line: 'squid', kind: null, names: [INKLING.name, SQUID.name, ELDER.name, LEVIATHAN.name, ABYSS.name] },
+    { line: 'squid', kind: null, names: [SPECK, SQUIDLET, SQUID2, GIANT, KRAKEN].map((f) => f.name) },
     { line: 'siphon', kind: null, names: [POLYP, SARSIA, CHAIN, COLONY, ARMADA].map((f) => f.name) }
   ].concat(Object.keys(MUTANT_STAGES).map((kind) => ({ line: 'mutant', kind, names: MUTANT_STAGES[kind].map((f) => f.name) })));
 

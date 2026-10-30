@@ -91,12 +91,41 @@ a.ero-dead:hover, a.ero-dead:focus-visible {
 /* the page you are on, in the header */
 .ero-here { color: var(--accent); }
 
-/* doors: links to every room, at the bottom of each Erosion page */
-.ero-doors { display: flex; flex-wrap: wrap; gap: 10px 26px; padding: 22px 22px 30px; border-top: 1px solid #262626; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
-.ero-doors-label { opacity: .6; }
-.ero-doors a:hover, .ero-doors a[aria-current] { color: var(--accent); }
-.ero-light .ero-doors { border-top-color: rgba(0, 0, 0, .18); }
-
-/* front page: the list of doors */
-.ero-door-list a { display: inline-block; margin-right: 6px; }
-.ero-door-list a:hover { color: var(--accent); }
+/* front page: an open field you drift around in (drift.js). The front page
+   itself lies where you start; the other pages lie out in the field as scraps. */
+body.ero-drift { height: 100vh; overflow: hidden; }
+.ero-drift .ero-header { position: relative; z-index: 5; background: linear-gradient(#060606 60%, rgba(6, 6, 6, 0)); }
+.dr-field { position: fixed; inset: 0; overflow: hidden; touch-action: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+.dr-field.dr-grabbing, .dr-field.dr-grabbing * { cursor: grabbing !important; }
+/* faint crosses every 120 px, bigger ones every 600 px; they move with the field */
+.dr-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M0 0h3M0 0v3M120 0h-3M0 120v-3' stroke='%23222120' stroke-width='1'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cpath d='M0 0h8M0 0v8M600 0h-8M0 600v-8' stroke='%23343330' stroke-width='1'/%3E%3C/svg%3E");
+  background-size: 120px 120px, 600px 600px;
+}
+.dr-item { position: absolute; left: 0; top: 0; margin: 0; will-change: transform; }
+.ero-drift .ero-main.dr-item { width: 100vw; }
+.dr-scrap { max-width: 340px; font-size: 14px; line-height: 1.7; }
+.dr-glyph { display: block; width: 120px; height: auto; margin-bottom: 14px; overflow: visible; }
+.dr-glyph path, .dr-glyph rect, .dr-glyph polyline { fill: none; stroke: #8d8a84; stroke-width: 1.2; vector-effect: non-scaling-stroke; }
+.dr-glyph .dr-faint { stroke: #3a3936; }
+.dr-glyph .dr-red { stroke: var(--accent); }
+.dr-secret { display: block; color: #3a3936; font-size: 9px; letter-spacing: .14em; }
+.dr-secret .dr-glyph { width: 70px; margin-bottom: 6px; }
+.dr-secret .dr-glyph path { stroke: #3a3936; }
+.dr-secret:hover .dr-glyph path, .dr-secret:focus-visible .dr-glyph path { stroke: var(--accent); }
+.dr-ascii { display: block; font-family: ui-monospace, Consolas, monospace; font-size: 11px; line-height: 1.25; white-space: pre; color: #55534e; }
+.dr-ascii:hover, .dr-ascii:focus-visible { color: var(--accent); }
+.dr-debris { color: #55534e; font-size: 12px; line-height: 1.7; white-space: nowrap; pointer-events: none; }
+.dr-dead { text-decoration: line-through; text-decoration-thickness: 1px; }
+.dr-red-text { color: var(--accent); }
+.dr-bones { width: 90px; height: auto; }
+.dr-bones polyline { fill: none; stroke: #3a3936; stroke-width: 1.4; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
+.dr-rule { width: 600px; height: 4px; }
+.dr-rule-v { width: 4px; height: 500px; }
+.dr-rule path { stroke: #262626; stroke-width: 1; vector-effect: non-scaling-stroke; }
+.dr-coords { position: fixed; right: 22px; bottom: 14px; z-index: 5; margin: 0; font-size: 9px; letter-spacing: .12em; color: #55534e; pointer-events: none; }
+.dr-coarse { display: none; }
+@media (pointer: coarse) { .dr-fine { display: none; } .dr-coarse { display: inline; } }

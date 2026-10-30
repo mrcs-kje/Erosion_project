@@ -26,25 +26,29 @@
     <p class="loop-brand">EROSION.EXE</p>
     <div class="loop-behind" aria-hidden="true" data-no-eggs>
       <div class="loop-cell"><p class="loop-label">TEXT / ABANDONED</p><p data-ero-food>I started this to explain why the staircase in my grandmother's house had thirteen steps</p></div>
-      <div class="loop-cell"><p class="loop-label">DRAWING / 3 OF ?</p></div>
+      <div class="loop-cell"><p class="loop-label">DRAWING / <a class="loop-secret" href="../sketch/index.html" tabindex="-1">3 OF ?</a></p></div>
       <div class="loop-cell loop-dashed"><p class="loop-label">WALL REMOVED. WAS: ABOUT</p></div>
       <div class="loop-cell"><p class="loop-label" data-ero-food>CRAWLER / DORMANT</p></div>
-      <div class="loop-cell"><p data-ero-food>ask about the door that doesn't close. something was eaten, not sure what. bring tape.</p></div>
-      <div class="loop-cell"><p class="loop-label">LOOP 00:12 / CLICK TO OPEN</p></div>
+      <div class="loop-cell"><p data-ero-food>ask about the eye that doesn't close. something was eaten, not sure what. bring tape.</p></div>
+      <div class="loop-cell"><p class="loop-label"><button class="loop-reopen" id="loop-reopen" type="button" tabindex="-1">LOOP 00:12 / CLICK TO OPEN</button></p></div>
     </div>
 
-    <section class="loop-player" role="dialog" aria-labelledby="loop-title">
+    <section class="loop-player" id="loop-player" role="dialog" aria-labelledby="loop-title">
       <div class="loop-head">
         <p id="loop-title" data-ero-food>LOOP <span id="loop-n">012</span> / NO SOUND</p>
         <a href="../index.html">[ X ] CLOSE</a>
       </div>
-      <svg class="loop-screen" id="loop-screen" viewBox="0 0 1100 600" role="img" aria-label="A grey corridor that never gets shorter, with a red door at the end">
+      <svg class="loop-screen" id="loop-screen" viewBox="0 0 1100 600" role="img" aria-label="A grey corridor that never gets shorter, with a red eye at the end">
+        <defs><clipPath id="loop-eye-clip"><path id="loop-eye-clip-path"/></clipPath></defs>
         <rect class="loop-wall" x="0" y="0" width="1100" height="600"/>
         <g id="loop-rings"></g>
         <g id="loop-edges"></g>
-        <a href="../room/index.html" class="loop-door-link" aria-label="Open the red door (room 3)">
-          <rect class="loop-door" id="loop-door" x="0" y="0" width="1" height="1"/>
-          <circle class="loop-knob" id="loop-knob" cx="0" cy="0" r="3"/>
+        <a href="../room/index.html" class="loop-eye-link" aria-label="Look into the red eye (the essay)">
+          <path class="loop-eye" id="loop-eye"/>
+          <g clip-path="url(#loop-eye-clip)">
+            <circle class="loop-iris" id="loop-iris" r="1"/>
+            <circle class="loop-pupil" id="loop-pupil" r="1"/>
+          </g>
         </a>
       </svg>
       <div class="loop-bar" aria-hidden="true"><span id="loop-bar"></span></div>
@@ -52,6 +56,12 @@
         <p><span id="loop-time">00:00</span> / 00:12 / LOOPS</p>
         <p data-ero-food>NOBODY KNOWS WHO FILMED THIS</p>
       </div>
+      <svg class="loop-crack" id="loop-crack" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+        <polyline class="loop-crack-edge" id="loop-crack-edge"/>
+        <polyline class="loop-crack-gap" id="loop-crack-gap"/>
+        <polyline class="loop-crack-hit" id="loop-crack-hit"/>
+      </svg>
+      <button class="loop-crack-grip" id="loop-crack-grip" type="button" aria-label="A crack in the frame. Press and hold, or press Enter a few times, to widen it"></button>
     </section>
   </main>
   <script src="../../js/main.js"></script>

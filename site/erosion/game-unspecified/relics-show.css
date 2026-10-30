@@ -1,0 +1,28 @@
+/* Erosion.exe: kept relics floating on a page, and the lore popup (relics-show.js). */
+.relic-layer { position: absolute; inset: 0 0 auto 0; height: 0; z-index: 5; }
+.relic {
+  position: absolute; padding: 6px; font: 700 22px/1 Consolas, "Courier New", ui-monospace, monospace;
+  color: #9a978f; animation: relic-drift 9s ease-in-out infinite alternate;
+}
+.relic:hover, .relic:focus-visible { color: var(--accent, #e8441b); animation-play-state: paused; }
+@keyframes relic-drift {
+  0% { transform: translate(0, 0); opacity: .55; }
+  50% { opacity: 1; }
+  100% { transform: translate(var(--drift, 10px), calc(var(--drift, 10px) * -1)); opacity: .7; }
+}
+
+.relic-pop {
+  max-width: min(460px, calc(100vw - 40px)); padding: 30px 28px 24px; border: 1px solid #262626;
+  background: #060606; color: #e8e6df;
+}
+.relic-pop::backdrop { background: rgba(6, 6, 6, .7); }
+.relic-pop-glyph { margin: 0 0 18px; font: 700 54px/1 Consolas, "Courier New", ui-monospace, monospace; }
+.relic-pop-name { margin: 0 0 14px; font-size: 12px; font-weight: 400; letter-spacing: .14em; color: var(--accent, #e8441b); }
+.relic-pop-lore { margin: 0 0 24px; font-size: 15px; line-height: 1.6; }
+.relic-pop form { margin: 0; }
+.relic-pop button { font: inherit; font-size: 12px; letter-spacing: .1em; color: #9a978f; }
+.relic-pop button:hover, .relic-pop button:focus-visible { color: var(--accent, #e8441b); }
+
+@media (prefers-reduced-motion: reduce) {
+  .relic { animation: none; opacity: .8; }
+}

@@ -21,9 +21,34 @@ main.loop-world > section.loop-player { /* beats the portfolio's "main > section
 .loop-wall { fill: #111; }
 #loop-edges line, #loop-rings rect { stroke: #4a4946; stroke-width: 1.2; fill: none; }
 #loop-rings rect { stroke: #262624; }
-.loop-door { fill: none; stroke: var(--accent); stroke-width: 2; }
-.loop-knob { fill: var(--accent); }
-.loop-door-link:hover .loop-door, .loop-door-link:focus-visible .loop-door { fill: rgba(232, 68, 27, .18); }
+.loop-eye { fill: none; stroke: var(--accent); stroke-width: 2; }
+.loop-iris { fill: none; stroke: var(--accent); stroke-width: 1.6; }
+.loop-pupil { fill: var(--accent); }
+.loop-eye-link:hover .loop-eye, .loop-eye-link:focus-visible .loop-eye { fill: rgba(232, 68, 27, .18); }
+
+/* the crack in the frame: press it and it widens until the player breaks */
+.loop-player[hidden] { display: none; }
+.loop-crack { position: absolute; inset: -1px; width: calc(100% + 2px); height: calc(100% + 2px); overflow: visible; pointer-events: none; }
+.loop-crack polyline { fill: none; stroke-linejoin: miter; stroke-linecap: butt; vector-effect: non-scaling-stroke; }
+.loop-crack-edge { stroke: #8d8a84; }
+.loop-crack-gap { stroke: #060606; }
+.loop-crack-hit { stroke: transparent; stroke-width: 26px; pointer-events: stroke; cursor: grab; touch-action: none; }
+.loop-crack-hit:active { cursor: grabbing; }
+.loop-crack-grip {
+  position: absolute; top: -14px; width: 28px; height: 28px; margin-left: -14px; padding: 0;
+  background: none; border: 0; cursor: grab; touch-action: none;
+}
+.loop-crack-grip:active { cursor: grabbing; }
+.loop-crack-grip:focus-visible { outline: 1px dashed var(--accent); outline-offset: 2px; }
+
+/* the page behind, once the player is gone */
+.loop-cell, .loop-label { transition: color 1.4s steps(6, end), border-color 1.4s steps(6, end); }
+.loop-revealed .loop-cell { color: #8d8a84; border-color: #2c2b29; }
+.loop-revealed .loop-label { color: #55534e; }
+.loop-revealed .loop-brand { color: #55534e; }
+.loop-reopen, .loop-secret { font: inherit; letter-spacing: inherit; text-transform: inherit; color: inherit; background: none; border: 0; padding: 0; pointer-events: none; }
+.loop-revealed .loop-reopen, .loop-revealed .loop-secret { pointer-events: auto; cursor: pointer; }
+.loop-revealed .loop-reopen:hover, .loop-revealed .loop-secret:hover { color: var(--accent); }
 .loop-bar { height: 4px; background: #2c2b29; margin-top: 24px; }
 .loop-bar span { display: block; height: 100%; width: 0; background: var(--accent); }
 

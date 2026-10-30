@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Unspecified game | Erosion.exe | Marcus Kje</title>
+  <meta name="description" content="Erosion.exe: an unspecified game. A world made of characters. Phase 01.">
+  <link rel="icon" href="../../img/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="../../fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="../../css/style.css">
+  <link rel="stylesheet" href="../erosion.css">
+  <link rel="stylesheet" href="game.css">
+</head>
+<body class="erosion ero-ugame">
+  <header class="ero-header">
+    <a href="../../index.html">TERMINATE PROCESS → HOME</a>
+    <a class="ero-dim ero-dead" href="../random/index.html" data-random>RANDOM / OFFLINE</a>
+    <a class="ero-dim ero-dead" href="../index/index.html">INDEX / 404</a>
+    <button class="ero-intercept" type="button" aria-label="Intercept process">EROSION.EXE / RUNNING</button>
+  </header>
+
+  <main class="ug-world">
+    <canvas id="ug-canvas" role="img" aria-label="A world drawn in characters, seen from above at an angle. You are the red block. Move with the arrow keys or WASD, or tap a spot to walk there."></canvas>
+
+    <div class="ug-top">
+      <p><span class="ug-here">PHASE 01</span> / <span id="ug-phase">ISO</span></p>
+      <p><button type="button" class="ug-sound" id="ug-drop" hidden title="Leave it on the floor (Q)">DROP</button> <button type="button" class="ug-sound" id="ug-sound" aria-pressed="false">SOUND: OFF</button></p>
+    </div>
+
+    <div class="ug-bottom">
+      <p class="ug-msg" id="ug-msg" aria-live="polite"></p>
+      <p class="ug-status" id="ug-status"></p>
+      <p class="ug-hint">ARROWS / WASD / TAP</p>
+    </div>
+  </main>
+
+  <script src="../../js/main.js"></script>
+  <script src="../sub.js"></script>
+  <script src="../nav.js"></script>
+  <script src="relics.js"></script>
+  <script src="game.js"></script>
+</body>
+</html>

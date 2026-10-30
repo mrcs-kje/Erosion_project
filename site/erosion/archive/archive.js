@@ -194,9 +194,9 @@
 
   ERO.onSplit = (parent, x, y) => {
     log(tag(parent) + ' SPLIT IN TWO');
-    if (parent.line === 'siphon') {
-      // A colony sheds two polyps instead of glyph creatures.
-      [-30, 30].forEach((dx) => summonAt(x + dx, y, 'siphon', null, 1));
+    if (parent.line === 'siphon' || parent.line === 'squid') {
+      // A colony sheds two polyps, a kraken bursts into two specks.
+      [-30, 30].forEach((dx) => summonAt(x + dx, y, parent.line, null, 1));
       return;
     }
     const kinds = ERO.mutantKinds.slice().sort(() => Math.random() - 0.5);
